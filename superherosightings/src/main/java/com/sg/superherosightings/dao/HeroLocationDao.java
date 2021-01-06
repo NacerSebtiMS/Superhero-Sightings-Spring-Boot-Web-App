@@ -21,4 +21,6 @@ public interface HeroLocationDao {
     HeroLocation addHeroLocation(HeroLocation heroLocation);
     void updateHeroLocation(HeroLocation heroLocation);
     void deleteHeroLocationById(int id);
+    
+    List<HeroLocation> getHeroLocationsForLocation(Location location);
 }
