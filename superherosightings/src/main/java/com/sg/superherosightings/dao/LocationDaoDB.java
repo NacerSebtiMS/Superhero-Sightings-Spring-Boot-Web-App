@@ -68,7 +68,8 @@ public class LocationDaoDB implements LocationDao {
                 location.getLatitude(),
                 location.getLongitude(),
                 location.getDescription(),
-                location.getAddressInformation());
+                location.getAddressInformation(),
+                location.getId());
     }
 
     @Override
