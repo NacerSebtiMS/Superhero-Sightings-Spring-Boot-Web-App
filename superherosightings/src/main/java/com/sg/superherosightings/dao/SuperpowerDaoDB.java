@@ -6,7 +6,10 @@
 package com.sg.superherosightings.dao;
 
 import com.sg.superherosightings.models.Superpower;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  *
@@ -38,5 +41,17 @@ public class SuperpowerDaoDB implements SuperpowerDao {
     public void deleteSuperpowerById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    public static final class SuperpowerMapper implements RowMapper<Superpower> {
+
+    @Override
+    public Superpower mapRow(ResultSet rs, int index) throws SQLException {
+        Superpower superpower = new Superpower();
+        superpower.setId(rs.getInt("id"));
+        superpower.setName(rs.getString("name"));
+        superpower.setDescription(rs.getString("description"));
+        return superpower;
+    }
+}
     
 }

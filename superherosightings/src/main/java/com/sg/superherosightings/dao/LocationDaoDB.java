@@ -6,7 +6,10 @@
 package com.sg.superherosightings.dao;
 
 import com.sg.superherosightings.models.Location;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  *
@@ -39,4 +42,18 @@ public class LocationDaoDB implements LocationDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
+    public static final class LocationMapper implements RowMapper<Location> {
+
+        @Override
+        public Location mapRow(ResultSet rs, int index) throws SQLException {
+            Location location = new Location();
+            location.setId(rs.getInt("id"));
+            location.setName(rs.getString("name"));
+            location.setLatitude(rs.getDouble("latitude"));
+            location.setLongitude(rs.getDouble("longitude"));
+            location.setDescription(rs.getString("description"));
+            location.setAddressInformation(rs.getString("addressInformation"));
+            return location;
+        }
+    }    
 }

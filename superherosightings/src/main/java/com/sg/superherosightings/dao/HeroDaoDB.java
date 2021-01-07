@@ -8,7 +8,10 @@ package com.sg.superherosightings.dao;
 import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Superpower;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import org.springframework.jdbc.core.RowMapper;
 
 /**
  *
@@ -49,6 +52,18 @@ public class HeroDaoDB implements HeroDao {
     @Override
     public List<Hero> getHerosForLocation(Location location) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    public static final class HeroMapper implements RowMapper<Hero> {
+
+        @Override
+        public Hero mapRow(ResultSet rs, int index) throws SQLException {
+            Hero hero = new Hero();
+            hero.setId(rs.getInt("id"));
+            hero.setIsHero(rs.getBoolean("isHero"));
+            hero.setDescription(rs.getString("description"));
+            return hero;
+        }
     }
     
 }
