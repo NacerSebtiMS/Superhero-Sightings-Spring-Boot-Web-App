@@ -6,7 +6,7 @@
 package com.sg.superherosightings.dao;
 
 import com.sg.superherosightings.models.Hero;
-import com.sg.superherosightings.models.Location;
+import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.models.Superpower;
 import java.util.List;
 
@@ -23,5 +23,5 @@ public interface HeroDao {
     void deleteHeroById(int id);
     
     List<Hero> getHerosForSuperpower(Superpower superpower);
-    List<Hero> getHerosForLocation(Location location);
+    Hero getHeroForSighting(Sighting sighting);
 }

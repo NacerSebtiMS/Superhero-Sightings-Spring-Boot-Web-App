@@ -30,6 +30,11 @@ public class SightingDaoDB implements SightingDao {
     public Sighting getSightingById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    Location getLocationForSighting(int id){
+        final String SELECT_LOCATION_FOR_SIGHTING = "SELECT * FROM Location WHERE LocationId = ?";
+        return jdbc.queryForObject(SELECT_LOCATION_FOR_SIGHTING, new LocationDaoDB.LocationMapper(), id);
+    }
 
     @Override
     public List<Sighting> getAllSightings() {
