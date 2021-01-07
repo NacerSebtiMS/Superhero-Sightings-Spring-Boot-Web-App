@@ -61,14 +61,14 @@ create table Location(
     AddressInformation varchar(255)
 );
 
--- HeroLocation
-create table HeroLocation(
+-- Sighting
+create table Sighting(
+	SightingId int primary key auto_increment,
 	HeroId int not null,
     LocationId int not null,
     Date datetime not null,
-    PRIMARY KEY pk_HeroLocation (HeroId, LocationId),
-    foreign key fk_HeroLocation_HeroId (HeroId)
+    foreign key fk_Sighting_HeroId (HeroId)
 		references Hero(HeroId),
-	foreign key fk_HeroLocation_LocationId (LocationId)
+	foreign key fk_Sighting_LocationId (LocationId)
 		references Location(LocationId)
 );

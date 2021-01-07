@@ -6,7 +6,7 @@
 package com.sg.superherosightings.dao;
 
 import com.sg.superherosightings.models.Hero;
-import com.sg.superherosightings.models.HeroLocation;
+import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.models.Location;
 import java.util.List;
 
@@ -14,13 +14,13 @@ import java.util.List;
  *
  * @author nacer
  */
-public interface HeroLocationDao {
+public interface SightingDao {
     
-    HeroLocation getHeroLocationByHeroAndLocation(Hero hero, Location location);
-    List<HeroLocation> getAllHeroLocations();
-    HeroLocation addHeroLocation(HeroLocation heroLocation);
-    void updateHeroLocation(HeroLocation heroLocation);
+    Sighting getSightingById(int id);
+    List<Sighting> getAllSightings();
+    Sighting addHeroLocation(Sighting sighting);
+    void updateHeroLocation(Sighting sighting);
     void deleteHeroLocationById(int id);
     
-    List<HeroLocation> getHeroLocationsForLocation(Location location);
+    List<Sighting> getSightingsForLocation(Location location);
 }

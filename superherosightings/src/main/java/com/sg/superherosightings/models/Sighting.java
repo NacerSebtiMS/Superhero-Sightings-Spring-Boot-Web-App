@@ -12,16 +12,18 @@ import java.util.Objects;
  *
  * @author nacer
  */
-public class HeroLocation {
+public class Sighting {
     
+    private int id;
     private Location location;
     private Date date;
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.location);
-        hash = 97 * hash + Objects.hashCode(this.date);
+        int hash = 3;
+        hash = 71 * hash + this.id;
+        hash = 71 * hash + Objects.hashCode(this.location);
+        hash = 71 * hash + Objects.hashCode(this.date);
         return hash;
     }
 
@@ -36,7 +38,10 @@ public class HeroLocation {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final HeroLocation other = (HeroLocation) obj;
+        final Sighting other = (Sighting) obj;
+        if (this.id != other.id) {
+            return false;
+        }
         if (!Objects.equals(this.location, other.location)) {
             return false;
         }
@@ -44,6 +49,14 @@ public class HeroLocation {
             return false;
         }
         return true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Location getLocation() {

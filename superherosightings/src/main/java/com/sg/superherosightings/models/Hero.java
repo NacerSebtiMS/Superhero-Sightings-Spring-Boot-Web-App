@@ -18,7 +18,7 @@ public class Hero {
     private boolean isHero;
     private String Description;
     private List<Superpower> superpowers;
-    private List<HeroLocation> locations;
+    private List<Sighting> sightings;
 
     @Override
     public int hashCode() {
@@ -27,7 +27,7 @@ public class Hero {
         hash = 79 * hash + (this.isHero ? 1 : 0);
         hash = 79 * hash + Objects.hashCode(this.Description);
         hash = 79 * hash + Objects.hashCode(this.superpowers);
-        hash = 79 * hash + Objects.hashCode(this.locations);
+        hash = 79 * hash + Objects.hashCode(this.sightings);
         return hash;
     }
 
@@ -55,7 +55,7 @@ public class Hero {
         if (!Objects.equals(this.superpowers, other.superpowers)) {
             return false;
         }
-        if (!Objects.equals(this.locations, other.locations)) {
+        if (!Objects.equals(this.sightings, other.sightings)) {
             return false;
         }
         return true;
@@ -93,12 +93,12 @@ public class Hero {
         this.superpowers = superpowers;
     }
 
-    public List<HeroLocation> getLocations() {
-        return locations;
+    public List<Sighting> getSightings() {
+        return sightings;
     }
 
-    public void setLocations(List<HeroLocation> locations) {
-        this.locations = locations;
+    public void setSightings(List<Sighting> sightings) {
+        this.sightings = sightings;
     }
     
 }
