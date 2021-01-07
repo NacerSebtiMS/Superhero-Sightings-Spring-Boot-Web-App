@@ -10,13 +10,21 @@ import com.sg.superherosightings.models.Sighting;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
  * @author nacer
  */
+@Repository
 public class SightingDaoDB implements SightingDao {
+    
+    @Autowired
+    JdbcTemplate jdbc;
 
     @Override
     public Sighting getSightingById(int id) {
@@ -29,6 +37,7 @@ public class SightingDaoDB implements SightingDao {
     }
 
     @Override
+    @Transactional
     public Sighting addHeroLocation(Sighting sighting) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -39,6 +48,7 @@ public class SightingDaoDB implements SightingDao {
     }
 
     @Override
+    @Transactional
     public void deleteHeroLocationById(int id) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
@@ -53,7 +63,7 @@ public class SightingDaoDB implements SightingDao {
         @Override
         public Sighting mapRow(ResultSet rs, int index) throws SQLException {
             Sighting sighting = new Sighting();
-            sighting.setId(rs.getInt("id"));
+            sighting.setId(rs.getInt("SightingId"));
             sighting.setDate(rs.getDate("date"));
             return sighting;
         }
