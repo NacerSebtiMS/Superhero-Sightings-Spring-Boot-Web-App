@@ -5,6 +5,12 @@
  */
 package com.sg.superherosightings.dao;
 
+import com.sg.superherosightings.models.Hero;
+import com.sg.superherosightings.models.Location;
+import com.sg.superherosightings.models.Organization;
+import com.sg.superherosightings.models.Sighting;
+import com.sg.superherosightings.models.Superpower;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,6 +58,30 @@ public class LocationDaoDBTest {
     
     @BeforeEach
     public void setUp() {
+        List<Hero> heros = heroDao.getAllHeros();
+        for(Hero hero : heros){
+            heroDao.deleteHeroById(hero.getId());
+        }
+        
+        List<Location> locations = locationDao.getAllLocations();
+        for(Location location : locations){
+            locationDao.deleteLocationById(location.getId());
+        }
+        
+        List<Organization> organizations = organizationDao.getAllOrganizations();
+        for(Organization organization : organizations){
+            organizationDao.deleteOrganizationById(organization.getId());
+        }
+        
+        List<Sighting> sightings = sightingDao.getAllSightings();
+        for(Sighting sighting : sightings){
+            sightingDao.deleteSightingById(sighting.getId());
+        }
+        
+        List<Superpower> superpowers = superpowerDao.getAllSuperpowers();
+        for(Superpower superpower : superpowers){
+            superpowerDao.deleteSuperpowerById(superpower.getId());
+        }
     }
     
     @AfterEach
