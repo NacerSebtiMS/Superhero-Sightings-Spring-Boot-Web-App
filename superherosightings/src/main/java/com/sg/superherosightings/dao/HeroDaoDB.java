@@ -53,14 +53,16 @@ public class HeroDaoDB implements HeroDao {
     private List<Sighting> getSightingsForHero(int id) {
         final String SELECT_SIGHTINGS_FOR_HERO = "SELECT * FROM Sighting WHERE HeroId = ?";
         List<Sighting> sighthings = jdbc.query(SELECT_SIGHTINGS_FOR_HERO, new SightingMapper(), id);
+        new SightingDaoDB().associateLocationsForSightings(sighthings);
         return sighthings;
     }
-    
+    /*
     private void associateLocationsForSightings(List<Sighting> sighthings){
         for (Sighting sighthing : sighthings) {
             sighthing.setLocation(new SightingDaoDB().getLocationForSighting(sighthing.getId()));
         }
     }
+    */
 
     @Override
     public List<Hero> getAllHeros() {
@@ -129,8 +131,8 @@ public class HeroDaoDB implements HeroDao {
         jdbc.update(DELETE_HERO_SUPERPOWER, hero.getId());
         insertHeroSuperpower(hero);
         
-        final String DELETE_HEROSIGHTING = "DELETE FROM Sighting WHERE HeroId = ?";
-        jdbc.update(DELETE_HEROSIGHTING, hero.getId());
+        final String DELETE_SIGHTING = "DELETE FROM Sighting WHERE HeroId = ?";
+        jdbc.update(DELETE_SIGHTING, hero.getId());
         insertSighting(hero);
     }
 

@@ -18,9 +18,9 @@ public interface SightingDao {
     
     Sighting getSightingById(int id);
     List<Sighting> getAllSightings();
-    Sighting addHeroLocation(Sighting sighting);
-    void updateHeroLocation(Sighting sighting);
-    void deleteHeroLocationById(int id);
+    Sighting addSighting(Sighting sighting);
+    void updateSighting(Sighting sighting);
+    void deleteSightingById(int id);
     
     List<Sighting> getSightingsForLocation(Location location);
 }
