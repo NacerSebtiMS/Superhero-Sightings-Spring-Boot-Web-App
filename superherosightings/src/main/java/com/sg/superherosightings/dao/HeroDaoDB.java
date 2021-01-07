@@ -8,7 +8,6 @@ package com.sg.superherosightings.dao;
 import com.sg.superherosightings.dao.SightingDaoDB.SightingMapper;
 import com.sg.superherosightings.dao.SuperpowerDaoDB.SuperpowerMapper;
 import com.sg.superherosightings.models.Hero;
-import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.models.Superpower;
 import java.sql.ResultSet;
