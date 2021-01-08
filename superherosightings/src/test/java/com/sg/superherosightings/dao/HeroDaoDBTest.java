@@ -109,7 +109,7 @@ public class HeroDaoDBTest {
         List<Superpower> superpowers = new ArrayList<>();
         superpowers.add(superpower);
         
-        List<Sighting> sightings = new ArrayList<>();  
+        List<Sighting> sightings = new ArrayList<>();        
         
         Hero hero = new Hero();
         hero.setIsHero(true);
@@ -117,7 +117,7 @@ public class HeroDaoDBTest {
         hero.setSuperpowers(superpowers);
         hero.setSightings(sightings);
         hero = heroDao.addHero(hero);
-        /*
+        
         Location location = new Location();
         location.setName("Test name");
         location.setLatitude(12.3);
@@ -126,20 +126,18 @@ public class HeroDaoDBTest {
         location.setAddressInformation("Test address info");
         location = locationDao.addLocation(location);
         
-        Date date = new Date(123456);
-               
+        Date date = Date.valueOf("2018-03-31");  
+        
         Sighting sighting = new Sighting();
         sighting.setHeroId(hero.getId());
         sighting.setLocation(location);
         sighting.setDate(date);
         sighting = sightingDao.addSighting(sighting);
         
-        sightings.add(sighting);
-        
         hero.setSightings(sightings);
         
         heroDao.updateHero(hero);
-        */
+
         Hero fromDao = heroDao.getHeroById(hero.getId());
         
         assertEquals(hero,fromDao);

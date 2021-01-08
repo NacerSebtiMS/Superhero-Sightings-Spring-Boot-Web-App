@@ -108,7 +108,7 @@ public class OrganizationDaoDBTest {
         List<Superpower> superpowers = new ArrayList<>();
         superpowers.add(superpower);
         
-        List<Sighting> sightings = new ArrayList<>();  
+        List<Sighting> sightings = new ArrayList<>();        
         
         Hero hero = new Hero();
         hero.setIsHero(true);
@@ -116,6 +116,26 @@ public class OrganizationDaoDBTest {
         hero.setSuperpowers(superpowers);
         hero.setSightings(sightings);
         hero = heroDao.addHero(hero);
+        
+        Location location = new Location();
+        location.setName("Test name");
+        location.setLatitude(12.3);
+        location.setLongitude(-5.36);
+        location.setDescription("Test description");
+        location.setAddressInformation("Test address info");
+        location = locationDao.addLocation(location);
+        
+        Date date = Date.valueOf("2018-03-31");  
+        
+        Sighting sighting = new Sighting();
+        sighting.setHeroId(hero.getId());
+        sighting.setLocation(location);
+        sighting.setDate(date);
+        sighting = sightingDao.addSighting(sighting);
+        
+        hero.setSightings(sightings);
+        
+        heroDao.updateHero(hero);
         
         List<Hero> heros = new ArrayList<>();        
         heros.add(hero);
@@ -128,9 +148,9 @@ public class OrganizationDaoDBTest {
         organization.setContact("Test contact");
         organization.setMembers(heros);
         organization = organizationDao.addOrganization(organization);
-        System.out.println("Created org:\n"+organization.toString());
+
         Organization fromDao = organizationDao.getOrganizationById(organization.getId());
-        System.out.println("DAO org:\n"+fromDao.toString());
+
         assertEquals(organization,fromDao);
     }
 
