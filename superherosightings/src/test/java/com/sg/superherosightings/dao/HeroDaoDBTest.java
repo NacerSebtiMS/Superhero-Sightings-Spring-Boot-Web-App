@@ -148,6 +148,60 @@ public class HeroDaoDBTest {
      */
     @Test
     public void testGetAllHeros() {
+        
+        Superpower superpower = new Superpower();
+        superpower.setName("Test name");
+        superpower.setDescription("Test description");
+        superpower = superpowerDao.addSuperpower(superpower);
+        
+        List<Superpower> superpowers = new ArrayList<>();
+        superpowers.add(superpower);
+        
+        List<Sighting> sightings = new ArrayList<>();        
+        
+        Hero hero = new Hero();
+        hero.setIsHero(true);
+        hero.setDescription("Test description");
+        hero.setSuperpowers(superpowers);
+        hero.setSightings(sightings);
+        hero = heroDao.addHero(hero);
+        
+        Location location = new Location();
+        location.setName("Test name");
+        location.setLatitude(12.3);
+        location.setLongitude(-5.36);
+        location.setDescription("Test description");
+        location.setAddressInformation("Test address info");
+        location = locationDao.addLocation(location);
+        
+        Date date = Date.valueOf("2018-03-31");  
+        
+        Sighting sighting = new Sighting();
+        sighting.setHeroId(hero.getId());
+        sighting.setLocation(location);
+        sighting.setDate(date);
+        sighting = sightingDao.addSighting(sighting);
+        
+        hero.setSightings(sightings);
+        
+        heroDao.updateHero(hero);
+        
+        
+        // HERO 2
+        
+        Hero hero2 = new Hero();
+        hero2.setIsHero(true);
+        hero2.setDescription("Test description2");
+        hero2.setSuperpowers(superpowers);
+        hero2.setSightings(sightings);
+        hero2 = heroDao.addHero(hero2);
+        
+        
+        List<Hero> heros = heroDao.getAllHeros();
+        assertEquals(2, heros.size());
+        assertTrue(heros.contains(hero));
+        assertTrue(heros.contains(hero2));
+
     }
 
     /**
