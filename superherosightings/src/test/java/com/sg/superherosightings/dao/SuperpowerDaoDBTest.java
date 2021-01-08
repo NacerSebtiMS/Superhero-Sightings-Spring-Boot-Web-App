@@ -103,10 +103,8 @@ public class SuperpowerDaoDBTest {
         superpower.setDescription("Test description");
         superpower = superpowerDao.addSuperpower(superpower);
         
-        Superpower fromDao = superpowerDao.getSuperpowerById(superpower.getId());
-        
+        Superpower fromDao = superpowerDao.getSuperpowerById(superpower.getId());       
         assertEquals(superpower,fromDao);
-
     }
 
     /**
@@ -114,6 +112,21 @@ public class SuperpowerDaoDBTest {
      */
     @Test
     public void testGetAllSuperpowers() {
+        
+        Superpower superpower = new Superpower();
+        superpower.setName("Test name");
+        superpower.setDescription("Test description");
+        superpower = superpowerDao.addSuperpower(superpower);
+        
+        Superpower superpower2 = new Superpower();
+        superpower2.setName("Test name2");
+        superpower2.setDescription("Test description2");
+        superpower2 = superpowerDao.addSuperpower(superpower2);
+        
+        List<Superpower> superpowers = superpowerDao.getAllSuperpowers();
+        assertEquals(2, superpowers.size());
+        assertTrue(superpowers.contains(superpower));
+        assertTrue(superpowers.contains(superpower2));
     }
 
     /**
@@ -128,6 +141,22 @@ public class SuperpowerDaoDBTest {
      */
     @Test
     public void testUpdateSuperpower() {
+        Superpower superpower = new Superpower();
+        superpower.setName("Test name");
+        superpower.setDescription("Test description");
+        superpower = superpowerDao.addSuperpower(superpower);
+        
+        Superpower fromDao = superpowerDao.getSuperpowerById(superpower.getId());       
+        assertEquals(superpower,fromDao);
+        
+        superpower.setName("Test name2");
+        superpower.setDescription("Test description2");
+        
+        superpowerDao.updateSuperpower(superpower);
+        assertNotEquals(superpower,fromDao);
+        
+        fromDao = superpowerDao.getSuperpowerById(superpower.getId());
+        assertEquals(superpower,fromDao);
     }
 
     /**
@@ -135,6 +164,18 @@ public class SuperpowerDaoDBTest {
      */
     @Test
     public void testDeleteSuperpowerById() {
+        Superpower superpower = new Superpower();
+        superpower.setName("Test name");
+        superpower.setDescription("Test description");
+        superpower = superpowerDao.addSuperpower(superpower);
+        
+        Superpower fromDao = superpowerDao.getSuperpowerById(superpower.getId());       
+        assertEquals(superpower,fromDao);
+        
+        superpowerDao.deleteSuperpowerById(superpower.getId());
+        
+        fromDao = superpowerDao.getSuperpowerById(superpower.getId());
+        assertNull(fromDao);
     }
     
 }
