@@ -106,17 +106,35 @@ public class LocationDaoDBTest {
         location.setAddressInformation("Test address info");
         location = locationDao.addLocation(location);
         
-        Location fromDao = locationDao.getLocationById(location.getId());
-        
+        Location fromDao = locationDao.getLocationById(location.getId());        
         assertEquals(location,fromDao);
-
     }
     
     /**
      * Test of getAllLocations method, of class LocationDaoDB.
      */
     @Test
-    public void testGetAllLocations() {
+    public void testGetAllLocations() {       
+        Location location = new Location();
+        location.setName("Test name");
+        location.setLatitude(12.3);
+        location.setLongitude(-5.36);
+        location.setDescription("Test description");
+        location.setAddressInformation("Test address info");
+        location = locationDao.addLocation(location);
+        
+        Location location2 = new Location();
+        location2.setName("Test name2");
+        location2.setLatitude(1.3);
+        location2.setLongitude(5.36);
+        location2.setDescription("Test description2");
+        location2.setAddressInformation("Test address info2");
+        location2 = locationDao.addLocation(location2);
+        
+        List<Location> locations = locationDao.getAllLocations();
+        assertEquals(2, locations.size());
+        assertTrue(locations.contains(location));
+        assertTrue(locations.contains(location2));    
     }
 
     /**
@@ -131,6 +149,27 @@ public class LocationDaoDBTest {
      */
     @Test
     public void testUpdateLocation() {
+        Location location = new Location();
+        location.setName("Test name");
+        location.setLatitude(12.3);
+        location.setLongitude(-5.36);
+        location.setDescription("Test description");
+        location.setAddressInformation("Test address info");
+        location = locationDao.addLocation(location);
+        
+        Location fromDao = locationDao.getLocationById(location.getId());        
+        assertEquals(location,fromDao);
+        
+        location.setName("Test name2");
+        location.setLatitude(12.33);
+        location.setLongitude(-5.365);
+        location.setDescription("Test description2");
+        
+        locationDao.updateLocation(location);
+        assertNotEquals(location,fromDao);
+        
+        fromDao = locationDao.getLocationById(location.getId());
+        assertEquals(location,fromDao);
     }
 
     /**
@@ -138,6 +177,22 @@ public class LocationDaoDBTest {
      */
     @Test
     public void testDeleteLocationById() {
+        
+        Location location = new Location();
+        location.setName("Test name");
+        location.setLatitude(12.3);
+        location.setLongitude(-5.36);
+        location.setDescription("Test description");
+        location.setAddressInformation("Test address info");
+        location = locationDao.addLocation(location);
+        
+        Location fromDao = locationDao.getLocationById(location.getId());        
+        assertEquals(location,fromDao);
+        
+        locationDao.deleteLocationById(location.getId());
+        
+        fromDao = locationDao.getLocationById(location.getId());
+        assertNull(fromDao);
     }
     
 }
