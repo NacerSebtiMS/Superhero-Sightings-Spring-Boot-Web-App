@@ -21,6 +21,11 @@ public class Location {
     private String addressInformation;
 
     @Override
+    public String toString() {
+        return "Location{" + "id=" + id + ", name=" + name + ", latitude=" + latitude + ", longitude=" + longitude + ", description=" + description + ", addressInformation=" + addressInformation + '}';
+    }
+
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 83 * hash + this.id;

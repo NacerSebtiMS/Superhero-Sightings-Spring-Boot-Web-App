@@ -99,6 +99,7 @@ public class OrganizationDaoDBTest {
     
     @Test
     public void testGetAndAddOrganization(){
+
         Superpower superpower = new Superpower();
         superpower.setName("Test name");
         superpower.setDescription("Test description");
@@ -107,24 +108,7 @@ public class OrganizationDaoDBTest {
         List<Superpower> superpowers = new ArrayList<>();
         superpowers.add(superpower);
         
-        Location location = new Location();
-        location.setName("Test name");
-        location.setLatitude(12.3);
-        location.setLongitude(-5.36);
-        location.setDescription("Test description");
-        location.setAddressInformation("Test address info");
-        location = locationDao.addLocation(location);
-        
-        Date date = new Date(123456);
-        
-        Sighting sighting = new Sighting();
-        sighting.setLocation(location);
-        sighting.setDate(date);
-        sighting = sightingDao.addSighting(sighting);
-        
-        List<Sighting> sightings = new ArrayList<>();
-        sightings.add(sighting);
-        
+        List<Sighting> sightings = new ArrayList<>();  
         
         Hero hero = new Hero();
         hero.setIsHero(true);
@@ -133,7 +117,7 @@ public class OrganizationDaoDBTest {
         hero.setSightings(sightings);
         hero = heroDao.addHero(hero);
         
-        List<Hero> heros = new ArrayList<>();
+        List<Hero> heros = new ArrayList<>();        
         heros.add(hero);
         
         Organization organization = new Organization();
@@ -144,9 +128,9 @@ public class OrganizationDaoDBTest {
         organization.setContact("Test contact");
         organization.setMembers(heros);
         organization = organizationDao.addOrganization(organization);
-        
+        System.out.println("Created org:\n"+organization.toString());
         Organization fromDao = organizationDao.getOrganizationById(organization.getId());
-        
+        System.out.println("DAO org:\n"+fromDao.toString());
         assertEquals(organization,fromDao);
     }
 

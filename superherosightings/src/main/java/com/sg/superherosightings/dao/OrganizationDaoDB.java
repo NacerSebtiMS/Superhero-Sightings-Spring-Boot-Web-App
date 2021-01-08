@@ -27,6 +27,9 @@ public class OrganizationDaoDB implements OrganizationDao {
     
     @Autowired
     JdbcTemplate jdbc;
+    
+    @Autowired
+    HeroDaoDB heroDaoDB;
 
     @Override
     public Organization getOrganizationById(int id) {
@@ -43,7 +46,9 @@ public class OrganizationDaoDB implements OrganizationDao {
     private List<Hero> getHerosForOrganization(int id) {
         final String SELECT_HEROS_FOR_ORGANIZATION = "SELECT h.* FROM Hero h "
                 + "JOIN HeroOrganization ho ON h.HeroId = ho.HeroId WHERE ho.OrganizationId = ?";
-        return jdbc.query(SELECT_HEROS_FOR_ORGANIZATION, new HeroMapper(), id);
+        List<Hero> heros = jdbc.query(SELECT_HEROS_FOR_ORGANIZATION, new HeroMapper(), id);
+        heroDaoDB.associateSuperpowersAndSightings(heros);
+        return heros;
     }
 
     @Override
@@ -108,8 +113,8 @@ public class OrganizationDaoDB implements OrganizationDao {
     @Override
     @Transactional
     public void deleteOrganizationById(int id) {
-        final String DELETE_ = "DELETE FROM HeroOrganization WHERE OrganizationId = ?";
-        jdbc.update(DELETE_, id);
+        final String DELETE_HERO_ORGANIZATION = "DELETE FROM HeroOrganization WHERE OrganizationId = ?";
+        jdbc.update(DELETE_HERO_ORGANIZATION, id);
         
         final String DELETE_ORGANIZATION = "DELETE FROM Organization WHERE OrganizationId = ?";
         jdbc.update(DELETE_ORGANIZATION, id);

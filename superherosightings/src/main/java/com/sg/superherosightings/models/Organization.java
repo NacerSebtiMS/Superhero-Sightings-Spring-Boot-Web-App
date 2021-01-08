@@ -23,6 +23,11 @@ public class Organization {
     private List<Hero> members;
 
     @Override
+    public String toString() {
+        return "Organization{" + "id=" + id + ", name=" + name + ", isHero=" + isHero + ", description=" + description + ", address=" + address + ", contact=" + contact + ", members=" + members + '}';
+    }
+
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + this.id;

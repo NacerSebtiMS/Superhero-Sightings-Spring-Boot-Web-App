@@ -18,6 +18,11 @@ public class Superpower {
     private String description;
 
     @Override
+    public String toString() {
+        return "Superpower{" + "id=" + id + ", name=" + name + ", description=" + description + '}';
+    }
+
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + this.id;

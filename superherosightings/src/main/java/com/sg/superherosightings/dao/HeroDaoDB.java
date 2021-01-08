@@ -29,6 +29,9 @@ public class HeroDaoDB implements HeroDao {
     
     @Autowired
     JdbcTemplate jdbc;
+    
+    @Autowired
+    SightingDaoDB sightingDaoDB;
 
     @Override
     public Hero getHeroById(int id) {
@@ -52,7 +55,7 @@ public class HeroDaoDB implements HeroDao {
     private List<Sighting> getSightingsForHero(int id) {
         final String SELECT_SIGHTINGS_FOR_HERO = "SELECT * FROM Sighting WHERE HeroId = ?";
         List<Sighting> sighthings = jdbc.query(SELECT_SIGHTINGS_FOR_HERO, new SightingMapper(), id);
-        new SightingDaoDB().associateLocationsForSightings(sighthings);
+        sightingDaoDB.associateLocationsForSightings(sighthings);
         return sighthings;
     }
     /*
@@ -71,7 +74,7 @@ public class HeroDaoDB implements HeroDao {
         return heros;
     }
     
-    private void associateSuperpowersAndSightings(List<Hero> heros) {
+    public void associateSuperpowersAndSightings(List<Hero> heros) {
         for (Hero hero : heros) {
             hero.setSuperpowers(getSuperpowersForHero(hero.getId()));
             hero.setSightings(getSightingsForHero(hero.getId()));
@@ -178,8 +181,8 @@ public class HeroDaoDB implements HeroDao {
         public Hero mapRow(ResultSet rs, int index) throws SQLException {
             Hero hero = new Hero();
             hero.setId(rs.getInt("HeroId"));
-            hero.setIsHero(rs.getBoolean("isHero"));
-            hero.setDescription(rs.getString("description"));
+            hero.setIsHero(rs.getBoolean("IsHero"));
+            hero.setDescription(rs.getString("Description"));
             return hero;
         }
     }

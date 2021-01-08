@@ -64,26 +64,27 @@ public class HeroDaoDBTest {
         for(Hero hero : heros){
             heroDao.deleteHeroById(hero.getId());
         }
-        
+
         List<Location> locations = locationDao.getAllLocations();
         for(Location location : locations){
             locationDao.deleteLocationById(location.getId());
         }
-        
+
         List<Organization> organizations = organizationDao.getAllOrganizations();
         for(Organization organization : organizations){
             organizationDao.deleteOrganizationById(organization.getId());
         }
-        
+
         List<Sighting> sightings = sightingDao.getAllSightings();
         for(Sighting sighting : sightings){
             sightingDao.deleteSightingById(sighting.getId());
         }
-        
+
         List<Superpower> superpowers = superpowerDao.getAllSuperpowers();
         for(Superpower superpower : superpowers){
             superpowerDao.deleteSuperpowerById(superpower.getId());
         }
+        
     }
     
     @AfterEach
@@ -99,6 +100,7 @@ public class HeroDaoDBTest {
     
     @Test
     public void testGetAndAddHero(){
+        
         Superpower superpower = new Superpower();
         superpower.setName("Test name");
         superpower.setDescription("Test description");
@@ -107,6 +109,15 @@ public class HeroDaoDBTest {
         List<Superpower> superpowers = new ArrayList<>();
         superpowers.add(superpower);
         
+        List<Sighting> sightings = new ArrayList<>();  
+        
+        Hero hero = new Hero();
+        hero.setIsHero(true);
+        hero.setDescription("Test description");
+        hero.setSuperpowers(superpowers);
+        hero.setSightings(sightings);
+        hero = heroDao.addHero(hero);
+        /*
         Location location = new Location();
         location.setName("Test name");
         location.setLatitude(12.3);
@@ -116,23 +127,19 @@ public class HeroDaoDBTest {
         location = locationDao.addLocation(location);
         
         Date date = new Date(123456);
-        
+               
         Sighting sighting = new Sighting();
+        sighting.setHeroId(hero.getId());
         sighting.setLocation(location);
         sighting.setDate(date);
         sighting = sightingDao.addSighting(sighting);
         
-        List<Sighting> sightings = new ArrayList<>();
         sightings.add(sighting);
         
-        
-        Hero hero = new Hero();
-        hero.setIsHero(true);
-        hero.setDescription("Test description");
-        hero.setSuperpowers(superpowers);
         hero.setSightings(sightings);
-        hero = heroDao.addHero(hero);
         
+        heroDao.updateHero(hero);
+        */
         Hero fromDao = heroDao.getHeroById(hero.getId());
         
         assertEquals(hero,fromDao);

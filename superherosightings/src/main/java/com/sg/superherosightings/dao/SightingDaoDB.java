@@ -10,6 +10,7 @@ import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Sighting;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -41,7 +42,8 @@ public class SightingDaoDB implements SightingDao {
     }
     
     private Location getLocationForSighting(int id){
-        final String SELECT_LOCATION_FOR_SIGHTING = "SELECT * FROM Location WHERE LocationId = ?";
+        final String SELECT_LOCATION_FOR_SIGHTING = "SELECT l.* FROM Location l "
+                + "JOIN Sighting s ON s.LocationId = l.LocationId WHERE s.SightingId = ?";
         return jdbc.queryForObject(SELECT_LOCATION_FOR_SIGHTING, new LocationDaoDB.LocationMapper(), id);
     }
 
@@ -62,11 +64,10 @@ public class SightingDaoDB implements SightingDao {
     @Override
     @Transactional
     public Sighting addSighting(Sighting sighting) {
-        Hero hero = new HeroDaoDB().getHeroForSighting(sighting);
         final String INSERT_SIGHTING = "INSERT INTO Sighting(HeroId, LocationId, Date) "
                 + "VALUES(?,?,?)";
         jdbc.update(INSERT_SIGHTING,
-                hero.getId(),
+                sighting.getHeroId(),
                 sighting.getLocation().getId(),
                 sighting.getDate());
         
@@ -77,11 +78,10 @@ public class SightingDaoDB implements SightingDao {
 
     @Override
     public void updateSighting(Sighting sighting) {
-        Hero hero = new HeroDaoDB().getHeroForSighting(sighting);
         final String UPDATE_SIGHTING = "UPDATE Sighting SET HeroId = ?, LocationId = ?, Date = ?"
                 + "WHERE SightingId = ?";
         jdbc.update(UPDATE_SIGHTING,
-                hero.getId(),
+                sighting.getHeroId(),
                 sighting.getLocation().getId(),
                 sighting.getDate(),
                 sighting.getId());
@@ -109,7 +109,8 @@ public class SightingDaoDB implements SightingDao {
         public Sighting mapRow(ResultSet rs, int index) throws SQLException {
             Sighting sighting = new Sighting();
             sighting.setId(rs.getInt("SightingId"));
-            sighting.setDate(rs.getDate("date"));
+            sighting.setHeroId(rs.getInt("HeroId"));
+            sighting.setDate(Date.valueOf(rs.getDate("Date").toString()));
             return sighting;
         }
     }

@@ -97,6 +97,7 @@ public class SuperpowerDaoDBTest {
     
     @Test
     public void testGetAndAddSuperpower(){
+
         Superpower superpower = new Superpower();
         superpower.setName("Test name");
         superpower.setDescription("Test description");
@@ -105,6 +106,7 @@ public class SuperpowerDaoDBTest {
         Superpower fromDao = superpowerDao.getSuperpowerById(superpower.getId());
         
         assertEquals(superpower,fromDao);
+
     }
 
     /**

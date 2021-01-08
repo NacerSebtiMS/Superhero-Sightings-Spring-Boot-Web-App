@@ -97,6 +97,7 @@ public class LocationDaoDBTest {
 
     @Test
     public void testGetAndAddLocation(){
+
         Location location = new Location();
         location.setName("Test name");
         location.setLatitude(12.3);
@@ -108,6 +109,7 @@ public class LocationDaoDBTest {
         Location fromDao = locationDao.getLocationById(location.getId());
         
         assertEquals(location,fromDao);
+
     }
     
     /**

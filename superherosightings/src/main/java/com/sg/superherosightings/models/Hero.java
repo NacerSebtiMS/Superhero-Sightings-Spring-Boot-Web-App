@@ -21,6 +21,11 @@ public class Hero {
     private List<Sighting> sightings;
 
     @Override
+    public String toString() {
+        return "Hero{" + "id=" + id + ", isHero=" + isHero + ", Description=" + Description + ", superpowers=" + superpowers + ", sightings=" + sightings + '}';
+    }
+
+    @Override
     public int hashCode() {
         int hash = 7;
         hash = 79 * hash + this.id;
