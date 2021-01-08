@@ -95,6 +95,21 @@ public class LocationDaoDBTest {
     public void testGetLocationById() {
     }
 
+    @Test
+    public void testGetAndAddLocation(){
+        Location location = new Location();
+        location.setName("Test name");
+        location.setLatitude(12.3);
+        location.setLongitude(-5.36);
+        location.setDescription("Test description");
+        location.setAddressInformation("Test address info");
+        location = locationDao.addLocation(location);
+        
+        Location fromDao = locationDao.getLocationById(location.getId());
+        
+        assertEquals(location,fromDao);
+    }
+    
     /**
      * Test of getAllLocations method, of class LocationDaoDB.
      */

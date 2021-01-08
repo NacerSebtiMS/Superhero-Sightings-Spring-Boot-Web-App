@@ -10,6 +10,7 @@ import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.models.Superpower;
+import java.sql.Date;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -93,6 +94,28 @@ public class SightingDaoDBTest {
      */
     @Test
     public void testGetSightingById() {
+    }
+    
+    @Test
+    public void testGetAndAddSighting(){
+        Location location = new Location();
+        location.setName("Test name");
+        location.setLatitude(12.3);
+        location.setLongitude(-5.36);
+        location.setDescription("Test description");
+        location.setAddressInformation("Test address info");
+        location = locationDao.addLocation(location);
+        
+        Date date = new Date(123456);
+        
+        Sighting sighting = new Sighting();
+        sighting.setLocation(location);
+        sighting.setDate(date);
+        sighting = sightingDao.addSighting(sighting);
+        
+        Sighting fromDao = sightingDao.getSightingById(sighting.getId());
+        
+        assertEquals(sighting,fromDao);
     }
 
     /**

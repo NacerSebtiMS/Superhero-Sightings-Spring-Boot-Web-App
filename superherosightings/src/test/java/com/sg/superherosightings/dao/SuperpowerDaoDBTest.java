@@ -94,6 +94,18 @@ public class SuperpowerDaoDBTest {
     @Test
     public void testGetSuperpowerById() {
     }
+    
+    @Test
+    public void testGetAndAddSuperpower(){
+        Superpower superpower = new Superpower();
+        superpower.setName("Test name");
+        superpower.setDescription("Test description");
+        superpower = superpowerDao.addSuperpower(superpower);
+        
+        Superpower fromDao = superpowerDao.getSuperpowerById(superpower.getId());
+        
+        assertEquals(superpower,fromDao);
+    }
 
     /**
      * Test of getAllSuperpowers method, of class SuperpowerDaoDB.

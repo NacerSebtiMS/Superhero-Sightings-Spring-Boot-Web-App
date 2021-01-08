@@ -10,6 +10,8 @@ import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.models.Superpower;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -93,6 +95,47 @@ public class HeroDaoDBTest {
      */
     @Test
     public void testGetHeroById() {
+    }
+    
+    @Test
+    public void testGetAndAddHero(){
+        Superpower superpower = new Superpower();
+        superpower.setName("Test name");
+        superpower.setDescription("Test description");
+        superpower = superpowerDao.addSuperpower(superpower);
+        
+        List<Superpower> superpowers = new ArrayList<>();
+        superpowers.add(superpower);
+        
+        Location location = new Location();
+        location.setName("Test name");
+        location.setLatitude(12.3);
+        location.setLongitude(-5.36);
+        location.setDescription("Test description");
+        location.setAddressInformation("Test address info");
+        location = locationDao.addLocation(location);
+        
+        Date date = new Date(123456);
+        
+        Sighting sighting = new Sighting();
+        sighting.setLocation(location);
+        sighting.setDate(date);
+        sighting = sightingDao.addSighting(sighting);
+        
+        List<Sighting> sightings = new ArrayList<>();
+        sightings.add(sighting);
+        
+        
+        Hero hero = new Hero();
+        hero.setIsHero(true);
+        hero.setDescription("Test description");
+        hero.setSuperpowers(superpowers);
+        hero.setSightings(sightings);
+        hero = heroDao.addHero(hero);
+        
+        Hero fromDao = heroDao.getHeroById(hero.getId());
+        
+        assertEquals(hero,fromDao);
     }
 
     /**
