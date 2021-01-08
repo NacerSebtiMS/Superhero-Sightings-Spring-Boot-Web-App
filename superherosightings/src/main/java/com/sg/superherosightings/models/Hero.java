@@ -16,21 +16,23 @@ public class Hero {
     
     private int id;
     private boolean isHero;
-    private String Description;
+    private String name;
+    private String description;
     private List<Superpower> superpowers;
     private List<Sighting> sightings;
 
     @Override
     public String toString() {
-        return "Hero{" + "id=" + id + ", isHero=" + isHero + ", Description=" + Description + ", superpowers=" + superpowers + ", sightings=" + sightings + '}';
+        return "Hero{" + "id=" + id + ", isHero=" + isHero + ", name=" + name + ", description=" + description + ", superpowers=" + superpowers + ", sightings=" + sightings + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
         hash = 79 * hash + this.id;
         hash = 79 * hash + (this.isHero ? 1 : 0);
-        hash = 79 * hash + Objects.hashCode(this.Description);
+        hash = 79 * hash + Objects.hashCode(this.name);
+        hash = 79 * hash + Objects.hashCode(this.description);
         hash = 79 * hash + Objects.hashCode(this.superpowers);
         hash = 79 * hash + Objects.hashCode(this.sightings);
         return hash;
@@ -54,7 +56,10 @@ public class Hero {
         if (this.isHero != other.isHero) {
             return false;
         }
-        if (!Objects.equals(this.Description, other.Description)) {
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.description, other.description)) {
             return false;
         }
         if (!Objects.equals(this.superpowers, other.superpowers)) {
@@ -65,6 +70,16 @@ public class Hero {
         }
         return true;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
 
     public int getId() {
         return id;
@@ -83,11 +98,11 @@ public class Hero {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
-    public void setDescription(String Description) {
-        this.Description = Description;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Superpower> getSuperpowers() {

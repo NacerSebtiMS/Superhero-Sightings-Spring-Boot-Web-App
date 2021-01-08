@@ -58,13 +58,6 @@ public class HeroDaoDB implements HeroDao {
         sightingDaoDB.associateLocationsForSightings(sighthings);
         return sighthings;
     }
-    /*
-    private void associateLocationsForSightings(List<Sighting> sighthings){
-        for (Sighting sighthing : sighthings) {
-            sighthing.setLocation(new SightingDaoDB().getLocationForSighting(sighthing.getId()));
-        }
-    }
-    */
 
     @Override
     public List<Hero> getAllHeros() {
@@ -84,10 +77,11 @@ public class HeroDaoDB implements HeroDao {
     @Override
     @Transactional
     public Hero addHero(Hero hero) {
-        final String INSERT_HERO = "INSERT INTO Hero(IsHero, Description) "
-                + "VALUES(?,?)";
+        final String INSERT_HERO = "INSERT INTO Hero(IsHero, Name, Description) "
+                + "VALUES(?,?,?)";
         jdbc.update(INSERT_HERO,
                 hero.isIsHero(),
+                hero.getName(),
                 hero.getDescription());
         
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
@@ -122,10 +116,11 @@ public class HeroDaoDB implements HeroDao {
 
     @Override
     public void updateHero(Hero hero) {
-        final String UPDATE_HERO = "UPDATE Hero SET IsHero = ?, Description = ?"
+        final String UPDATE_HERO = "UPDATE Hero SET IsHero = ?, Name = ?, Description = ?"
                 + "WHERE HeroId = ?";
         jdbc.update(UPDATE_HERO,
                 hero.isIsHero(),
+                hero.getName(),
                 hero.getDescription(),
                 hero.getId());
         
@@ -182,6 +177,7 @@ public class HeroDaoDB implements HeroDao {
             Hero hero = new Hero();
             hero.setId(rs.getInt("HeroId"));
             hero.setIsHero(rs.getBoolean("IsHero"));
+            hero.setName(rs.getString("Name"));
             hero.setDescription(rs.getString("Description"));
             return hero;
         }

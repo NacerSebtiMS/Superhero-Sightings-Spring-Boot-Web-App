@@ -112,6 +112,7 @@ public class SightingDaoDBTest {
         
         Hero hero = new Hero();
         hero.setIsHero(true);
+        hero.setName("Test name");
         hero.setDescription("Test description");
         hero.setSuperpowers(superpowers);
         hero.setSightings(sightings);

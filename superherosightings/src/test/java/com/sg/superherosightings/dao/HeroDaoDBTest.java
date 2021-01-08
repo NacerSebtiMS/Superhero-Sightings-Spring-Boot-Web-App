@@ -113,6 +113,7 @@ public class HeroDaoDBTest {
         
         Hero hero = new Hero();
         hero.setIsHero(true);
+        hero.setName("Test name");
         hero.setDescription("Test description");
         hero.setSuperpowers(superpowers);
         hero.setSightings(sightings);
@@ -161,6 +162,7 @@ public class HeroDaoDBTest {
         
         Hero hero = new Hero();
         hero.setIsHero(true);
+        hero.setName("Test name");
         hero.setDescription("Test description");
         hero.setSuperpowers(superpowers);
         hero.setSightings(sightings);
@@ -191,6 +193,7 @@ public class HeroDaoDBTest {
         
         Hero hero2 = new Hero();
         hero2.setIsHero(true);
+        hero2.setName("Test name2");
         hero2.setDescription("Test description2");
         hero2.setSuperpowers(superpowers);
         hero2.setSightings(sightings);

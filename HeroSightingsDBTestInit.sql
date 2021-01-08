@@ -8,7 +8,8 @@ use HeroSightingsDBTest;
 create table Hero(
 	HeroId int primary key auto_increment,
     IsHero boolean not null,
-    Description varchar(255) not null
+    Name varchar(50) not null,
+    Description varchar(255)
 );
 
 -- Superpower
