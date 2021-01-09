@@ -283,6 +283,71 @@ public class OrganizationDaoDBTest {
      */
     @Test
     public void testUpdateOrganization() {
+        
+        Superpower superpower = new Superpower();
+        superpower.setName("Test name");
+        superpower.setDescription("Test description");
+        superpower = superpowerDao.addSuperpower(superpower);
+        
+        List<Superpower> superpowers = new ArrayList<>();
+        superpowers.add(superpower);
+        
+        List<Sighting> sightings = new ArrayList<>();        
+        
+        Hero hero = new Hero();
+        hero.setIsHero(true);
+        hero.setName("Test name");
+        hero.setDescription("Test description");
+        hero.setSuperpowers(superpowers);
+        hero.setSightings(sightings);
+        hero = heroDao.addHero(hero);
+        
+        Location location = new Location();
+        location.setName("Test name");
+        location.setLatitude(12.3);
+        location.setLongitude(-5.36);
+        location.setDescription("Test description");
+        location.setAddressInformation("Test address info");
+        location = locationDao.addLocation(location);
+        
+        Date date = Date.valueOf("2018-03-31");  
+        
+        Sighting sighting = new Sighting();
+        sighting.setHeroId(hero.getId());
+        sighting.setLocation(location);
+        sighting.setDate(date);
+        sighting = sightingDao.addSighting(sighting);
+        
+        hero.setSightings(sightings);
+        
+        heroDao.updateHero(hero);
+        
+        List<Hero> heros = new ArrayList<>();        
+        heros.add(hero);
+        
+        Organization organization = new Organization();
+        organization.setName("Test name");
+        organization.setIsHero(true);
+        organization.setDescription("Test description");
+        organization.setAddress("Test address");
+        organization.setContact("Test contact");
+        organization.setMembers(heros);
+        organization = organizationDao.addOrganization(organization);
+        
+        Organization fromDao = organizationDao.getOrganizationById(organization.getId());
+        assertEquals(organization,fromDao);
+
+        organization.setName("Test name2");
+        organization.setIsHero(false);
+        organization.setDescription("Test description2");
+        organization.setAddress("Test address2");
+        organization.setContact("Test contact2");
+        
+        organizationDao.updateOrganization(organization);
+        assertNotEquals(organization,fromDao);
+        
+        fromDao = organizationDao.getOrganizationById(organization.getId());
+        assertEquals(organization,fromDao);
     }
 
     /**
