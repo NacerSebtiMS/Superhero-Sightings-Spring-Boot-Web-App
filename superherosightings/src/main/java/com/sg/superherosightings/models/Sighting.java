@@ -40,28 +40,22 @@ public class Sighting {
             return true;
         }
         if (obj == null) {
-            System.out.println("NULL");
             return false;
         }
         if (getClass() != obj.getClass()) {
-            System.out.println("NOT SAME CLASS");
             return false;
         }
         final Sighting other = (Sighting) obj;
         if (this.id != other.id) {
-            System.out.println("NOT SAME ID");
             return false;
         }
         if (this.heroId != other.heroId) {
-            System.out.println("NOT SAME HERO ID");
             return false;
         }
         if (!Objects.equals(this.location, other.location)) {
-            System.out.println("NOT SAME LOCATION");
             return false;
         }
         if (!Objects.equals(this.date, other.date)) {
-            System.out.println("NOT SAME DATE");
             return false;
         }
         return true;
