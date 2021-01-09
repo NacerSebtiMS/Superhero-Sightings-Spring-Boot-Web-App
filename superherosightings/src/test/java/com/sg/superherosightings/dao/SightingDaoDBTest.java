@@ -145,6 +145,81 @@ public class SightingDaoDBTest {
      */
     @Test
     public void testGetAllSightings() {
+        
+        Superpower superpower = new Superpower();
+        superpower.setName("Test name");
+        superpower.setDescription("Test description");
+        superpower = superpowerDao.addSuperpower(superpower);
+        
+        List<Superpower> superpowers = new ArrayList<>();
+        superpowers.add(superpower);
+        
+        List<Sighting> sightings = new ArrayList<>();        
+        
+        Hero hero = new Hero();
+        hero.setIsHero(true);
+        hero.setName("Test name");
+        hero.setDescription("Test description");
+        hero.setSuperpowers(superpowers);
+        hero.setSightings(sightings);
+        hero = heroDao.addHero(hero);
+        
+        Location location = new Location();
+        location.setName("Test name");
+        location.setLatitude(12.3);
+        location.setLongitude(-5.36);
+        location.setDescription("Test description");
+        location.setAddressInformation("Test address info");
+        location = locationDao.addLocation(location);
+        
+        Date date = Date.valueOf("2018-03-31");  
+        
+        Sighting sighting = new Sighting();
+        sighting.setHeroId(hero.getId());
+        sighting.setLocation(location);
+        sighting.setDate(date);
+        sighting = sightingDao.addSighting(sighting);
+        
+        // Sighting 2
+        
+        Superpower superpower2 = new Superpower();
+        superpower2.setName("Test name2");
+        superpower2.setDescription("Test description2");
+        superpower2 = superpowerDao.addSuperpower(superpower2);
+        
+        List<Superpower> superpowers2 = new ArrayList<>();
+        superpowers2.add(superpower2);
+        
+        List<Sighting> sightings2 = new ArrayList<>();        
+        
+        Hero hero2 = new Hero();
+        hero2.setIsHero(false);
+        hero2.setName("Test name2");
+        hero2.setDescription("Test description2");
+        hero2.setSuperpowers(superpowers2);
+        hero2.setSightings(sightings2);
+        hero2 = heroDao.addHero(hero2);
+        
+        Location location2 = new Location();
+        location2.setName("Test name2");
+        location2.setLatitude(1.3);
+        location2.setLongitude(5.36);
+        location2.setDescription("Test description2");
+        location2.setAddressInformation("Test address info2");
+        location2 = locationDao.addLocation(location2);
+        
+        Date date2 = Date.valueOf("2017-03-31");  
+        
+        Sighting sighting2 = new Sighting();
+        sighting2.setHeroId(hero2.getId());
+        sighting2.setLocation(location2);
+        sighting2.setDate(date2);
+        sighting2 = sightingDao.addSighting(sighting2);
+        
+        List<Sighting> sightingsDao = sightingDao.getAllSightings();
+        assertEquals(2, sightingsDao.size());
+        assertTrue(sightingsDao.contains(sighting));
+        assertTrue(sightingsDao.contains(sighting2));
     }
 
     /**
