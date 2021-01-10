@@ -47,16 +47,16 @@ public class OrganizationService {
     public Organization getOrganizationById(int id){
         return organizationDao.getOrganizationById(id);      
     }
-    List<Organization> getAllOrganizations(){
+    public List<Organization> getAllOrganizations(){
         return organizationDao.getAllOrganizations();
     }
-    Organization addHero(Organization organization){
+    public Organization addHero(Organization organization){
         return organizationDao.addOrganization(organization);
     }
-    void updateOrganization(Organization hero){
+    public void updateOrganization(Organization hero){
         organizationDao.updateOrganization(hero);
     }
-    void deleteOrganizationById(int id){
+    public void deleteOrganizationById(int id){
         organizationDao.deleteOrganizationById(id);
     }
 }

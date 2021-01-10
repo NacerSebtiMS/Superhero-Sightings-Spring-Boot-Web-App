@@ -43,23 +43,23 @@ public class HeroService {
     
     
     // EXTERNAL DAO FUNCTIONS  
-    List<Organization> getOrganizationsForHero(Hero hero){
+    public List<Organization> getOrganizationsForHero(Hero hero){
         return organizationDao.getOrganizationsForHero(hero);
     }  
     // LOCAL DAO FUNCTIONS  
     public Hero getHeroById(int id){
         return heroDao.getHeroById(id);      
     }
-    List<Hero> getAllHeros(){
+    public List<Hero> getAllHeros(){
         return heroDao.getAllHeros();
     }
-    Hero addHero(Hero hero){
+    public Hero addHero(Hero hero){
         return heroDao.addHero(hero);
     }
-    void updateHero(Hero hero){
+    public void updateHero(Hero hero){
         heroDao.updateHero(hero);
     }
-    void deleteHeroById(int id){
+    public void deleteHeroById(int id){
         heroDao.deleteHeroById(id);
     }
     

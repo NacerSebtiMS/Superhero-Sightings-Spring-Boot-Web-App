@@ -42,23 +42,23 @@ public class SightingService {
     
        
     // EXTERNAL DAO FUNCTIONS  
-    Hero getHeroForSighting(Sighting sighting){
+    public Hero getHeroForSighting(Sighting sighting){
         return heroDao.getHeroForSighting(sighting);
     }
     // LOCAL DAO FUNCTIONS  
     public Sighting getSightingById(int id){
         return sightingDao.getSightingById(id);      
     }
-    List<Sighting> getAllSightings(){
+    public List<Sighting> getAllSightings(){
         return sightingDao.getAllSightings();
     }
-    Sighting addHero(Sighting sighting){
+    public Sighting addHero(Sighting sighting){
         return sightingDao.addSighting(sighting);
     }
-    void updateSighting(Sighting hero){
+    public void updateSighting(Sighting hero){
         sightingDao.updateSighting(hero);
     }
-    void deleteSightingById(int id){
+    public void deleteSightingById(int id){
         sightingDao.deleteSightingById(id);
     }
 }

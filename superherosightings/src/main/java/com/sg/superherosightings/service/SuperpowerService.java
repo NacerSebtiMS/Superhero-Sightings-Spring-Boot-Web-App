@@ -42,23 +42,23 @@ public class SuperpowerService {
     
     
     // EXTERNAL DAO FUNCTIONS  
-    List<Hero> getHerosForSuperpower(Superpower superpower){
+    public List<Hero> getHerosForSuperpower(Superpower superpower){
         return heroDao.getHerosForSuperpower(superpower);
     }
     // LOCAL DAO FUNCTIONS  
     public Superpower getSuperpowerById(int id){
         return superpowerDao.getSuperpowerById(id);      
     }
-    List<Superpower> getAllSuperpowers(){
+    public List<Superpower> getAllSuperpowers(){
         return superpowerDao.getAllSuperpowers();
     }
-    Superpower addHero(Superpower superpower){
+    public Superpower addHero(Superpower superpower){
         return superpowerDao.addSuperpower(superpower);
     }
-    void updateSuperpower(Superpower hero){
+    public void updateSuperpower(Superpower hero){
         superpowerDao.updateSuperpower(hero);
     }
-    void deleteSuperpowerById(int id){
+    public void deleteSuperpowerById(int id){
         superpowerDao.deleteSuperpowerById(id);
     }
 }

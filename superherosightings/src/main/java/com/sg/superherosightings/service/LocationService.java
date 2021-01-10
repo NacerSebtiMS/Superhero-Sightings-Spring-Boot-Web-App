@@ -50,16 +50,16 @@ public class LocationService {
     public Location getLocationById(int id){
         return locationDao.getLocationById(id);      
     }
-    List<Location> getAllLocations(){
+    public List<Location> getAllLocations(){
         return locationDao.getAllLocations();
     }
-    Location addHero(Location location){
+    public Location addHero(Location location){
         return locationDao.addLocation(location);
     }
-    void updateLocation(Location hero){
+    public void updateLocation(Location hero){
         locationDao.updateLocation(hero);
     }
-    void deleteLocationById(int id){
+    public void deleteLocationById(int id){
         locationDao.deleteLocationById(id);
     }
 }
