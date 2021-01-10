@@ -10,6 +10,9 @@ import com.sg.superherosightings.dao.LocationDao;
 import com.sg.superherosightings.dao.OrganizationDao;
 import com.sg.superherosightings.dao.SightingDao;
 import com.sg.superherosightings.dao.SuperpowerDao;
+import com.sg.superherosightings.models.Hero;
+import com.sg.superherosightings.models.Organization;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +37,30 @@ public class HeroService {
     
     @Autowired
     SuperpowerDao superpowerDao;
+    
+    // SERVICE FUNCTION
+    
+    
+    
+    // EXTERN DAO FUNCTIONS  
+    List<Organization> getOrganizationsForHero(Hero hero){
+        return organizationDao.getOrganizationsForHero(hero);
+    }  
+    // LOCAL DAO FUNCTIONS  
+    public Hero getHeroById(int id){
+        return heroDao.getHeroById(id);      
+    }
+    List<Hero> getAllHeros(){
+        return heroDao.getAllHeros();
+    }
+    Hero addHero(Hero hero){
+        return heroDao.addHero(hero);
+    }
+    void updateHero(Hero hero){
+        heroDao.updateHero(hero);
+    }
+    void deleteHeroById(int id){
+        heroDao.deleteHeroById(id);
+    }
     
 }
