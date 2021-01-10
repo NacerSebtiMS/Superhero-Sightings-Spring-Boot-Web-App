@@ -10,6 +10,7 @@ import com.sg.superherosightings.dao.LocationDao;
 import com.sg.superherosightings.dao.OrganizationDao;
 import com.sg.superherosightings.dao.SightingDao;
 import com.sg.superherosightings.dao.SuperpowerDao;
+import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Sighting;
 import java.util.List;
@@ -45,6 +46,9 @@ public class LocationService {
     // EXTERNAL DAO FUNCTIONS  
     List<Sighting> getSightingsForLocation(Location location){
         return sightingDao.getSightingsForLocation(location);
+    }
+    List<Hero> getHerosForLocation(Location location){
+        return heroDao.getHerosForLocation(location);
     }
     // LOCAL DAO FUNCTIONS  
     public Location getLocationById(int id){

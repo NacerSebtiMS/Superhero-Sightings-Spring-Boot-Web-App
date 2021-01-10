@@ -8,6 +8,7 @@ package com.sg.superherosightings.dao;
 import com.sg.superherosightings.dao.SightingDaoDB.SightingMapper;
 import com.sg.superherosightings.dao.SuperpowerDaoDB.SuperpowerMapper;
 import com.sg.superherosightings.models.Hero;
+import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.models.Superpower;
 import java.sql.ResultSet;
@@ -168,6 +169,17 @@ public class HeroDaoDB implements HeroDao {
         hero.setSuperpowers(getSuperpowersForHero(hero.getId()));
         hero.setSightings(getSightingsForHero(hero.getId()));
         return hero;
+    }
+
+    @Override
+    public List<Hero> getHerosForLocation(Location location) {
+        final String SELECT_HEROS_FOR_LOCATION = "SELECT h.* FROM Hero h "
+                + "JOIN Sighting s ON s.HeroId = h.HeroId "
+                + "WHERE s.LocationId = ?";
+        List<Hero> heros = jdbc.query(SELECT_HEROS_FOR_LOCATION, 
+                new HeroMapper(), location.getId());
+        associateSuperpowersAndSightings(heros);
+        return heros;
     }
     
     public static final class HeroMapper implements RowMapper<Hero> {
