@@ -4,13 +4,7 @@
  * and open the template in the editor.
  */
 package com.sg.superherosightings.controller;
-
-import com.sg.superherosightings.dao.HeroDao;
-import com.sg.superherosightings.dao.LocationDao;
-import com.sg.superherosightings.dao.OrganizationDao;
-import com.sg.superherosightings.dao.SightingDao;
-import com.sg.superherosightings.dao.SuperpowerDao;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sg.superherosightings.service.HeroSightingsService;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -20,19 +14,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class HeroController {
     
-    @Autowired
-    HeroDao heroDao;
-    
-    @Autowired
-    LocationDao locationDao;
-    
-    @Autowired
-    OrganizationDao organizationDao;
-    
-    @Autowired
-    SightingDao sightingDao;
-    
-    @Autowired
-    SuperpowerDao superpowerDao;
+    private final HeroSightingsService service;
+    public HeroController(HeroSightingsService service){
+        this.service = service;
+    }
     
 }

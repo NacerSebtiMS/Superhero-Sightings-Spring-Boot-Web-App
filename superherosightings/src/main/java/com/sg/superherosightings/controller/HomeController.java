@@ -5,13 +5,8 @@
  */
 package com.sg.superherosightings.controller;
 
-import com.sg.superherosightings.dao.HeroDao;
-import com.sg.superherosightings.dao.LocationDao;
-import com.sg.superherosightings.dao.OrganizationDao;
-import com.sg.superherosightings.dao.SightingDao;
-import com.sg.superherosightings.dao.SuperpowerDao;
+import com.sg.superherosightings.service.HeroSightingsService;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,26 +18,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
     
-    @Autowired
-    HeroDao heroDao;
-    
-    @Autowired
-    LocationDao locationDao;
-    
-    @Autowired
-    OrganizationDao organizationDao;
-    
-    @Autowired
-    SightingDao sightingDao;
-    
-    @Autowired
-    SuperpowerDao superpowerDao;
+    private final HeroSightingsService service;
+    public HomeController(HeroSightingsService service){
+        this.service = service;
+    }
     
     @GetMapping("/")
     public String displayIndex(Model model) {
         
-        model.addAttribute("test", "TEST");
-
         return "index";
     }
     
