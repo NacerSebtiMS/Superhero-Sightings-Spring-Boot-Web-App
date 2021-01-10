@@ -6,6 +6,8 @@
 package com.sg.superherosightings.controller;
 import com.sg.superherosightings.service.HeroService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
@@ -17,6 +19,12 @@ public class HeroController {
     private final HeroService heroService;
     public HeroController(HeroService heroService){
         this.heroService = heroService;
+    }
+    
+    @GetMapping("heroes")
+    public String displayIndex(Model model) {
+        
+        return "heroes";
     }
     
 }
