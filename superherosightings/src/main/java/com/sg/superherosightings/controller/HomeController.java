@@ -5,7 +5,10 @@
  */
 package com.sg.superherosightings.controller;
 
+import com.sg.superherosightings.models.Hero;
+import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.service.SightingService;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +28,11 @@ public class HomeController {
     
     @GetMapping("/")
     public String displayIndex(Model model) {
-        
+        final int SIGHTINGS_PER_PAGE = 10;
+        List<Sighting> sightings = sightingService.getLastSightings(SIGHTINGS_PER_PAGE);
+        HashMap<Sighting,Hero> heroSightings = sightingService.mapHeroSightings(sightings);
+        model.addAttribute("sightings", sightings);
+        model.addAttribute("heroSightings", heroSightings);
         return "index";
     }
     

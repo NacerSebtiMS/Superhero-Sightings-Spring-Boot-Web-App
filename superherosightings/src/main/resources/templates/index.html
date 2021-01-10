@@ -14,33 +14,69 @@
     <!-- Main Body of Page -->
     
     <div class="container">
+        <!-- Page header -->
         <div class="row m-4">
             <div class="col text-center border border-dark">
                 <h1>Superhero Sightings</h1>
             </div>
         </div>
+        <!-- END Page header -->
+        <!-- Navbar -->
         <div class="row m-4 border border-dark">
-            <div class="col text-center m-3">
+             <div class="col text-center m-2">
+                <a href="" class="btn btn-outline-secondary btn-lg">Home</a>
+             </div>
+            
+            <div class="col text-center m-2">
                 <a href="heroes" class="btn btn-outline-primary btn-lg">Heroes</a>
             </div>
             
-            <div class="col text-center m-3">
+            <div class="col text-center m-2">
                 <a href="superpowers" class="btn btn-outline-primary btn-lg">Superpowers</a>
             </div>
             
-            <div class="col text-center m-3">
+            <div class="col text-center m-2">
                 <a href="locations" class="btn btn-outline-primary btn-lg">Locations</a>
             </div>
             
-            <div class="col text-center m-3">
+            <div class="col text-center m-2">
                 <a href="organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
             </div>
             
-            <div class="col text-center m-3">
+            <div class="col text-center m-2">
                 <a href="sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
-            </div>
-            
+            </div>           
         </div>
+        <!-- END Navbar -->
+        <!-- Hero sightings table -->
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Hero</th>
+                            <th>Alignment</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="sighting : ${sightings}">
+                            <td th:text="${heroSightings.get(sighting).name}">Hero Name</td>
+                            
+                            <td th:if='${heroSightings.get(sighting).isHero}'>Superhero</td>
+                            <td th:unless='${heroSightings.get(sighting).isHero}'>Superhero</td>
+                            
+                            <td th:text="${sighting.location.name}">Location Name</td>
+                            
+                            <td th:href="${sighting.date}">Date</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END Hero sightings table -->
+        
     </div> 
     <!-- End main body -->
 

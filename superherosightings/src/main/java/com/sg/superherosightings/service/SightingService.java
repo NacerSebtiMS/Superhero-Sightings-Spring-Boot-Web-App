@@ -15,6 +15,7 @@ import com.sg.superherosightings.models.Sighting;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +43,8 @@ public class SightingService {
     SuperpowerDao superpowerDao;
     
     // SERVICE FUNCTION
+    
+    // 2 functions to get last sightings and the heroes seen
     public List<Sighting> getLastSightings(int number){
         List<Sighting> sightings = sightingDao.getAllSightings();
         Collections.sort(sightings, new SortByDateDesc());
@@ -54,6 +57,13 @@ public class SightingService {
             }
             return result;
         }
+    }
+    public HashMap<Sighting, Hero> mapHeroSightings(List<Sighting> sightings){
+        HashMap<Sighting, Hero> heroSightings = new HashMap<>();
+        for(int i=0;i<sightings.size();i++){
+            heroSightings.put(sightings.get(i), getHeroForSighting(sightings.get(i)));
+        }
+        return heroSightings;
     }
     
     public static final class SortByDateDesc implements Comparator<Sighting>{
