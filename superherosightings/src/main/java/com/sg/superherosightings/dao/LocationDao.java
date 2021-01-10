@@ -6,6 +6,7 @@
 package com.sg.superherosightings.dao;
 
 import com.sg.superherosightings.models.Location;
+import com.sg.superherosightings.models.Hero;
 import java.util.List;
 
 /**
@@ -20,4 +21,5 @@ public interface LocationDao {
     void updateLocation(Location location);
     void deleteLocationById(int id);
     
+    List<Location> getLocationsForHero(Hero hero);
 }

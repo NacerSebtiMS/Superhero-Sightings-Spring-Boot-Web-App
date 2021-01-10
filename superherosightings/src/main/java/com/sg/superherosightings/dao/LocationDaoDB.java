@@ -5,6 +5,7 @@
  */
 package com.sg.superherosightings.dao;
 
+import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Location;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,6 +81,16 @@ public class LocationDaoDB implements LocationDao {
         
         final String DELETE_LOCATION = "DELETE FROM Location WHERE LocationId = ?";
         jdbc.update(DELETE_LOCATION, id);
+    }
+
+    @Override
+    public List<Location> getLocationsForHero(Hero hero) {
+        final String SELECT_LOCATIONS_FOR_HERO = "SELECT l.* FROM Location l "
+                + "JOIN Sighting s ON s.LocationId = l.LocationId "
+                + "WHERE s.HeroId = ?";
+        List<Location> locations = jdbc.query(SELECT_LOCATIONS_FOR_HERO, 
+                new LocationMapper(), hero.getId());
+        return locations;
     }
     
     public static final class LocationMapper implements RowMapper<Location> {
