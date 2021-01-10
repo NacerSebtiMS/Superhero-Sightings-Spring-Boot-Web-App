@@ -10,6 +10,8 @@ import com.sg.superherosightings.dao.LocationDao;
 import com.sg.superherosightings.dao.OrganizationDao;
 import com.sg.superherosightings.dao.SightingDao;
 import com.sg.superherosightings.dao.SuperpowerDao;
+import com.sg.superherosightings.models.Location;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,4 +37,26 @@ public class LocationService {
     @Autowired
     SuperpowerDao superpowerDao;
     
+    // SERVICE FUNCTION
+    
+    
+    
+    // EXTERN DAO FUNCTIONS  
+
+    // LOCAL DAO FUNCTIONS  
+    public Location getLocationById(int id){
+        return locationDao.getLocationById(id);      
+    }
+    List<Location> getAllLocations(){
+        return locationDao.getAllLocations();
+    }
+    Location addHero(Location location){
+        return locationDao.addLocation(location);
+    }
+    void updateLocation(Location hero){
+        locationDao.updateLocation(hero);
+    }
+    void deleteLocationById(int id){
+        locationDao.deleteLocationById(id);
+    }
 }
