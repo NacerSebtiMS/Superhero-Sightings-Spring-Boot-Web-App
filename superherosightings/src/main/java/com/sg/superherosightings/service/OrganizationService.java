@@ -41,7 +41,7 @@ public class OrganizationService {
     
     
     
-    // EXTERN DAO FUNCTIONS  
+    // EXTERNAL DAO FUNCTIONS  
 
     // LOCAL DAO FUNCTIONS  
     public Organization getOrganizationById(int id){

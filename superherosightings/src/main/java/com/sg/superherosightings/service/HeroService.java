@@ -42,7 +42,7 @@ public class HeroService {
     
     
     
-    // EXTERN DAO FUNCTIONS  
+    // EXTERNAL DAO FUNCTIONS  
     List<Organization> getOrganizationsForHero(Hero hero){
         return organizationDao.getOrganizationsForHero(hero);
     }  
