@@ -7,6 +7,8 @@ package com.sg.superherosightings.controller;
 
 import com.sg.superherosightings.service.OrganizationService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 /**
  *
@@ -20,6 +22,11 @@ public class OrganizationController {
         this.organizationService = organizationService;
     }
     
+    @GetMapping("organizations")
+    public String displayOrganizations(Model model) {
+        
+        return "organizations";
+    }
     
     
 }
