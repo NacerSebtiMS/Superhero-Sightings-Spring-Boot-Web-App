@@ -22,7 +22,7 @@ public class HeroController {
     }
     
     @GetMapping("heroes")
-    public String displayIndex(Model model) {
+    public String displayHeroes(Model model) {
         
         return "heroes";
     }
