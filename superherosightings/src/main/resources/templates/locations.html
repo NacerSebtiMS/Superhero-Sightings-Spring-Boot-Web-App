@@ -48,7 +48,47 @@
             </div>           
         </div>
         <!-- END Navbar -->
-        
+        <!-- Add location button -->
+        <div class="row m-4">
+            <div class="col text-left m-2">
+                <a href="/locations/addLocation" class="btn btn-primary btn-lg">Add Location</a>
+            </div> 
+        </div>
+        <!-- END Add location button -->
+        <!-- Locations table -->
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Location Name</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="location : ${locations}">
+                            <td th:text="${location.id}">Location ID</td>
+                            
+                            <td th:text='${location.name}'>Location Name</td>
+                            
+                            <td th:text='${location.latitude}'>Latitude</td>
+                            
+                            <td th:text="${location.longitude}">Longitude</td>
+                            
+                            <td><a href="#" th:href="@{/locations/editLocation(id=${location.id})}">Edit</a></td>
+                            
+                            <td><a href="#" th:href="@{/locations/deleteLocation(id=${location.id})}">Delete</a></td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END Locations table -->
     </div> 
     <!-- End main body -->
 

@@ -28,5 +28,9 @@ public class LocationController {
         return "locations";
     }
     
-    
+    @GetMapping("/locations/addLocation")
+    public String displayAddLocations(Model model) {       
+        return "/locations/addLocation";
+    }
+       
 }
