@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package com.sg.superherosightings.controller;
-import com.sg.superherosightings.service.HeroSightingsService;
+import com.sg.superherosightings.service.HeroService;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -14,9 +14,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class HeroController {
     
-    private final HeroSightingsService service;
-    public HeroController(HeroSightingsService service){
-        this.service = service;
+    private final HeroService heroService;
+    public HeroController(HeroService heroService){
+        this.heroService = heroService;
     }
     
 }

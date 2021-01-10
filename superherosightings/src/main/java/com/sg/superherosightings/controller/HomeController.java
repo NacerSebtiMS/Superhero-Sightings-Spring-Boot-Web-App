@@ -5,7 +5,7 @@
  */
 package com.sg.superherosightings.controller;
 
-import com.sg.superherosightings.service.HeroSightingsService;
+import com.sg.superherosightings.service.SightingService;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
     
-    private final HeroSightingsService service;
-    public HomeController(HeroSightingsService service){
-        this.service = service;
+    private final SightingService sightingService;
+    public HomeController(SightingService sightingService){
+        this.sightingService = sightingService;
     }
     
     @GetMapping("/")

@@ -5,7 +5,7 @@
  */
 package com.sg.superherosightings.controller;
 
-import com.sg.superherosightings.service.HeroSightingsService;
+import com.sg.superherosightings.service.OrganizationService;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -15,9 +15,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class OrganizationController {
     
-    private final HeroSightingsService service;
-    public OrganizationController(HeroSightingsService service){
-        this.service = service;
+    private final OrganizationService organizationService;
+    public OrganizationController(OrganizationService organizationService){
+        this.organizationService = organizationService;
     }
     
     

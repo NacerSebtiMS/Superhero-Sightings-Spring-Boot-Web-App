@@ -5,7 +5,7 @@
  */
 package com.sg.superherosightings.controller;
 
-import com.sg.superherosightings.service.HeroSightingsService;
+import com.sg.superherosightings.service.LocationService;
 import org.springframework.stereotype.Controller;
 
 /**
@@ -15,9 +15,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class LocationController {
     
-    private final HeroSightingsService service;
-    public LocationController(HeroSightingsService service){
-        this.service = service;
+    private final LocationService locationService;
+    public LocationController(LocationService locationService){
+        this.locationService = locationService;
     }
     
     
