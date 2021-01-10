@@ -5,10 +5,14 @@
  */
 package com.sg.superherosightings.controller;
 
+import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.service.LocationService;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -24,7 +28,8 @@ public class LocationController {
     
     @GetMapping("locations")
     public String displayLocations(Model model) {
-        
+        List<Location> locations = locationService.getAllLocations();
+        model.addAttribute("locations", locations);
         return "locations";
     }
     
@@ -32,5 +37,23 @@ public class LocationController {
     public String displayAddLocations(Model model) {       
         return "/locations/addLocation";
     }
-       
+    
+    @PostMapping("/locations/addLocation")
+    public String addLocation(HttpServletRequest request){
+        String name = request.getParameter("locationName");
+        double latitude = Double.parseDouble(request.getParameter("latitude"));
+        double longitude = Double.parseDouble(request.getParameter("longitude"));
+        String description = request.getParameter("description");
+        String address = request.getParameter("addressInformation");
+        
+        locationService.addLocation(name, latitude, longitude, description, address);
+        
+        return "redirect:/locations/addLocation";
+    }
+    
+    @GetMapping("/locations/deleteLocation")
+    public String deleteLocation(Integer id) {
+        locationService.deleteLocationById(id);
+        return "redirect:/locations";
+    }
 }

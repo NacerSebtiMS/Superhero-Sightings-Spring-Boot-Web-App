@@ -40,7 +40,15 @@ public class LocationService {
     SuperpowerDao superpowerDao;
     
     // SERVICE FUNCTION
-    
+    public void addLocation(String name, double latitude, double longitude, String description, String address){
+        Location location = new Location();
+        location.setName(name);
+        location.setLatitude(latitude);
+        location.setLongitude(longitude);
+        location.setDescription(description);
+        location.setAddressInformation(address);
+        location = addLocationDao(location);
+    }
     
     
     // EXTERNAL DAO FUNCTIONS  
@@ -57,7 +65,7 @@ public class LocationService {
     public List<Location> getAllLocations(){
         return locationDao.getAllLocations();
     }
-    public Location addHero(Location location){
+    public Location addLocationDao(Location location){
         return locationDao.addLocation(location);
     }
     public void updateLocation(Location hero){
