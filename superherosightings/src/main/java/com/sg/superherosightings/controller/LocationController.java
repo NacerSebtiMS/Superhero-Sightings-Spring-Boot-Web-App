@@ -46,7 +46,7 @@ public class LocationController {
         String description = request.getParameter("description");
         String address = request.getParameter("addressInformation");
         
-        locationService.addLocation(name, latitude, longitude, description, address);
+        locationService.createLocation(name, latitude, longitude, description, address);
         
         return "redirect:/locations/addLocation";
     }
