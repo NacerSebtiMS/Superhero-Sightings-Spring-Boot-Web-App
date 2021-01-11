@@ -49,16 +49,16 @@ public class SuperpowerService {
     public Superpower getSuperpowerById(int id){
         return superpowerDao.getSuperpowerById(id);      
     }
-    public List<Superpower> getAllSuperpowers(){
+    List<Superpower> getAllSuperpowers(){
         return superpowerDao.getAllSuperpowers();
     }
-    public Superpower addHero(Superpower superpower){
+    Superpower addSuperpower(Superpower superpower){
         return superpowerDao.addSuperpower(superpower);
     }
-    public void updateSuperpower(Superpower hero){
-        superpowerDao.updateSuperpower(hero);
+    void updateSuperpower(Superpower superpower){
+        superpowerDao.updateSuperpower(superpower);
     }
-    public void deleteSuperpowerById(int id){
+    void deleteSuperpowerById(int id){
         superpowerDao.deleteSuperpowerById(id);
     }
 }

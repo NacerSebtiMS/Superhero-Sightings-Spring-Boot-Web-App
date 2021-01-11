@@ -65,6 +65,7 @@
                             <th>Location Name</th>
                             <th>Latitude</th>
                             <th>Longitude</th>
+                            <th>Details</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -78,6 +79,8 @@
                             <td th:text='${location.latitude}'>Latitude</td>
                             
                             <td th:text="${location.longitude}">Longitude</td>
+                            
+                            <td><a href="#" th:href="@{/locations/detailsLocation(id=${location.id})}">Details</a></td>
                             
                             <td><a href="#" th:href="@{/locations/editLocation(id=${location.id})}">Edit</a></td>
                             

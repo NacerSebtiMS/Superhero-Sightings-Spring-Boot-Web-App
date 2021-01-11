@@ -50,11 +50,11 @@ public class OrganizationService {
     public List<Organization> getAllOrganizations(){
         return organizationDao.getAllOrganizations();
     }
-    public Organization addHero(Organization organization){
+    public Organization addOrganization(Organization organization){
         return organizationDao.addOrganization(organization);
     }
-    public void updateOrganization(Organization hero){
-        organizationDao.updateOrganization(hero);
+    public void updateOrganization(Organization organization){
+        organizationDao.updateOrganization(organization);
     }
     public void deleteOrganizationById(int id){
         organizationDao.deleteOrganizationById(id);

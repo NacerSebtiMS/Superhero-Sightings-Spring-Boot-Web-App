@@ -68,8 +68,8 @@ public class LocationService {
     public Location addLocationDao(Location location){
         return locationDao.addLocation(location);
     }
-    public void updateLocation(Location hero){
-        locationDao.updateLocation(hero);
+    public void updateLocation(Location location){
+        locationDao.updateLocation(location);
     }
     public void deleteLocationById(int id){
         locationDao.deleteLocationById(id);
