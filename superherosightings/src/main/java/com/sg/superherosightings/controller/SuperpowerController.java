@@ -43,7 +43,8 @@ public class SuperpowerController {
         String name = request.getParameter("superpowerName");
         String description = request.getParameter("superpowerDescription");
         
-        superpowerService.createSuperpower(name, description);
+        Superpower superpower = superpowerService.createSuperpower(name, description);
+        superpowerService.addSuperpower(superpower);
         
         return "redirect:/superpowers/addSuperpower";
     }
@@ -61,5 +62,16 @@ public class SuperpowerController {
         
         model.addAttribute("superpower", superpower);
         return "superpowers/editSuperpower";
+    }
+    
+    @PostMapping("/superpowers/editSuperpower")
+    public String editSuperpower(HttpServletRequest request, Model model){
+        String name = request.getParameter("superpowerName");
+        String description = request.getParameter("superpowerDescription");
+        
+        Superpower superpower = superpowerService.createSuperpower(name, description);
+        superpowerService.updateSuperpower(superpower);
+        
+        return "redirect:/superpowers";
     }
 }
