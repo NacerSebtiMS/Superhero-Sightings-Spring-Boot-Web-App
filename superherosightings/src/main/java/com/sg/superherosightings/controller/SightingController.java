@@ -92,4 +92,19 @@ public class SightingController {
         
         return "sightings/editSighting";
     }
+    
+    @PostMapping("/sightings/editSighting")
+    public String editSighting(HttpServletRequest request, Model model){
+        int heroId = Integer.parseInt(request.getParameter("heroId"));
+        int locationId = Integer.parseInt(request.getParameter("locationId"));
+        Date date = Date.valueOf(request.getParameter("sightingDate"));
+        
+        Hero hero = heroService.getHeroById(heroId);
+        Location location = locationService.getLocationById(locationId);
+        
+        Sighting sighting = sightingService.createSighting(hero, location, date);
+        sightingService.updateSighting(sighting);
+        
+        return "redirect:/sightings";
+    }
 }

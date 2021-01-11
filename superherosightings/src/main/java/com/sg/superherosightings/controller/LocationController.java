@@ -66,4 +66,18 @@ public class LocationController {
         model.addAttribute("location", location);
         return "locations/editLocation";
     }
+    
+    @PostMapping("/locations/editLocation")
+    public String editLocation(HttpServletRequest request, Model model){
+        String name = request.getParameter("locationName");
+        double latitude = Double.parseDouble(request.getParameter("latitude"));
+        double longitude = Double.parseDouble(request.getParameter("longitude"));
+        String description = request.getParameter("description");
+        String address = request.getParameter("addressInformation");
+        
+        Location location = locationService.createLocation(name, latitude, longitude, description, address);
+        locationService.updateLocation(location);
+        
+        return "redirect:/locations";
+    }
 }

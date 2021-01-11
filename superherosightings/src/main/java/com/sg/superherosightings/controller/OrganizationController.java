@@ -47,7 +47,6 @@ public class OrganizationController {
     
     @PostMapping("/organizations/addOrganization")
     public String addOrganization(HttpServletRequest request){
-        // String name, boolean isHero, String description, String address, String contact, List<Hero> heros
         String name = request.getParameter("organizationName");
         boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));
         String description = request.getParameter("organizationDescription");
@@ -83,5 +82,25 @@ public class OrganizationController {
         model.addAttribute("heros", heros);
         
         return "organizations/editOrganization";
+    }
+    
+    @PostMapping("/organizations/editOrganization")
+    public String editOrganization(HttpServletRequest request, Model model){
+        String name = request.getParameter("organizationName");
+        boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));
+        String description = request.getParameter("organizationDescription");
+        String address = request.getParameter("organizationAddress");
+        String contact = request.getParameter("organizationContact");
+        String[] heroIds = request.getParameterValues("heroId");
+        
+        List<Hero> heros = new ArrayList<>();
+        for(String heroId : heroIds) {
+            heros.add(heroService.getHeroById(Integer.parseInt(heroId)));
+        }
+        
+        Organization organization = organizationService.createOrganization(name, isHero, description, address, contact, heros);
+        organizationService.updateOrganization(organization);
+        
+        return "redirect:/organizations";
     }
 }

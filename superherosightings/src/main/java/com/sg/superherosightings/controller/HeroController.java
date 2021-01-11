@@ -80,4 +80,22 @@ public class HeroController {
         
         return "heroes/editHero";
     }
+    
+    @PostMapping("/heroes/editHero")
+    public String editHero(HttpServletRequest request, Model model){
+        String name = request.getParameter("heroName");
+        boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));
+        String description = request.getParameter("heroDescription");
+        String[] superpowerIds = request.getParameterValues("superpowerId");
+        
+        List<Superpower> superpowers = new ArrayList<>();
+        for(String superpowerId : superpowerIds) {
+            superpowers.add(superpowerService.getSuperpowerById(Integer.parseInt(superpowerId)));
+        }
+        
+        Hero hero = heroService.createHero(name,isHero,description,superpowers);
+        heroService.updateHero(hero);
+        
+        return "redirect:/heroes";
+    }
 }
