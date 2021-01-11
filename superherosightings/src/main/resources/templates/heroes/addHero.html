@@ -66,11 +66,35 @@
                     </div>
                     
                     <div class="form-group row">
+                        <label for="isHero" class="col-3 col-form-label">
+                            Hero type</label>
+                        <div class="col-9">
+                            <select id="isHero" name="isHero" class="form-control" >
+                                <option value="true">Superhero</option>
+                                <option value="false">Supervillain</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
                         <label for="heroDescription" class="col-3 col-form-label">
                             Hero Description</label>
                         <div class="col-9">
                             <textarea type="textarea" name="heroDescription" 
                                       id="heroDescription" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="superpower" class="col-3 col-form-label">
+                            Superpowers</label>
+                        <div class="col-9">
+                            <select multiple id="superpowerId" name="superpowerId" class="form-control" >
+                                <option th:each="superpower : ${superpowers}" 
+                                        th:value="${superpower.id}" 
+                                        th:text="${superpower.name}">
+                                    Superpower Name</option>
+                            </select>
                         </div>
                     </div>
                     

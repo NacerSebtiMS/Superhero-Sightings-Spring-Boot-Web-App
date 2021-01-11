@@ -47,7 +47,7 @@ public class HeroController {
     @PostMapping("/heroes/addHero")
     public String addHero(HttpServletRequest request){
         String name = request.getParameter("heroName");
-        boolean isHero = Boolean.parseBoolean(request.getParameter(""));
+        boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));
         String description = request.getParameter("heroDescription");
         String[] superpowerIds = request.getParameterValues("superpowerId");
         
@@ -56,7 +56,7 @@ public class HeroController {
             superpowers.add(superpowerService.getSuperpowerById(Integer.parseInt(superpowerId)));
         }
         
-        //heroService.createHero(name,isHero,description,superpowers);
+        heroService.createHero(name,isHero,description,superpowers);
         
         return "redirect:/heroes/addHero";
     }
