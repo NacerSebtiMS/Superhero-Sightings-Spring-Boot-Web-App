@@ -17,7 +17,7 @@
         <!-- Page header -->
         <div class="row m-4">
             <div class="col text-center border border-dark">
-                <h1>Locations</h1>
+                <h1>Sightings</h1>
             </div>
         </div>
         <!-- END Page header -->
@@ -76,7 +76,12 @@
                             <select id="locationId" name="locationId" class="form-control" >
                                 <option th:each="location : ${locations}" 
                                         th:value="${location.id}" 
-                                        th:text="${location.name + ' (' + location.latitude +' , '+ location.longitude + ')'}">
+                                        th:text="${location.name 
+                                        + ' (' 
+                                        + location.latitude 
+                                        +' , '
+                                        + location.longitude 
+                                        + ')'}">
                                     Location</option>
                             </select>
                         </div>

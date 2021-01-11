@@ -76,7 +76,12 @@
                             <td th:if='${heroSightings.get(sighting).isHero}'>Superhero</td>
                             <td th:unless='${heroSightings.get(sighting).isHero}'>Supervillain</td>
                             
-                            <td th:text="${sighting.location.name}">Location Name</td>
+                            <td th:text="${sighting.location.name  
+                                + ' (' 
+                                + sighting.location.latitude 
+                                +' , '
+                                + sighting.location.longitude 
+                                + ')'}">Location Name</td>
                             
                             <td th:text="${sighting.date}">Date</td>
                             
