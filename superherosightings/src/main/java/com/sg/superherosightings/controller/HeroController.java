@@ -70,9 +70,13 @@ public class HeroController {
     @GetMapping("/heroes/editHero")
     public String displayEditHero(HttpServletRequest request, Model model) {
         int id = Integer.parseInt(request.getParameter("id"));
-        Hero hero = heroService.getHeroById(id);
         
+        Hero hero = heroService.getHeroById(id);
         model.addAttribute("hero", hero);
+        
+        List<Superpower> superpowers = superpowerService.getAllSuperpowers();
+        model.addAttribute("superpowers", superpowers);
+        
         return "heroes/editHero";
     }
 }

@@ -60,7 +60,7 @@
                         <label for="heroName" class="col-3 col-form-label">
                             Hero Name</label>
                         <div class="col-9">
-                            <input type="text" name="heroName" 
+                            <input type="text" name="heroName" th:value="${hero.name}"
                                    id="heroName" class="form-control"/>
                         </div>
                     </div>
@@ -69,9 +69,9 @@
                         <label for="isHero" class="col-3 col-form-label">
                             Hero type</label>
                         <div class="col-9">
-                            <select id="isHero" name="isHero" class="form-control" >
-                                <option value="true">Superhero</option>
-                                <option value="false">Supervillain</option>
+                            <select id="isHero" name="isHero" class="form-control">
+                                <option value="true" th:selected="${hero.isHero}">Superhero</option>
+                                <option value="false" th:selected="${!hero.isHero}">Supervillain</option>
                             </select>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         <label for="heroDescription" class="col-3 col-form-label">
                             Hero Description</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="heroDescription" 
+                            <textarea type="textarea" name="heroDescription" th:text="${hero.description}"
                                       id="heroDescription" class="form-control"></textarea>
                         </div>
                     </div>
@@ -92,7 +92,8 @@
                             <select multiple id="superpowerId" name="superpowerId" class="form-control" >
                                 <option th:each="superpower : ${superpowers}" 
                                         th:value="${superpower.id}" 
-                                        th:text="${superpower.name}">
+                                        th:text="${superpower.name}"
+                                        th:selected="${hero.superpowers.contains(superpower)}">
                                     Superpower Name</option>
                             </select>
                         </div>
