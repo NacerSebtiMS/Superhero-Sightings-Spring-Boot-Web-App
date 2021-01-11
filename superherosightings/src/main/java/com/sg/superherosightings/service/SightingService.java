@@ -11,7 +11,9 @@ import com.sg.superherosightings.dao.OrganizationDao;
 import com.sg.superherosightings.dao.SightingDao;
 import com.sg.superherosightings.dao.SuperpowerDao;
 import com.sg.superherosightings.models.Hero;
+import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Sighting;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -43,6 +45,14 @@ public class SightingService {
     SuperpowerDao superpowerDao;
     
     // SERVICE FUNCTION
+    public void createSighting(Hero hero, Location location, String date){
+        Sighting sighting = new Sighting();
+        sighting.setHeroId(hero.getId());
+        sighting.setLocation(location);
+        sighting.setDate(Date.valueOf(date));
+
+        sighting = addSighting(sighting);
+    }
     
     // 2 functions to get last sightings and the heroes seen
     public List<Sighting> getLastSightings(int number){

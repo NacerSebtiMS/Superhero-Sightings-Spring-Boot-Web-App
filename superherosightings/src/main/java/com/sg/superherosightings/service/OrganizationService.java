@@ -10,6 +10,7 @@ import com.sg.superherosightings.dao.LocationDao;
 import com.sg.superherosightings.dao.OrganizationDao;
 import com.sg.superherosightings.dao.SightingDao;
 import com.sg.superherosightings.dao.SuperpowerDao;
+import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Organization;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,17 @@ public class OrganizationService {
     SuperpowerDao superpowerDao;
     
     // SERVICE FUNCTION
-    
+    public void createOrganization(String name, boolean isHero, String description, String address, String contact, List<Hero> heros){
+        Organization organization = new Organization();
+        organization.setName(name);
+        organization.setIsHero(isHero);
+        organization.setDescription(description);
+        organization.setAddress(address);
+        organization.setContact(contact);
+        organization.setMembers(heros);
+
+        organization = addOrganization(organization);
+    }
     
     
     // EXTERNAL DAO FUNCTIONS  
