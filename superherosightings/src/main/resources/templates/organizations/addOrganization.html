@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Superhero Sightings</title>
+  </head>
+  <body>
+    <!-- Main Body of Page -->
+    
+    <div class="container">
+        <!-- Page header -->
+        <div class="row m-4">
+            <div class="col text-center border border-dark">
+                <h1>Locations</h1>
+            </div>
+        </div>
+        <!-- END Page header -->
+        <!-- Navbar -->
+        <div class="row m-4 border border-dark">
+             <div class="col text-center m-2">
+                <a href="/" class="btn btn-outline-primary btn-lg">Home</a>
+             </div>
+            
+            <div class="col text-center m-2">
+                <a href="/heroes" class="btn btn-outline-primary btn-lg">Heroes</a>
+            </div>
+            
+            <div class="col text-center m-2">
+                <a href="/superpowers" class="btn btn-outline-primary btn-lg">Superpowers</a>
+            </div>
+            
+            <div class="col text-center m-2">
+                <a href="/locations" class="btn btn-outline-primary btn-lg">Locations</a>
+            </div>
+            
+            <div class="col text-center m-2">
+                <a href="/organizations" class="btn btn-outline-primary btn-lg">Organizations</a>
+            </div>
+            
+            <div class="col text-center m-2">
+                <a href="/sightings" class="btn btn-outline-primary btn-lg">Sightings</a>
+            </div>           
+        </div>
+        <!-- END Navbar -->
+        <!-- Add form -->
+        <div class="row m-4 border border-dark">
+            <div class="col-3 text-center m-3">
+                <span class="h3">Add Organization</span>
+            </div>
+            <div class="col-7 text-center m-3">
+                <form action="/organizations/addOrganization" method="POST">
+                    
+                    <div class="form-group row">
+                        <label for="organizationName" class="col-3 col-form-label">
+                            Organization Name</label>
+                        <div class="col-9">
+                            <input type="text" name="organizationName" 
+                                   id="organizationName" class="form-control"/>
+                        </div>
+                    </div>
+                    
+                    <!-- SELECT HERO GOES HERE -->
+                    
+                    <div class="form-group row">
+                        <label for="organizationDescription" class="col-3 col-form-label">
+                            Organization Description</label>
+                        <div class="col-9">
+                            <textarea type="textarea" name="organizationDescription" 
+                                      id="organizationDescription" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="organizationAddress" class="col-3 col-form-label">
+                            Organization Address</label>
+                        <div class="col-9">
+                            <textarea type="textarea" name="organizationAddress" 
+                                      id="organizationAddress" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="organizationContact" class="col-3 col-form-label">
+                            Organization Contact</label>
+                        <div class="col-9">
+                            <textarea type="textarea" name="organizationContact" 
+                                      id="organizationContact" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="row m-4">
+                        <div class="col text-center m-4">
+                            <a href="/organizations" class="btn btn-outline-primary btn-lg">Go Back</a>
+                        </div> 
+
+                        <button type="submit" class="col m-4 btn btn-primary btn-lg">Add Organization</button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        <!-- END Add form -->
+    </div> 
+    <!-- End main body -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  </body>
+</html>
