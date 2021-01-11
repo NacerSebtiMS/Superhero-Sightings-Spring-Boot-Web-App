@@ -31,5 +31,8 @@ public class OrganizationController {
         return "organizations";
     }
     
-    
+    @GetMapping("/organizations/addOrganization")
+    public String displayAddOrganizations(Model model) {       
+        return "/organizations/addOrganization";
+    }
 }

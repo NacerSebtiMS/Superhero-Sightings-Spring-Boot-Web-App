@@ -31,4 +31,8 @@ public class SuperpowerController {
         return "superpowers";
     }
     
+    @GetMapping("/superpowers/addSuperpower")
+    public String displayAddSuperpowers(Model model) {       
+        return "/superpowers/addSuperpower";
+    }
 }

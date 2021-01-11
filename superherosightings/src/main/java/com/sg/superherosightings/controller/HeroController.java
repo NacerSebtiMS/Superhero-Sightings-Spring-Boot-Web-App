@@ -30,4 +30,8 @@ public class HeroController {
         return "heroes";
     }
     
+    @GetMapping("/heroes/addHero")
+    public String displayAddHeroes(Model model) {       
+        return "/heroes/addHero";
+    }
 }

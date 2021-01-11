@@ -35,4 +35,8 @@ public class SightingController {
         return "sightings";
     }
     
+    @GetMapping("/sightings/addSighting")
+    public String displayAddSightings(Model model) {       
+        return "/sightings/addSighting";
+    }
 }
