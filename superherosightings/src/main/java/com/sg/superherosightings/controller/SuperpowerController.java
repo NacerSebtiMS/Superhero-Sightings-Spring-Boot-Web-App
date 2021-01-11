@@ -8,9 +8,11 @@ package com.sg.superherosightings.controller;
 import com.sg.superherosightings.models.Superpower;
 import com.sg.superherosightings.service.SuperpowerService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -34,5 +36,14 @@ public class SuperpowerController {
     @GetMapping("/superpowers/addSuperpower")
     public String displayAddSuperpowers(Model model) {       
         return "/superpowers/addSuperpower";
+    }
+    
+    @PostMapping("/superpowers/addSuperpower")
+    public String addSuperpower(HttpServletRequest request){
+        
+        
+        //superpowerService.createSuperpower();
+        
+        return "redirect:/superpowers/addSuperpower";
     }
 }

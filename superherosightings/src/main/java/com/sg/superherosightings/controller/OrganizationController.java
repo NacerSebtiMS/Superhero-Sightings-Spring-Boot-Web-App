@@ -8,9 +8,11 @@ package com.sg.superherosightings.controller;
 import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.service.OrganizationService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -34,5 +36,14 @@ public class OrganizationController {
     @GetMapping("/organizations/addOrganization")
     public String displayAddOrganizations(Model model) {       
         return "/organizations/addOrganization";
+    }
+    
+    @PostMapping("/organizations/addOrganization")
+    public String addOrganization(HttpServletRequest request){
+        
+        
+        //organizationService.createOrganization();
+        
+        return "redirect:/organizations/addOrganization";
     }
 }

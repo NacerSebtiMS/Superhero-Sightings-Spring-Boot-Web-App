@@ -7,9 +7,11 @@ package com.sg.superherosightings.controller;
 import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.service.HeroService;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  *
@@ -33,5 +35,14 @@ public class HeroController {
     @GetMapping("/heroes/addHero")
     public String displayAddHeroes(Model model) {       
         return "/heroes/addHero";
+    }
+    
+    @PostMapping("/heroes/addHero")
+    public String addHero(HttpServletRequest request){
+        
+        
+        //heroService.createHero();
+        
+        return "redirect:/heroes/addHero";
     }
 }
