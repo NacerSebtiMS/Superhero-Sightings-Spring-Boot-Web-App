@@ -60,7 +60,7 @@
                         <label for="locationName" class="col-3 col-form-label">
                             Location Name</label>
                         <div class="col-9">
-                            <input type="text" name="locationName" 
+                            <input type="text" name="locationName" th:value="${location.name}"
                                    id="locationName" class="form-control"/>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                         <label for="latitude" class="col-3 col-form-label">
                             Latitude</label>
                         <div class="col-9">
-                            <input type="text" name="latitude" 
+                            <input type="text" name="latitude" th:value="${location.latitude}"
                                    id="latitude" class="form-control"/>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         <label for="longitude" class="col-3 col-form-label">
                             Longitude</label>
                         <div class="col-9">
-                            <input type="text" name="longitude" 
+                            <input type="text" name="longitude" th:value="${location.longitude}"
                                    id="longitude" class="form-control"/>
                         </div>
                     </div>
@@ -87,7 +87,7 @@
                         <label for="description" class="col-3 col-form-label">
                             Descritpion</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="description" 
+                            <textarea type="textarea" name="description" th:text="${location.description}"
                                       id="description" class="form-control"></textarea>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                         <label for="addressInformation" class="col-3 col-form-label">
                             Address Information</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="addressInformation" 
+                            <textarea type="textarea" name="addressInformation" th:text="${location.addressInformation}"
                                       id="addressInformation" class="form-control"></textarea>
                         </div>
                     </div>
