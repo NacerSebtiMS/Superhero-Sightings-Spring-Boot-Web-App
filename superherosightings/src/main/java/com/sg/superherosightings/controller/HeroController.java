@@ -56,7 +56,8 @@ public class HeroController {
             superpowers.add(superpowerService.getSuperpowerById(Integer.parseInt(superpowerId)));
         }
         
-        heroService.createHero(name,isHero,description,superpowers);
+        Hero hero = heroService.createHero(name,isHero,description,superpowers);
+        heroService.addHero(hero);
         
         return "redirect:/heroes/addHero";
     }

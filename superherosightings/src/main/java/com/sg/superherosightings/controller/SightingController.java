@@ -65,7 +65,8 @@ public class SightingController {
         Hero hero = heroService.getHeroById(heroId);
         Location location = locationService.getLocationById(locationId);
         
-        sightingService.createSighting(hero, location, date);
+        Sighting sighting = sightingService.createSighting(hero, location, date);
+        sightingService.addSighting(sighting);
         
         return "redirect:/sightings/addSighting";
     }

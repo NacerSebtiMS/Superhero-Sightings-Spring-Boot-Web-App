@@ -39,7 +39,7 @@ public class OrganizationService {
     SuperpowerDao superpowerDao;
     
     // SERVICE FUNCTION
-    public void createOrganization(String name, boolean isHero, String description, String address, String contact, List<Hero> heros){
+    public Organization createOrganization(String name, boolean isHero, String description, String address, String contact, List<Hero> heros){
         Organization organization = new Organization();
         organization.setName(name);
         organization.setIsHero(isHero);
@@ -48,7 +48,7 @@ public class OrganizationService {
         organization.setContact(contact);
         organization.setMembers(heros);
 
-        organization = addOrganization(organization);
+        return organization;
     }
     
     

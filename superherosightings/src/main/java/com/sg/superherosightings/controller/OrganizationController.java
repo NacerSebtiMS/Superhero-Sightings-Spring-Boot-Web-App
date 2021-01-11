@@ -60,7 +60,8 @@ public class OrganizationController {
             heros.add(heroService.getHeroById(Integer.parseInt(heroId)));
         }
         
-        organizationService.createOrganization(name, isHero, description, address, contact, heros);
+        Organization organization = organizationService.createOrganization(name, isHero, description, address, contact, heros);
+        organizationService.addOrganization(organization);
         
         return "redirect:/organizations/addOrganization";
     }

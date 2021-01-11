@@ -43,7 +43,7 @@ public class HeroService {
     SuperpowerDao superpowerDao;
     
     // SERVICE FUNCTION
-    public void createHero(String name, boolean isHero, String descritpion, List<Superpower> superpowers){
+    public Hero createHero(String name, boolean isHero, String descritpion, List<Superpower> superpowers){
         Hero hero = new Hero();
         hero.setName(name);
         hero.setIsHero(isHero);
@@ -51,7 +51,7 @@ public class HeroService {
         hero.setSuperpowers(superpowers);
         hero.setSightings(new ArrayList<Sighting>());
 
-        hero = addHero(hero);
+        return hero;
     }
     
     
