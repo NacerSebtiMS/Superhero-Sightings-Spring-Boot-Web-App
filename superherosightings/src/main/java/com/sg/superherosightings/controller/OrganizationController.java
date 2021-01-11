@@ -70,4 +70,13 @@ public class OrganizationController {
         organizationService.deleteOrganizationById(id);
         return "redirect:/organizations";
     }
+    
+    @GetMapping("/organizations/editOrganization")
+    public String displayEditOrganization(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Organization organization = organizationService.getOrganizationById(id);
+        
+        model.addAttribute("organization", organization);
+        return "organizations/editOrganization";
+    }
 }

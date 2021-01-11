@@ -75,4 +75,13 @@ public class SightingController {
         sightingService.deleteSightingById(id);
         return "redirect:/sightings";
     }
+    
+    @GetMapping("/sightings/editSighting")
+    public String displayEditSighting(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Sighting sighting = sightingService.getSightingById(id);
+        
+        model.addAttribute("sighting", sighting);
+        return "sightings/editSighting";
+    }
 }

@@ -66,4 +66,13 @@ public class HeroController {
         heroService.deleteHeroById(id);
         return "redirect:/heroes";
     }
+    
+    @GetMapping("/heroes/editHero")
+    public String displayEditHero(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Hero hero = heroService.getHeroById(id);
+        
+        model.addAttribute("hero", hero);
+        return "heroes/editHero";
+    }
 }

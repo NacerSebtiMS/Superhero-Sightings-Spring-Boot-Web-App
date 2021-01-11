@@ -56,4 +56,13 @@ public class LocationController {
         locationService.deleteLocationById(id);
         return "redirect:/locations";
     }
+    
+    @GetMapping("/locations/editLocation")
+    public String displayEditLocation(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Location location = locationService.getLocationById(id);
+        
+        model.addAttribute("location", location);
+        return "locations/editLocation";
+    }
 }

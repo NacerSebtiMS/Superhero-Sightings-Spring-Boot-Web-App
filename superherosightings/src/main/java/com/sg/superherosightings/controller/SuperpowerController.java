@@ -53,4 +53,13 @@ public class SuperpowerController {
         superpowerService.deleteSuperpowerById(id);
         return "redirect:/superpowers";
     }
+    
+    @GetMapping("/superpowers/editSuperpower")
+    public String displayEditSuperpower(HttpServletRequest request, Model model) {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Superpower superpower = superpowerService.getSuperpowerById(id);
+        
+        model.addAttribute("superpower", superpower);
+        return "superpowers/editSuperpower";
+    }
 }
