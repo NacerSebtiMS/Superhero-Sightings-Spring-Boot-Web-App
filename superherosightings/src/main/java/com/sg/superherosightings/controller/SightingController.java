@@ -58,14 +58,14 @@ public class SightingController {
     
     @PostMapping("/sightings/addSighting")
     public String addSighting(HttpServletRequest request){
-        int heroId = Integer.parseInt(request.getParameter(""));
-        int locationId = Integer.parseInt(request.getParameter(""));
+        int heroId = Integer.parseInt(request.getParameter("heroId"));
+        int locationId = Integer.parseInt(request.getParameter("locationId"));
         Date date = Date.valueOf(request.getParameter("sightingDate"));
         
         Hero hero = heroService.getHeroById(heroId);
         Location location = locationService.getLocationById(locationId);
         
-        //sightingService.createSighting(hero, location, date);
+        sightingService.createSighting(hero, location, date);
         
         return "redirect:/sightings/addSighting";
     }

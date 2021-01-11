@@ -57,10 +57,36 @@
                 <form action="/sightings/addSighting" method="POST">
                     
                     <div class="form-group row">
+                        <label for="hero" class="col-3 col-form-label">
+                            Hero</label>
+                        <div class="col-9">
+                            <select id="heroId" name="heroId" class="form-control" >
+                                <option th:each="hero : ${heros}" 
+                                        th:value="${hero.id}" 
+                                        th:text="${hero.name}">
+                                    Hero Name</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="location" class="col-3 col-form-label">
+                            Location</label>
+                        <div class="col-9">
+                            <select id="locationId" name="locationId" class="form-control" >
+                                <option th:each="location : ${locations}" 
+                                        th:value="${location.id}" 
+                                        th:text="${location.name + ' (' + location.latitude +' , '+ location.longitude + ')'}">
+                                    Location</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
                         <label for="sightingDate" class="col-3 col-form-label">
                             Sighting Date</label>
                         <div class="col-9">
-                            <input type="text" name="sightingDate" 
+                            <input type="text" name="sightingDate" placeholder='yyyy-mm-dd'
                                    id="sightingDate" class="form-control"/>
                         </div>
                     </div>
