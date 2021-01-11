@@ -56,6 +56,8 @@
             <div class="col-7 text-center m-3">
                 <form action="/sightings/editSighting" method="POST">
                     
+                    <input type="hidden" name="sightingId" th:value="${sighting.id}" id="sightingId"/>
+                    
                     <div class="form-group row">
                         <label for="hero" class="col-3 col-form-label">
                             Hero</label>

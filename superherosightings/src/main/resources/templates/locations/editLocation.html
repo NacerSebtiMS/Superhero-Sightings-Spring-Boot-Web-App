@@ -56,6 +56,8 @@
             <div class="col-7 text-center m-3">
                 <form action="/locations/editLocation" method="POST">
                     
+                    <input type="hidden" name="locationId" th:value="${location.id}" id="locationId"/>
+                    
                     <div class="form-group row">
                         <label for="locationName" class="col-3 col-form-label">
                             Location Name</label>

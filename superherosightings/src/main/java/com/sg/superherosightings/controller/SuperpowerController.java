@@ -66,10 +66,12 @@ public class SuperpowerController {
     
     @PostMapping("/superpowers/editSuperpower")
     public String editSuperpower(HttpServletRequest request, Model model){
+        int id = Integer.parseInt(request.getParameter("superpowerId"));
         String name = request.getParameter("superpowerName");
         String description = request.getParameter("superpowerDescription");
         
         Superpower superpower = superpowerService.createSuperpower(name, description);
+        superpower.setId(id);
         superpowerService.updateSuperpower(superpower);
         
         return "redirect:/superpowers";

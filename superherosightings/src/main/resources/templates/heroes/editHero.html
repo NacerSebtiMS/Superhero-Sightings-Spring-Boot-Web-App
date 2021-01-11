@@ -55,6 +55,7 @@
             </div>
             <div class="col-7 text-center m-3">
                 <form action="/heroes/editHero" method="POST">
+                    <input type="hidden" name="heroId" th:value="${hero.id}" id="heroId"/>
                     
                     <div class="form-group row">
                         <label for="heroName" class="col-3 col-form-label">

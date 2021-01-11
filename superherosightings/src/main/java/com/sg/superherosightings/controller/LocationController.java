@@ -69,6 +69,7 @@ public class LocationController {
     
     @PostMapping("/locations/editLocation")
     public String editLocation(HttpServletRequest request, Model model){
+        int id = Integer.parseInt(request.getParameter("locationId"));
         String name = request.getParameter("locationName");
         double latitude = Double.parseDouble(request.getParameter("latitude"));
         double longitude = Double.parseDouble(request.getParameter("longitude"));
@@ -76,6 +77,7 @@ public class LocationController {
         String address = request.getParameter("addressInformation");
         
         Location location = locationService.createLocation(name, latitude, longitude, description, address);
+        location.setId(id);
         locationService.updateLocation(location);
         
         return "redirect:/locations";

@@ -83,6 +83,7 @@ public class HeroController {
     
     @PostMapping("/heroes/editHero")
     public String editHero(HttpServletRequest request, Model model){
+        int id = Integer.parseInt(request.getParameter("heroId"));
         String name = request.getParameter("heroName");
         boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));
         String description = request.getParameter("heroDescription");
@@ -94,6 +95,7 @@ public class HeroController {
         }
         
         Hero hero = heroService.createHero(name,isHero,description,superpowers);
+        hero.setId(id);
         heroService.updateHero(hero);
         
         return "redirect:/heroes";

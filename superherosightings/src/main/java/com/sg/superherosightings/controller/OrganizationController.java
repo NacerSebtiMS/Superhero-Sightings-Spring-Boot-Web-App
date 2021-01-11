@@ -86,6 +86,7 @@ public class OrganizationController {
     
     @PostMapping("/organizations/editOrganization")
     public String editOrganization(HttpServletRequest request, Model model){
+        int id = Integer.parseInt(request.getParameter("organizationId"));
         String name = request.getParameter("organizationName");
         boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));
         String description = request.getParameter("organizationDescription");
@@ -99,6 +100,7 @@ public class OrganizationController {
         }
         
         Organization organization = organizationService.createOrganization(name, isHero, description, address, contact, heros);
+        organization.setId(id);
         organizationService.updateOrganization(organization);
         
         return "redirect:/organizations";
