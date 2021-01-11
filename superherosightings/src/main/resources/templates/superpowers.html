@@ -48,7 +48,44 @@
             </div>           
         </div>
         <!-- END Navbar -->
-        
+        <!-- Add superpower button -->
+        <div class="row m-4">
+            <div class="col text-left m-2">
+                <a href="/superpowers/addSuperpower" class="btn btn-primary btn-lg">Add Superpower</a>
+            </div> 
+        </div>
+        <!-- END Add superpower button -->
+        <!-- superpower table -->
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Superpower Name</th>
+                            <th>Details</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="superpower : ${superpowers}">
+                            <td th:text="${superpower.id}">Location ID</td>
+                            
+                            <td th:text='${superpower.name}'>Location Name</td>
+                            
+                            <td><a href="#" th:href="@{/superpowers/detailsSuperpower(id=${superpower.id})}">Details</a></td>
+                            
+                            <td><a href="#" th:href="@{/superpowers/editSuperpower(id=${superpower.id})}">Edit</a></td>
+                            
+                            <td><a href="#" th:href="@{/superpowers/deleteSuperpower(id=${superpower.id})}">Delete</a></td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END superpower table -->
     </div> 
     <!-- End main body -->
 

@@ -49,6 +49,49 @@
         </div>
         <!-- END Navbar -->
         
+        <!-- Add hero button -->
+        <div class="row m-4">
+            <div class="col text-left m-2">
+                <a href="/heroes/addHero" class="btn btn-primary btn-lg">Add Hero</a>
+            </div> 
+        </div>
+        <!-- END Add hero button -->
+        <!-- Hero table -->
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Hero Name</th>
+                            <th>Alignment</th>
+                            <th>Details</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="hero : ${heros}">
+                            <td th:text="${hero.id}">Location ID</td>
+                            
+                            <td th:text='${hero.name}'>Location Name</td>
+                            
+                            <td th:if='${hero.isHero}'>Superhero</td>
+                            <td th:unless='${hero.isHero}'>Supervillain</td>
+                            
+                            <td><a href="#" th:href="@{/heroes/detailsHero(id=${hero.id})}">Details</a></td>
+                            
+                            <td><a href="#" th:href="@{/heroes/editHero(id=${hero.id})}">Edit</a></td>
+                            
+                            <td><a href="#" th:href="@{/heroes/deleteHero(id=${hero.id})}">Delete</a></td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END hero table -->
+        
     </div> 
     <!-- End main body -->
 

@@ -65,7 +65,7 @@
                             <td th:text="${heroSightings.get(sighting).name}">Hero Name</td>
                             
                             <td th:if='${heroSightings.get(sighting).isHero}'>Superhero</td>
-                            <td th:unless='${heroSightings.get(sighting).isHero}'>Superhero</td>
+                            <td th:unless='${heroSightings.get(sighting).isHero}'>Supervillain</td>
                             
                             <td th:text="${sighting.location.name}">Location Name</td>
                             

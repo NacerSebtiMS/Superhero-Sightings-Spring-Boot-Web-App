@@ -48,7 +48,47 @@
             </div>           
         </div>
         <!-- END Navbar -->
-        
+        <!-- Add sighting button -->
+        <div class="row m-4">
+            <div class="col text-left m-2">
+                <a href="/sightings/addSighting" class="btn btn-primary btn-lg">Add Sighting</a>
+            </div> 
+        </div>
+        <!-- END Add sighting button -->
+        <!-- sighting table -->
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Hero</th>
+                            <th>Alignment</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="sighting : ${sightings}">
+                            <td th:text="${heroSightings.get(sighting).name}">Hero Name</td>
+                            
+                            <td th:if='${heroSightings.get(sighting).isHero}'>Superhero</td>
+                            <td th:unless='${heroSightings.get(sighting).isHero}'>Supervillain</td>
+                            
+                            <td th:text="${sighting.location.name}">Location Name</td>
+                            
+                            <td th:href="${sighting.date}">Date</td>
+                            
+                            <td><a href="#" th:href="@{/sightings/editSighting(id=${sighting.id})}">Edit</a></td>
+                            
+                            <td><a href="#" th:href="@{/sightings/deleteSighting(id=${sighting.id})}">Delete</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END sighting table -->
     </div> 
     <!-- End main body -->
 

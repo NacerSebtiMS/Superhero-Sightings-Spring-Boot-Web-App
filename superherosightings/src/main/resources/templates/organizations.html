@@ -48,7 +48,48 @@
             </div>           
         </div>
         <!-- END Navbar -->
-        
+        <!-- Add organization button -->
+        <div class="row m-4">
+            <div class="col text-left m-2">
+                <a href="/organizations/addOrganization" class="btn btn-primary btn-lg">Add Organization</a>
+            </div> 
+        </div>
+        <!-- END Add organization button -->
+        <!-- organization table -->
+        <div class="row m-4 border border-dark">
+            <div class="col text-center m-3">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Organization Name</th>
+                            <th>Alignment</th>
+                            <th>Details</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="organization : ${organizations}">
+                            <td th:text="${organization.id}">Location ID</td>
+                            
+                            <td th:text='${organization.name}'>Location Name</td>
+                            
+                            <td th:if='${organization.isHero}'>Superhero</td>
+                            <td th:unless='${organization.isHero}'>Supervillain</td>
+                            
+                            <td><a href="#" th:href="@{/organizations/detailsOrganization(id=${organization.id})}">Details</a></td>
+                            
+                            <td><a href="#" th:href="@{/organizations/editOrganization(id=${organization.id})}">Edit</a></td>
+                            
+                            <td><a href="#" th:href="@{/organizations/deleteOrganization(id=${organization.id})}">Delete</a></td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END organization table -->
     </div> 
     <!-- End main body -->
 

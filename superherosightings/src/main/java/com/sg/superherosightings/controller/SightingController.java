@@ -5,8 +5,10 @@
  */
 package com.sg.superherosightings.controller;
 
+import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.service.SightingService;
+import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,9 @@ public class SightingController {
     @GetMapping("sightings")
     public String displaySightings(Model model) {
         List<Sighting> sightings = sightingService.getAllSightings();
+        HashMap<Sighting,Hero> heroSightings = sightingService.mapHeroSightings(sightings);
         model.addAttribute("sightings", sightings);
+        model.addAttribute("heroSightings", heroSightings);
         return "sightings";
     }
     
