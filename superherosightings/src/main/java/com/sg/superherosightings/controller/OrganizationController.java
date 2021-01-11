@@ -74,9 +74,13 @@ public class OrganizationController {
     @GetMapping("/organizations/editOrganization")
     public String displayEditOrganization(HttpServletRequest request, Model model) {
         int id = Integer.parseInt(request.getParameter("id"));
-        Organization organization = organizationService.getOrganizationById(id);
         
+        Organization organization = organizationService.getOrganizationById(id);
         model.addAttribute("organization", organization);
+        
+        List<Hero> heros = heroService.getAllHeros();
+        model.addAttribute("heros", heros);
+        
         return "organizations/editOrganization";
     }
 }

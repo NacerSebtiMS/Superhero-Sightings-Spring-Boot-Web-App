@@ -60,7 +60,7 @@
                         <label for="organizationName" class="col-3 col-form-label">
                             Organization Name</label>
                         <div class="col-9">
-                            <input type="text" name="organizationName" 
+                            <input type="text" name="organizationName" th:value="${organization.name}"
                                    id="organizationName" class="form-control"/>
                         </div>
                     </div>
@@ -70,8 +70,8 @@
                             Hero type</label>
                         <div class="col-9">
                             <select id="isHero" name="isHero" class="form-control" >
-                                <option value="true">Superhero</option>
-                                <option value="false">Supervillain</option>
+                                <option value="true" th:selected="${organization.isHero}">Superhero</option>
+                                <option value="false" th:selected="${!organization.isHero}">Supervillain</option>
                             </select>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         <label for="organizationDescription" class="col-3 col-form-label">
                             Organization Description</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="organizationDescription" 
+                            <textarea type="textarea" name="organizationDescription" th:text="${organization.description}"
                                       id="organizationDescription" class="form-control"></textarea>
                         </div>
                     </div>
@@ -89,7 +89,7 @@
                         <label for="organizationAddress" class="col-3 col-form-label">
                             Organization Address</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="organizationAddress" 
+                            <textarea type="textarea" name="organizationAddress" th:text="${organization.address}"
                                       id="organizationAddress" class="form-control"></textarea>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                         <label for="organizationContact" class="col-3 col-form-label">
                             Organization Contact</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="organizationContact" 
+                            <textarea type="textarea" name="organizationContact" th:text="${organization.contact}"
                                       id="organizationContact" class="form-control"></textarea>
                         </div>
                     </div>
@@ -110,7 +110,8 @@
                             <select multiple id="heroId" name="heroId" class="form-control" >
                                 <option th:each="hero : ${heros}" 
                                         th:value="${hero.id}" 
-                                        th:text="${hero.name}">
+                                        th:text="${hero.name}"
+                                        th:selected="${organization.members.contains(hero)}">
                                     Hero Name</option>
                             </select>
                         </div>
