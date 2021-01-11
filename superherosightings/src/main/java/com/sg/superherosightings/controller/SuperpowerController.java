@@ -47,4 +47,10 @@ public class SuperpowerController {
         
         return "redirect:/superpowers/addSuperpower";
     }
+    
+    @GetMapping("/superpowers/deleteSuperpower")
+    public String deleteSuperpower(Integer id) {
+        superpowerService.deleteSuperpowerById(id);
+        return "redirect:/superpowers";
+    }
 }

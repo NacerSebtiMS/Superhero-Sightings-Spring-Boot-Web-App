@@ -64,4 +64,10 @@ public class OrganizationController {
         
         return "redirect:/organizations/addOrganization";
     }
+    
+    @GetMapping("/organizations/deleteOrganization")
+    public String deleteOrganization(Integer id) {
+        organizationService.deleteOrganizationById(id);
+        return "redirect:/organizations";
+    }
 }

@@ -69,4 +69,10 @@ public class SightingController {
         
         return "redirect:/sightings/addSighting";
     }
+    
+    @GetMapping("/sightings/deleteSighting")
+    public String deleteSighting(Integer id) {
+        sightingService.deleteSightingById(id);
+        return "redirect:/sightings";
+    }
 }
