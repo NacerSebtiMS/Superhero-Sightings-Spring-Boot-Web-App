@@ -5,7 +5,9 @@
  */
 package com.sg.superherosightings.controller;
 
+import com.sg.superherosightings.models.Superpower;
 import com.sg.superherosightings.service.SuperpowerService;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,8 @@ public class SuperpowerController {
     
     @GetMapping("superpowers")
     public String displaySuperpowers(Model model) {
-        
+        List<Superpower> superpowers = superpowerService.getAllSuperpowers();
+        model.addAttribute("superpowers", superpowers);
         return "superpowers";
     }
     

@@ -5,7 +5,9 @@
  */
 package com.sg.superherosightings.controller;
 
+import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.service.SightingService;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,8 @@ public class SightingController {
     
     @GetMapping("sightings")
     public String displaySightings(Model model) {
-        
+        List<Sighting> sightings = sightingService.getAllSightings();
+        model.addAttribute("sightings", sightings);
         return "sightings";
     }
     

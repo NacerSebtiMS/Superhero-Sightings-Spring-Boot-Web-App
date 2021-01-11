@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 package com.sg.superherosightings.controller;
+import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.service.HeroService;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,8 @@ public class HeroController {
     
     @GetMapping("heroes")
     public String displayHeroes(Model model) {
-        
+        List<Hero> heros = heroService.getAllHeros();
+        model.addAttribute("heros", heros);
         return "heroes";
     }
     

@@ -83,16 +83,16 @@ public class SightingService {
     public Sighting getSightingById(int id){
         return sightingDao.getSightingById(id);      
     }
-    List<Sighting> getAllSightings(){
+    public List<Sighting> getAllSightings(){
         return sightingDao.getAllSightings();
     }
-    Sighting addSighting(Sighting sighting){
+    public Sighting addSighting(Sighting sighting){
         return sightingDao.addSighting(sighting);
     }
-    void updateSighting(Sighting sighting){
+    public void updateSighting(Sighting sighting){
         sightingDao.updateSighting(sighting);
     }
-    void deleteSightingById(int id){
+    public void deleteSightingById(int id){
         sightingDao.deleteSightingById(id);
     }
 }

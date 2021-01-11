@@ -5,7 +5,9 @@
  */
 package com.sg.superherosightings.controller;
 
+import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.service.OrganizationService;
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +26,8 @@ public class OrganizationController {
     
     @GetMapping("organizations")
     public String displayOrganizations(Model model) {
-        
+        List<Organization> organizations = organizationService.getAllOrganizations();
+        model.addAttribute("organizations", organizations);
         return "organizations";
     }
     
