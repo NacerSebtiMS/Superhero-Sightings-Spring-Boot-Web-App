@@ -60,7 +60,7 @@
                         <label for="superpowerName" class="col-3 col-form-label">
                             Superpower Name</label>
                         <div class="col-9">
-                            <input type="text" name="superpowerName" 
+                            <input type="text" name="superpowerName" th:value="${superpower.name}"
                                    id="superpowerName" class="form-control"/>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
                         <label for="superpowerDescription" class="col-3 col-form-label">
                             Superpower Description</label>
                         <div class="col-9">
-                            <textarea type="textarea" name="superpowerDescription" 
+                            <textarea type="textarea" name="superpowerDescription" th:text="${superpower.description}"
                                       id="superpowerDescription" class="form-control"></textarea>
                         </div>
                     </div>
