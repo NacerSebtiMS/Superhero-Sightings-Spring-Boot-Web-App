@@ -65,7 +65,16 @@
                         </div>
                     </div>
                     
-                    <!-- SELECT HERO GOES HERE -->
+                    <div class="form-group row">
+                        <label for="isHero" class="col-3 col-form-label">
+                            Hero type</label>
+                        <div class="col-9">
+                            <select id="isHero" name="isHero" class="form-control" >
+                                <option value="true">Superhero</option>
+                                <option value="false">Supervillain</option>
+                            </select>
+                        </div>
+                    </div>
                     
                     <div class="form-group row">
                         <label for="organizationDescription" class="col-3 col-form-label">
@@ -91,6 +100,19 @@
                         <div class="col-9">
                             <textarea type="textarea" name="organizationContact" 
                                       id="organizationContact" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="members" class="col-3 col-form-label">
+                            Members</label>
+                        <div class="col-9">
+                            <select multiple id="heroId" name="heroId" class="form-control" >
+                                <option th:each="hero : ${heros}" 
+                                        th:value="${hero.id}" 
+                                        th:text="${hero.name}">
+                                    Hero Name</option>
+                            </select>
                         </div>
                     </div>
                     

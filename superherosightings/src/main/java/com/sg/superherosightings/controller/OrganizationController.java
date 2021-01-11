@@ -49,7 +49,7 @@ public class OrganizationController {
     public String addOrganization(HttpServletRequest request){
         // String name, boolean isHero, String description, String address, String contact, List<Hero> heros
         String name = request.getParameter("organizationName");
-        boolean isHero = Boolean.parseBoolean(request.getParameter(""));
+        boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));
         String description = request.getParameter("organizationDescription");
         String address = request.getParameter("organizationAddress");
         String contact = request.getParameter("organizationContact");
@@ -60,7 +60,7 @@ public class OrganizationController {
             heros.add(heroService.getHeroById(Integer.parseInt(heroId)));
         }
         
-        //organizationService.createOrganization(name, isHero, description, address, contact, heros);
+        organizationService.createOrganization(name, isHero, description, address, contact, heros);
         
         return "redirect:/organizations/addOrganization";
     }
