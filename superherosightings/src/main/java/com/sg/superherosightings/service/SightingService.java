@@ -45,11 +45,11 @@ public class SightingService {
     SuperpowerDao superpowerDao;
     
     // SERVICE FUNCTION
-    public void createSighting(Hero hero, Location location, String date){
+    public void createSighting(Hero hero, Location location, Date date){
         Sighting sighting = new Sighting();
         sighting.setHeroId(hero.getId());
         sighting.setLocation(location);
-        sighting.setDate(Date.valueOf(date));
+        sighting.setDate(date);
 
         sighting = addSighting(sighting);
     }

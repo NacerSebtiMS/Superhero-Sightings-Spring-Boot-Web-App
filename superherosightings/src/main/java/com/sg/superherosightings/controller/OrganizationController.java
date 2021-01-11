@@ -5,8 +5,11 @@
  */
 package com.sg.superherosightings.controller;
 
+import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Organization;
+import com.sg.superherosightings.service.HeroService;
 import com.sg.superherosightings.service.OrganizationService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -22,8 +25,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class OrganizationController {
     
     private final OrganizationService organizationService;
-    public OrganizationController(OrganizationService organizationService){
+    private final HeroService heroService;
+    public OrganizationController(OrganizationService organizationService, HeroService heroService){
         this.organizationService = organizationService;
+        this.heroService = heroService;
     }
     
     @GetMapping("organizations")
@@ -40,9 +45,20 @@ public class OrganizationController {
     
     @PostMapping("/organizations/addOrganization")
     public String addOrganization(HttpServletRequest request){
+        // String name, boolean isHero, String description, String address, String contact, List<Hero> heros
+        String name = request.getParameter("organizationName");
+        boolean isHero = Boolean.parseBoolean(request.getParameter(""));
+        String description = request.getParameter("organizationDescription");
+        String address = request.getParameter("organizationAddress");
+        String contact = request.getParameter("organizationContact");
+        String[] heroIds = request.getParameterValues("heroId");
         
+        List<Hero> heros = new ArrayList<>();
+        for(String heroId : heroIds) {
+            heros.add(heroService.getHeroById(Integer.parseInt(heroId)));
+        }
         
-        //organizationService.createOrganization();
+        //organizationService.createOrganization(name, isHero, description, address, contact, heros);
         
         return "redirect:/organizations/addOrganization";
     }

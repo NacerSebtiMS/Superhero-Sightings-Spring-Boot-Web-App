@@ -5,7 +5,10 @@
  */
 package com.sg.superherosightings.controller;
 import com.sg.superherosightings.models.Hero;
+import com.sg.superherosightings.models.Superpower;
 import com.sg.superherosightings.service.HeroService;
+import com.sg.superherosightings.service.SuperpowerService;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
@@ -21,8 +24,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class HeroController {
     
     private final HeroService heroService;
-    public HeroController(HeroService heroService){
+    private final SuperpowerService superpowerService;
+    public HeroController(HeroService heroService, SuperpowerService superpowerService){
         this.heroService = heroService;
+        this.superpowerService = superpowerService;
     }
     
     @GetMapping("heroes")
@@ -39,9 +44,17 @@ public class HeroController {
     
     @PostMapping("/heroes/addHero")
     public String addHero(HttpServletRequest request){
+        String name = request.getParameter("heroName");
+        boolean isHero = Boolean.parseBoolean(request.getParameter(""));
+        String description = request.getParameter("heroDescription");
+        String[] superpowerIds = request.getParameterValues("superpowerId");
         
+        List<Superpower> superpowers = new ArrayList<>();
+        for(String superpowerId : superpowerIds) {
+            superpowers.add(superpowerService.getSuperpowerById(Integer.parseInt(superpowerId)));
+        }
         
-        //heroService.createHero();
+        //heroService.createHero(name,isHero,description,superpowers);
         
         return "redirect:/heroes/addHero";
     }

@@ -6,8 +6,12 @@
 package com.sg.superherosightings.controller;
 
 import com.sg.superherosightings.models.Hero;
+import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Sighting;
+import com.sg.superherosightings.service.HeroService;
+import com.sg.superherosightings.service.LocationService;
 import com.sg.superherosightings.service.SightingService;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -24,8 +28,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class SightingController {
     
     private final SightingService sightingService;
-    public SightingController(SightingService sightingService){
+    private final HeroService heroService;
+    private final LocationService locationService;
+    public SightingController(SightingService sightingService, HeroService heroService, LocationService locationService){
         this.sightingService = sightingService;
+        this.heroService = heroService;
+        this.locationService = locationService;
     }
     
     @GetMapping("sightings")
@@ -44,9 +52,14 @@ public class SightingController {
     
     @PostMapping("/sightings/addSighting")
     public String addSighting(HttpServletRequest request){
+        int heroId = Integer.parseInt(request.getParameter(""));
+        int locationId = Integer.parseInt(request.getParameter(""));
+        Date date = Date.valueOf(request.getParameter("sightingDate"));
         
+        Hero hero = heroService.getHeroById(heroId);
+        Location location = locationService.getLocationById(locationId);
         
-        //sightingService.createSighting();
+        //sightingService.createSighting(hero, location, date);
         
         return "redirect:/sightings/addSighting";
     }

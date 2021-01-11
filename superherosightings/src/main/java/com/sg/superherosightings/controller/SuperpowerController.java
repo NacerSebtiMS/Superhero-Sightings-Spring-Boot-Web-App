@@ -40,9 +40,10 @@ public class SuperpowerController {
     
     @PostMapping("/superpowers/addSuperpower")
     public String addSuperpower(HttpServletRequest request){
+        String name = request.getParameter("superpowerName");
+        String description = request.getParameter("superpowerDescription");
         
-        
-        //superpowerService.createSuperpower();
+        superpowerService.createSuperpower(name, description);
         
         return "redirect:/superpowers/addSuperpower";
     }

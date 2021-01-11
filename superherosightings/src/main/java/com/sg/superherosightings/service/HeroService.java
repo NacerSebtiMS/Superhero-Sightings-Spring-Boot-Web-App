@@ -15,6 +15,7 @@ import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.models.Superpower;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,9 +43,13 @@ public class HeroService {
     SuperpowerDao superpowerDao;
     
     // SERVICE FUNCTION
-    public void createHero(String name, boolean isHero, String descritpion, List<Superpower> superpowers, List<Sighting> sightings){
+    public void createHero(String name, boolean isHero, String descritpion, List<Superpower> superpowers){
         Hero hero = new Hero();
-        //hero;
+        hero.setName(name);
+        hero.setIsHero(isHero);
+        hero.setDescription(descritpion);
+        hero.setSuperpowers(superpowers);
+        hero.setSightings(new ArrayList<Sighting>());
 
         hero = addHero(hero);
     }
