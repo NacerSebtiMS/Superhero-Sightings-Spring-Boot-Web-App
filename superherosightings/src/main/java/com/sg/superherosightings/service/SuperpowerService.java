@@ -39,12 +39,12 @@ public class SuperpowerService {
     SuperpowerDao superpowerDao;
     
     // SERVICE FUNCTION
-    public void createSuperpower(String name, String description){
+    public Superpower createSuperpower(String name, String description){
         Superpower superpower = new Superpower();
         superpower.setName(name);
         superpower.setDescription(description);
 
-        superpower = addSuperpower(superpower);
+        return superpower;
     }
     
     // EXTERNAL DAO FUNCTIONS  
