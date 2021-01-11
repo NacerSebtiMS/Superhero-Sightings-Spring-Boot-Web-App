@@ -39,7 +39,9 @@ public class OrganizationController {
     }
     
     @GetMapping("/organizations/addOrganization")
-    public String displayAddOrganizations(Model model) {       
+    public String displayAddOrganizations(Model model) {
+        List<Hero> heros = heroService.getAllHeros();
+        model.addAttribute("heros", heros);
         return "/organizations/addOrganization";
     }
     

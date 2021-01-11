@@ -38,7 +38,9 @@ public class HeroController {
     }
     
     @GetMapping("/heroes/addHero")
-    public String displayAddHeroes(Model model) {       
+    public String displayAddHeroes(Model model) {
+        List<Superpower> superpowers = superpowerService.getAllSuperpowers();
+        model.addAttribute("superpowers", superpowers);
         return "/heroes/addHero";
     }
     

@@ -46,7 +46,13 @@ public class SightingController {
     }
     
     @GetMapping("/sightings/addSighting")
-    public String displayAddSightings(Model model) {       
+    public String displayAddSightings(Model model) {
+        List<Hero> heros = heroService.getAllHeros();
+        model.addAttribute("heros", heros);
+        
+        List<Location> locations = locationService.getAllLocations();
+        model.addAttribute("locations", locations);
+        
         return "/sightings/addSighting";
     }
     
