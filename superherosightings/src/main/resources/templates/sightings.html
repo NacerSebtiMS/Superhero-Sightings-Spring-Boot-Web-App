@@ -78,7 +78,7 @@
                             
                             <td th:text="${sighting.location.name}">Location Name</td>
                             
-                            <td th:href="${sighting.date}">Date</td>
+                            <td th:text="${sighting.date}">Date</td>
                             
                             <td><a href="#" th:href="@{/sightings/editSighting(id=${sighting.id})}">Edit</a></td>
                             
