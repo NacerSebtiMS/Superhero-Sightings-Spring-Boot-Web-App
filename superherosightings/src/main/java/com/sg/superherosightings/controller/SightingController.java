@@ -79,9 +79,16 @@ public class SightingController {
     @GetMapping("/sightings/editSighting")
     public String displayEditSighting(HttpServletRequest request, Model model) {
         int id = Integer.parseInt(request.getParameter("id"));
-        Sighting sighting = sightingService.getSightingById(id);
         
+        Sighting sighting = sightingService.getSightingById(id);
         model.addAttribute("sighting", sighting);
+        
+        List<Hero> heros = heroService.getAllHeros();
+        model.addAttribute("heros", heros);
+        
+        List<Location> locations = locationService.getAllLocations();
+        model.addAttribute("locations", locations);
+        
         return "sightings/editSighting";
     }
 }
