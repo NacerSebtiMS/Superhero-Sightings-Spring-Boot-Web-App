@@ -61,9 +61,9 @@ public class HeroController {
         return "redirect:/heroes/addHero";
     }
     
-    @GetMapping("/heros/deleteHero")
+    @GetMapping("/heroes/deleteHero")
     public String deleteHero(Integer id) {
         heroService.deleteHeroById(id);
-        return "redirect:/heros";
+        return "redirect:/heroes";
     }
 }
