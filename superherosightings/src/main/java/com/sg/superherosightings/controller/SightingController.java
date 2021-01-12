@@ -71,7 +71,14 @@ public class SightingController {
     public String addSighting(HttpServletRequest request, Model model){
         int heroId = Integer.parseInt(request.getParameter("heroId"));
         int locationId = Integer.parseInt(request.getParameter("locationId"));
-        Date date = Date.valueOf(request.getParameter("sightingDate"));
+        String dateString = request.getParameter("sightingDate");
+        
+        Date date = null;
+        if(sightingService.isValidDate(dateString)){
+            date = Date.valueOf(dateString);
+        } else {
+            model.addAttribute("dateError", "Empty or Invalid date.");
+        }
         
         Hero hero = heroService.getHeroById(heroId);
         Location location = locationService.getLocationById(locationId);
@@ -80,7 +87,7 @@ public class SightingController {
         
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(sighting);
-        if(violations.isEmpty()){
+        if(violations.isEmpty() && date !=null){
             sightingService.addSighting(sighting);
         }
         
@@ -120,7 +127,14 @@ public class SightingController {
         int id = Integer.parseInt(request.getParameter("sightingId"));
         int heroId = Integer.parseInt(request.getParameter("heroId"));
         int locationId = Integer.parseInt(request.getParameter("locationId"));
-        Date date = Date.valueOf(request.getParameter("sightingDate"));
+        String dateString = request.getParameter("sightingDate");
+        
+        Date date = null;
+        if(sightingService.isValidDate(dateString)){
+            date = Date.valueOf(dateString);
+        } else {
+            model.addAttribute("dateError", "Empty or Invalid date.");
+        }
         
         Hero hero = heroService.getHeroById(heroId);
         Location location = locationService.getLocationById(locationId);
@@ -130,7 +144,7 @@ public class SightingController {
         
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(sighting);
-        if(violations.isEmpty()){
+        if(violations.isEmpty() && date !=null){
             sightingService.updateSighting(sighting);
             return "redirect:/sightings";
         } else {
