@@ -64,6 +64,9 @@
                         <div class="col-9">
                             <input type="text" name="superpowerName" th:value="${superpower.name}"
                                    id="superpowerName" class="form-control"/>
+                            <p class="alert alert-danger" th:each="error : ${errors}" 
+                                    th:text="${error.message}"
+                                    th:if="${error.getPropertyPath().toString().equals('name')}">Error message</p>
                         </div>
                     </div>
                     
@@ -73,6 +76,9 @@
                         <div class="col-9">
                             <textarea type="textarea" name="superpowerDescription" th:text="${superpower.description}"
                                       id="superpowerDescription" class="form-control"></textarea>
+                            <p class="alert alert-danger" th:each="error : ${errors}" 
+                                    th:text="${error.message}"
+                                    th:if="${error.getPropertyPath().toString().equals('description')}">Error message</p>
                         </div>
                     </div>
                     
