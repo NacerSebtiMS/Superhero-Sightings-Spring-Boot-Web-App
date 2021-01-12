@@ -22,11 +22,9 @@ public class Location {
     @Size(max = 50, message="Name must be less than 50 characters.")
     private String name;
     
-    @NotBlank(message = "Latitude must not be empty.")
     @Digits(integer=10, fraction=8)
     private double latitude;
     
-    @NotBlank(message = "Latitude must not be empty.")
     @Digits(integer=11, fraction=8)
     private double longitude;
     

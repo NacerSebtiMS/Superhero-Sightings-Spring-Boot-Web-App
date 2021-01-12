@@ -43,7 +43,6 @@ public class LocationController {
     
     @GetMapping("/locations/addLocation")
     public String displayAddLocations(Model model) {
-        violations.clear();
         model.addAttribute("errors", violations);
         
         return "/locations/addLocation";

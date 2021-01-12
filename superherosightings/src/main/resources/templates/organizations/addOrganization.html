@@ -62,6 +62,9 @@
                         <div class="col-9">
                             <input type="text" name="organizationName" 
                                    id="organizationName" class="form-control"/>
+                            <p class="alert alert-danger" th:each="error : ${errors}" 
+                                    th:text="${error.message}"
+                                    th:if="${error.getPropertyPath().toString().equals('name')}">Error message</p>
                         </div>
                     </div>
                     
@@ -82,6 +85,9 @@
                         <div class="col-9">
                             <textarea type="textarea" name="organizationDescription" 
                                       id="organizationDescription" class="form-control"></textarea>
+                            <p class="alert alert-danger" th:each="error : ${errors}" 
+                                    th:text="${error.message}"
+                                    th:if="${error.getPropertyPath().toString().equals('description')}">Error message</p>
                         </div>
                     </div>
                     
@@ -91,6 +97,9 @@
                         <div class="col-9">
                             <textarea type="textarea" name="organizationAddress" 
                                       id="organizationAddress" class="form-control"></textarea>
+                            <p class="alert alert-danger" th:each="error : ${errors}" 
+                                    th:text="${error.message}"
+                                    th:if="${error.getPropertyPath().toString().equals('address')}">Error message</p>
                         </div>
                     </div>
                     
@@ -100,6 +109,9 @@
                         <div class="col-9">
                             <textarea type="textarea" name="organizationContact" 
                                       id="organizationContact" class="form-control"></textarea>
+                            <p class="alert alert-danger" th:each="error : ${errors}" 
+                                    th:text="${error.message}"
+                                    th:if="${error.getPropertyPath().toString().equals('contact')}">Error message</p>
                         </div>
                     </div>
                     
