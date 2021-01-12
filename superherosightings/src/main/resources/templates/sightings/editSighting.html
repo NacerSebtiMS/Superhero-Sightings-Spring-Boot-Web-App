@@ -97,6 +97,9 @@
                         <div class="col-9">
                             <input type="text" name="sightingDate" placeholder='yyyy-mm-dd' th:value="${sighting.date}"
                                    id="sightingDate" class="form-control"/>
+                            <p class="alert alert-danger"
+                               th:if="${dateError!=null}"
+                               th:text="${dateError}">Error message</p>
                         </div>
                     </div>
                     

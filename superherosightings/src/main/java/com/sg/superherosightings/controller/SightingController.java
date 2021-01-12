@@ -42,6 +42,7 @@ public class SightingController {
     }
     
     Set<ConstraintViolation<Sighting>> violations = new HashSet<>();
+    String dateError = null;
     
     @GetMapping("sightings")
     public String displaySightings(Model model) {
@@ -64,6 +65,8 @@ public class SightingController {
         
         model.addAttribute("errors", violations);
         
+        model.addAttribute("dateError", dateError);
+        
         return "/sightings/addSighting";
     }
     
@@ -75,10 +78,12 @@ public class SightingController {
         
         Date date = null;
         if(sightingService.isValidDate(dateString)){
-            date = Date.valueOf(dateString);
+            date = Date.valueOf(dateString);           
         } else {
-            model.addAttribute("dateError", "Empty or Invalid date.");
+            dateError = "Empty or Invalid date.";
         }
+        
+        model.addAttribute("dateError", dateError);
         
         Hero hero = heroService.getHeroById(heroId);
         Location location = locationService.getLocationById(locationId);
@@ -119,6 +124,8 @@ public class SightingController {
         
         model.addAttribute("errors", violations);
         
+        model.addAttribute("dateError", dateError);
+        
         return "sightings/editSighting";
     }
     
@@ -129,12 +136,15 @@ public class SightingController {
         int locationId = Integer.parseInt(request.getParameter("locationId"));
         String dateString = request.getParameter("sightingDate");
         
+        String dateError = null;
         Date date = null;
         if(sightingService.isValidDate(dateString)){
-            date = Date.valueOf(dateString);
+            date = Date.valueOf(dateString);           
         } else {
-            model.addAttribute("dateError", "Empty or Invalid date.");
+            dateError = "Empty or Invalid date.";
         }
+        
+        model.addAttribute("dateError", dateError);
         
         Hero hero = heroService.getHeroById(heroId);
         Location location = locationService.getLocationById(locationId);
