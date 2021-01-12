@@ -62,17 +62,26 @@
                     </thead>
                     <tbody>
                         <tr th:each="sighting : ${sightings}">
-                            <td th:text="${heroSightings.get(sighting).name}">Hero Name</td>
+                            <td>
+                                <a href="#"
+                                   th:href="@{/heroes/detailsHero(id=${heroSightings.get(sighting).id})}"
+                                   th:text="${heroSightings.get(sighting).name}"></a>
+                            </td>
                             
                             <td th:if='${heroSightings.get(sighting).isHero}'>Superhero</td>
                             <td th:unless='${heroSightings.get(sighting).isHero}'>Supervillain</td>
                             
-                            <td th:text="${sighting.location.name 
-                                + ' (' 
-                                + sighting.location.latitude 
-                                +' , '
-                                + sighting.location.longitude 
-                                + ')'}">Location Name</td>
+                            <td>
+                                <a href="#"
+                                    th:href="@{/locations/detailsLocation(id=${sighting.location.id})}"
+                                    th:text="${
+                                    sighting.location.name 
+                                    + ' (' 
+                                    + sighting.location.latitude 
+                                    +' , '
+                                    + sighting.location.longitude 
+                                    + ')'}"></a>
+                            </td>
                             
                             <td th:text="${sighting.date}">Date</td>
                         </tr>
