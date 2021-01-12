@@ -96,6 +96,8 @@ public class HeroController {
         List<Superpower> superpowers = superpowerService.getAllSuperpowers();
         model.addAttribute("superpowers", superpowers);
         
+        model.addAttribute("errors", violations);
+        
         return "heroes/editHero";
     }
     
@@ -108,15 +110,29 @@ public class HeroController {
         String[] superpowerIds = request.getParameterValues("superpowerId");
         
         List<Superpower> superpowers = new ArrayList<>();
-        for(String superpowerId : superpowerIds) {
-            superpowers.add(superpowerService.getSuperpowerById(Integer.parseInt(superpowerId)));
+        if(superpowerIds != null){
+            for(String superpowerId : superpowerIds) {
+                superpowers.add(superpowerService.getSuperpowerById(Integer.parseInt(superpowerId)));
+            }
         }
         
         Hero hero = heroService.createHero(name,isHero,description,superpowers);
         hero.setId(id);
-        heroService.updateHero(hero);
         
-        return "redirect:/heroes";
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(hero);
+        if(violations.isEmpty()) {
+            heroService.updateHero(hero);
+            return "redirect:/heroes";
+        } else {
+            hero = heroService.getHeroById(hero.getId());
+            model.addAttribute("hero", hero);
+
+            superpowers = superpowerService.getAllSuperpowers();
+            model.addAttribute("superpowers", superpowers);
+            model.addAttribute("errors", violations);
+            return "heroes/editHero";
+        }
     }
     
     @GetMapping("heroes/detailsHero")

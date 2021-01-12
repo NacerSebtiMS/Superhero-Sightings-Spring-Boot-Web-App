@@ -63,6 +63,12 @@
                         <div class="col-9">
                             <input type="text" name="heroName" th:value="${hero.name}"
                                    id="heroName" class="form-control"/>
+                            <div class="text-center" 
+                                th:if="${!errors.isEmpty()}">
+                                <p class="alert alert-danger" th:each="error : ${errors}" 
+                                    th:text="${error.message}"
+                                    th:if="${error.getPropertyPath().toString().equals('name')}">Error message</p>
+                            </div>
                         </div>
                     </div>
                     
