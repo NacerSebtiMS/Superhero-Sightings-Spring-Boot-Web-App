@@ -8,8 +8,13 @@ package com.sg.superherosightings.controller;
 import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.service.LocationService;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +32,8 @@ public class LocationController {
         this.locationService = locationService;
     }
     
+    Set<ConstraintViolation<Location>> violations = new HashSet<>();
+    
     @GetMapping("locations")
     public String displayLocations(Model model) {
         List<Location> locations = locationService.getAllLocations();
@@ -35,12 +42,15 @@ public class LocationController {
     }
     
     @GetMapping("/locations/addLocation")
-    public String displayAddLocations(Model model) {       
+    public String displayAddLocations(Model model) {
+        violations.clear();
+        model.addAttribute("errors", violations);
+        
         return "/locations/addLocation";
     }
     
     @PostMapping("/locations/addLocation")
-    public String addLocation(HttpServletRequest request){
+    public String addLocation(HttpServletRequest request, Model model){
         String name = request.getParameter("locationName");
         double latitude = Double.parseDouble(request.getParameter("latitude"));
         double longitude = Double.parseDouble(request.getParameter("longitude"));
@@ -48,7 +58,14 @@ public class LocationController {
         String address = request.getParameter("addressInformation");
         
         Location location = locationService.createLocation(name, latitude, longitude, description, address);
-        locationService.addLocation(location);
+        
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(location);
+        if(violations.isEmpty()){
+            locationService.addLocation(location);
+        }
+        
+        model.addAttribute("errors", violations);
         
         return "redirect:/locations/addLocation";
     }
@@ -61,10 +78,14 @@ public class LocationController {
     
     @GetMapping("/locations/editLocation")
     public String displayEditLocation(HttpServletRequest request, Model model) {
+        violations.clear();
         int id = Integer.parseInt(request.getParameter("id"));
         Location location = locationService.getLocationById(id);
         
         model.addAttribute("location", location);
+        
+        model.addAttribute("errors", violations);
+        
         return "locations/editLocation";
     }
     
@@ -79,9 +100,17 @@ public class LocationController {
         
         Location location = locationService.createLocation(name, latitude, longitude, description, address);
         location.setId(id);
-        locationService.updateLocation(location);
         
-        return "redirect:/locations";
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(location);
+        if(violations.isEmpty()){
+            locationService.updateLocation(location);
+            return "redirect:/locations";
+        } else {
+            model.addAttribute("location", locationService.getLocationById(location.getId()));
+            model.addAttribute("errors", violations);
+            return "locations/editLocation";
+        }    
     }
     
     @GetMapping("locations/detailsLocation")

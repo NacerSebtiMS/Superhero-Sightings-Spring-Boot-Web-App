@@ -13,8 +13,13 @@ import com.sg.superherosightings.service.LocationService;
 import com.sg.superherosightings.service.SightingService;
 import java.sql.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +41,8 @@ public class SightingController {
         this.locationService = locationService;
     }
     
+    Set<ConstraintViolation<Sighting>> violations = new HashSet<>();
+    
     @GetMapping("sightings")
     public String displaySightings(Model model) {
         List<Sighting> sightings = sightingService.getAllSightings();
@@ -47,17 +54,21 @@ public class SightingController {
     
     @GetMapping("/sightings/addSighting")
     public String displayAddSightings(Model model) {
+        violations.clear();
+        
         List<Hero> heros = heroService.getAllHeros();
         model.addAttribute("heros", heros);
         
         List<Location> locations = locationService.getAllLocations();
         model.addAttribute("locations", locations);
         
+        model.addAttribute("errors", violations);
+        
         return "/sightings/addSighting";
     }
     
     @PostMapping("/sightings/addSighting")
-    public String addSighting(HttpServletRequest request){
+    public String addSighting(HttpServletRequest request, Model model){
         int heroId = Integer.parseInt(request.getParameter("heroId"));
         int locationId = Integer.parseInt(request.getParameter("locationId"));
         Date date = Date.valueOf(request.getParameter("sightingDate"));
@@ -66,7 +77,15 @@ public class SightingController {
         Location location = locationService.getLocationById(locationId);
         
         Sighting sighting = sightingService.createSighting(hero, location, date);
-        sightingService.addSighting(sighting);
+        
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(sighting);
+        if(violations.isEmpty()){
+            sightingService.addSighting(sighting);
+        }
+        
+        model.addAttribute("errors", violations);
+        
         
         return "redirect:/sightings/addSighting";
     }
@@ -79,6 +98,7 @@ public class SightingController {
     
     @GetMapping("/sightings/editSighting")
     public String displayEditSighting(HttpServletRequest request, Model model) {
+        violations.clear();
         int id = Integer.parseInt(request.getParameter("id"));
         
         Sighting sighting = sightingService.getSightingById(id);
@@ -89,6 +109,8 @@ public class SightingController {
         
         List<Location> locations = locationService.getAllLocations();
         model.addAttribute("locations", locations);
+        
+        model.addAttribute("errors", violations);
         
         return "sightings/editSighting";
     }
@@ -105,8 +127,27 @@ public class SightingController {
         
         Sighting sighting = sightingService.createSighting(hero, location, date);
         sighting.setId(id);
-        sightingService.updateSighting(sighting);
         
-        return "redirect:/sightings";
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(sighting);
+        if(violations.isEmpty()){
+            sightingService.updateSighting(sighting);
+            return "redirect:/sightings";
+        } else {
+            sighting = sightingService.getSightingById(sighting.getId());
+            model.addAttribute("sighting", sighting);
+
+            List<Hero> heros = heroService.getAllHeros();
+            model.addAttribute("heros", heros);
+
+            List<Location> locations = locationService.getAllLocations();
+            model.addAttribute("locations", locations);
+            
+            model.addAttribute("errors", violations);
+            
+            return "sightings/editSighting";
+        }  
+        
+        
     }
 }

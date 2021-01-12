@@ -54,6 +54,15 @@ public class SightingService {
         return sighting;
     }
     
+    public boolean isValidDate(String date){
+        try{
+            Date.valueOf(date);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+    }
+    
     // 2 functions to get last sightings and the heroes seen
     public List<Sighting> getLastSightings(int number){
         List<Sighting> sightings = sightingDao.getAllSightings();
