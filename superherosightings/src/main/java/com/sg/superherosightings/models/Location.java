@@ -6,6 +6,9 @@
 package com.sg.superherosightings.models;
 
 import java.util.Objects;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -14,10 +17,23 @@ import java.util.Objects;
 public class Location {
     
     private int id;
+    
+    @NotBlank(message = "Name must not be empty.")
+    @Size(max = 50, message="Name must be less than 50 characters.")
     private String name;
+    
+    @NotBlank(message = "Latitude must not be empty.")
+    @Digits(integer=10, fraction=8)
     private double latitude;
+    
+    @NotBlank(message = "Latitude must not be empty.")
+    @Digits(integer=11, fraction=8)
     private double longitude;
+    
+    @Size(max = 255, message="Description must be less than 255 characters.")
     private String description;
+    
+    @Size(max = 255, message="Address Information must be less than 255 characters.")
     private String addressInformation;
 
     @Override

@@ -10,8 +10,13 @@ import com.sg.superherosightings.models.Superpower;
 import com.sg.superherosightings.service.HeroService;
 import com.sg.superherosightings.service.SuperpowerService;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +36,8 @@ public class HeroController {
         this.superpowerService = superpowerService;
     }
     
+    Set<ConstraintViolation<Hero>> violations = new HashSet<>();
+    
     @GetMapping("heroes")
     public String displayHeroes(Model model) {
         List<Hero> heros = heroService.getAllHeros();
@@ -42,23 +49,33 @@ public class HeroController {
     public String displayAddHeroes(Model model) {
         List<Superpower> superpowers = superpowerService.getAllSuperpowers();
         model.addAttribute("superpowers", superpowers);
+        model.addAttribute("errors", violations);
         return "/heroes/addHero";
     }
     
     @PostMapping("/heroes/addHero")
-    public String addHero(HttpServletRequest request){
+    public String addHero(HttpServletRequest request, Model model){
         String name = request.getParameter("heroName");
         boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));
         String description = request.getParameter("heroDescription");
         String[] superpowerIds = request.getParameterValues("superpowerId");
         
         List<Superpower> superpowers = new ArrayList<>();
-        for(String superpowerId : superpowerIds) {
-            superpowers.add(superpowerService.getSuperpowerById(Integer.parseInt(superpowerId)));
+        if(superpowerIds != null){
+            for(String superpowerId : superpowerIds) {
+                superpowers.add(superpowerService.getSuperpowerById(Integer.parseInt(superpowerId)));
+            }
         }
         
         Hero hero = heroService.createHero(name,isHero,description,superpowers);
-        heroService.addHero(hero);
+        
+        Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
+        violations = validate.validate(hero);
+        if(violations.isEmpty()) {
+            heroService.addHero(hero);
+        }
+        
+        model.addAttribute("errors", violations);
         
         return "redirect:/heroes/addHero";
     }

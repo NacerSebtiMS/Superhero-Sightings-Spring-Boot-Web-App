@@ -7,6 +7,7 @@ package com.sg.superherosightings.models;
 
 import java.sql.Date;
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
 
 /**
  *
@@ -17,6 +18,8 @@ public class Sighting {
     private int id;
     private int heroId;
     private Location location;
+    
+    @NotBlank(message = "Name must not be empty.")
     private Date date;
 
     @Override

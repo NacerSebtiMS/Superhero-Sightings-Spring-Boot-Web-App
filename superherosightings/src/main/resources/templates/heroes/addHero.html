@@ -53,6 +53,7 @@
             <div class="col-3 text-center m-3">
                 <span class="h3">Add Hero</span>
             </div>
+            
             <div class="col-7 text-center m-3">
                 <form action="/heroes/addHero" method="POST">
                     
@@ -62,6 +63,12 @@
                         <div class="col-9">
                             <input type="text" name="heroName" 
                                    id="heroName" class="form-control"/>
+                            <div class="text-center" 
+                                th:if="${!errors.isEmpty()}">
+                                <p class="alert alert-danger" th:each="error : ${errors}" 
+                                    th:text="${error.message}"
+                                    th:if="${error.getPropertyPath().toString().equals('name')}">Error message</p>
+                            </div>
                         </div>
                     </div>
                     

@@ -7,6 +7,8 @@ package com.sg.superherosightings.models;
 
 import java.util.List;
 import java.util.Objects;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -16,8 +18,14 @@ public class Hero {
     
     private int id;
     private boolean isHero;
+    
+    @NotBlank(message = "Name must not be empty.")
+    @Size(max = 50, message="Name must be less than 50 characters.")
     private String name;
+    
+    @Size(max = 255, message="Description must be less than 255 characters.")
     private String description;
+    
     private List<Superpower> superpowers;
     private List<Sighting> sightings;
 
