@@ -53,10 +53,10 @@ public class LocationService {
     
     
     // EXTERNAL DAO FUNCTIONS  
-    List<Sighting> getSightingsForLocation(Location location){
+    public List<Sighting> getSightingsForLocation(Location location){
         return sightingDao.getSightingsForLocation(location);
     }
-    List<Hero> getHerosForLocation(Location location){
+    public List<Hero> getHerosForLocation(Location location){
         return heroDao.getHerosForLocation(location);
     }
     // LOCAL DAO FUNCTIONS  

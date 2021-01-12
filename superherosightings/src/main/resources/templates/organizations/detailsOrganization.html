@@ -17,7 +17,7 @@
         <!-- Page header -->
         <div class="row m-4">
             <div class="col text-center border border-dark">
-                <h1>Heroes</h1>
+                <h1>Organizations</h1>
             </div>
         </div>
         <!-- END Page header -->
@@ -48,69 +48,58 @@
             </div>           
         </div>
         <!-- END Navbar -->
-        <!-- details hero -->
+        <!-- details organization -->
         <div class="row m-4 border border-dark">
             
             <!-- ID -->
             <div class="col-6 text-right"><strong>ID</strong></div>
             <div class="col-6 text-left">
-                <span th:text="${hero.id}">display id</span>
+                <span th:text="${organization.id}">display id</span>
             </div>
             <hr>
             <!-- Name -->
             <div class="col-6 text-right"><strong>Name</strong></div>
             <div class="col-6 text-left">
-                <span th:text="${hero.name}">display name</span>
+                <span th:text="${organization.name}">display name</span>
             </div>
             <hr>
             <!-- Alignment -->
             <div class="col-6 text-right"><strong>Alignment</strong></div>
             <div class="col-6 text-left">
-                <span th:if="${hero.isHero}">Superhero</span>
-                <span th:unless="${hero.isHero}">Supervillain</span>
+                <span th:if="${organization.isHero}">Superhero</span>
+                <span th:unless="${organization.isHero}">Supervillain</span>
             </div>
             <hr>
             <!-- Description -->
             <div class="col-6 text-right"><strong>Description</strong></div>
             <div class="col-6 text-left">
-                <span th:text="${hero.description}">display description</span>
+                <span th:text="${organization.description}">display description</span>
             </div>
             <hr>
-            <!-- Superpowers -->
-            <div class="col-6 text-right"><strong>Superpowers</strong></div>
+            <!-- Address -->
+            <div class="col-6 text-right"><strong>Address</strong></div>
             <div class="col-6 text-left">
-                <span th:each="superpower : ${hero.superpowers}">
-                    <span th:text="${superpower.name}">
-                        display superpower</span><br/>
+                <span th:text="${organization.address}">display Address</span>
+            </div>
+            <hr>
+            <!-- Contact -->
+            <div class="col-6 text-right"><strong>Contact</strong></div>
+            <div class="col-6 text-left">
+                <span th:text="${organization.contact}">display Contact</span>
+            </div>
+            <hr>
+            <!-- Heroes -->
+            <div class="col-6 text-right"><strong>Members</strong></div>
+            <div class="col-6 text-left">
+                <span th:each="hero : ${organization.members}">
+                    <span th:text="${hero.name}">
+                        display hero</span><br/>
                 </span>
             </div>
             <hr>
-            <!-- Organizations -->
-            <div class="col-6 text-right"><strong>Organizations</strong></div>
-            <div class="col-6 text-left">
-                <span th:each="organization : ${organizations}">
-                    <span th:text="${organization.name}">
-                        display organization</span><br/>
-                </span>
-            </div>
-            <hr>
-            <!-- Sightings -->
-            <div class="col-6 text-right"><strong>Sightings</strong></div>
-            <div class="col-6 text-left">
-                <span th:each="sighting : ${hero.sightings}">
-                    <span th:text="${
-                          sighting.location.name
-                          + ' ('
-                          + sighting.location.latitude
-                          + ' , '
-                          + sighting.location.longitude
-                          + ')'}">
-                        display sighting</span><br/>
-                </span>
-            </div>
-            <hr>
+            
         </div>
-        <!-- END details hero -->
+        <!-- END details organization -->
     </div> 
     <!-- End main body -->
 

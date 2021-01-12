@@ -5,6 +5,7 @@
  */
 package com.sg.superherosightings.controller;
 
+import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.service.LocationService;
 import java.util.List;
@@ -81,5 +82,18 @@ public class LocationController {
         locationService.updateLocation(location);
         
         return "redirect:/locations";
+    }
+    
+    @GetMapping("locations/detailsLocation")
+    public String displayDetailsLocation(HttpServletRequest request, Model model){
+        int id = Integer.parseInt(request.getParameter("id"));
+        
+        Location location = locationService.getLocationById(id);
+        model.addAttribute("location", location);
+        
+        List<Hero> heros = locationService.getHerosForLocation(location);
+        model.addAttribute("heros", heros);
+        
+        return "locations/detailsLocation";
     }
 }

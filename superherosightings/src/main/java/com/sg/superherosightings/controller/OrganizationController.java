@@ -105,4 +105,14 @@ public class OrganizationController {
         
         return "redirect:/organizations";
     }
+    
+    @GetMapping("organizations/detailsOrganization")
+    public String displayDetailsOrganization(HttpServletRequest request, Model model){
+        int id = Integer.parseInt(request.getParameter("id"));
+        
+        Organization organization = organizationService.getOrganizationById(id);
+        model.addAttribute("organization", organization);
+        
+        return "organizations/detailsOrganization";
+    }
 }
