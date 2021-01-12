@@ -54,7 +54,7 @@ public class SightingController {
     
     @GetMapping("/sightings/addSighting")
     public String displayAddSightings(Model model) {
-        violations.clear();
+        //violations.clear();
         
         List<Hero> heros = heroService.getAllHeros();
         model.addAttribute("heros", heros);
@@ -105,7 +105,7 @@ public class SightingController {
     
     @GetMapping("/sightings/editSighting")
     public String displayEditSighting(HttpServletRequest request, Model model) {
-        violations.clear();
+        //violations.clear();
         int id = Integer.parseInt(request.getParameter("id"));
         
         Sighting sighting = sightingService.getSightingById(id);

@@ -44,7 +44,7 @@ public class SuperpowerController {
     
     @GetMapping("/superpowers/addSuperpower")
     public String displayAddSuperpowers(Model model) { 
-        violations.clear();
+        //violations.clear();
         model.addAttribute("errors", violations);
         
         return "/superpowers/addSuperpower";
@@ -77,7 +77,7 @@ public class SuperpowerController {
     
     @GetMapping("/superpowers/editSuperpower")
     public String displayEditSuperpower(HttpServletRequest request, Model model) {
-        violations.clear();
+        //violations.clear();
         int id = Integer.parseInt(request.getParameter("id"));
         Superpower superpower = superpowerService.getSuperpowerById(id);
         

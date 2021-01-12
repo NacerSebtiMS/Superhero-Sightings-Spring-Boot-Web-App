@@ -48,7 +48,7 @@ public class OrganizationController {
     
     @GetMapping("/organizations/addOrganization")
     public String displayAddOrganizations(Model model) {
-        violations.clear();
+        //violations.clear();
         
         List<Hero> heros = heroService.getAllHeros();
         model.addAttribute("heros", heros);
@@ -96,7 +96,7 @@ public class OrganizationController {
     
     @GetMapping("/organizations/editOrganization")
     public String displayEditOrganization(HttpServletRequest request, Model model) {
-        violations.clear();
+        //violations.clear();
         int id = Integer.parseInt(request.getParameter("id"));
         
         Organization organization = organizationService.getOrganizationById(id);

@@ -43,6 +43,7 @@ public class LocationController {
     
     @GetMapping("/locations/addLocation")
     public String displayAddLocations(Model model) {
+        //violations.clear();
         model.addAttribute("errors", violations);
         
         return "/locations/addLocation";
@@ -77,7 +78,7 @@ public class LocationController {
     
     @GetMapping("/locations/editLocation")
     public String displayEditLocation(HttpServletRequest request, Model model) {
-        violations.clear();
+        //violations.clear();
         int id = Integer.parseInt(request.getParameter("id"));
         Location location = locationService.getLocationById(id);
         
