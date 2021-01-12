@@ -5,6 +5,7 @@
  */
 package com.sg.superherosightings.controller;
 import com.sg.superherosightings.models.Hero;
+import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.models.Superpower;
 import com.sg.superherosightings.service.HeroService;
 import com.sg.superherosightings.service.SuperpowerService;
@@ -99,5 +100,18 @@ public class HeroController {
         heroService.updateHero(hero);
         
         return "redirect:/heroes";
+    }
+    
+    @GetMapping("heroes/detailsHero")
+    public String displayDetailsHero(HttpServletRequest request, Model model){
+        int id = Integer.parseInt(request.getParameter("id"));
+        
+        Hero hero = heroService.getHeroById(id);
+        model.addAttribute("hero", hero);
+        
+        List<Organization> organizations = heroService.getOrganizationsForHero(hero);
+        model.addAttribute("organizations", organizations);   
+        
+        return "heroes/detailsHero";
     }
 }
