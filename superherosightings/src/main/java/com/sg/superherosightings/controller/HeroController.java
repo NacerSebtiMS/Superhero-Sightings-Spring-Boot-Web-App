@@ -47,7 +47,6 @@ public class HeroController {
     
     @GetMapping("/heroes/addHero")
     public String displayAddHeroes(Model model) {
-        //violations.clear();
         List<Superpower> superpowers = superpowerService.getAllSuperpowers();
         model.addAttribute("superpowers", superpowers);
         model.addAttribute("errors", violations);
@@ -56,6 +55,8 @@ public class HeroController {
     
     @PostMapping("/heroes/addHero")
     public String addHero(HttpServletRequest request, Model model){
+        violations.clear();
+        
         String name = request.getParameter("heroName");
         boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));
         String description = request.getParameter("heroDescription");
@@ -89,7 +90,6 @@ public class HeroController {
     
     @GetMapping("/heroes/editHero")
     public String displayEditHero(HttpServletRequest request, Model model) {
-        //violations.clear();
         int id = Integer.parseInt(request.getParameter("id"));
         
         Hero hero = heroService.getHeroById(id);
@@ -105,6 +105,7 @@ public class HeroController {
     
     @PostMapping("/heroes/editHero")
     public String editHero(HttpServletRequest request, Model model){
+        violations.clear();
         int id = Integer.parseInt(request.getParameter("heroId"));
         String name = request.getParameter("heroName");
         boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));

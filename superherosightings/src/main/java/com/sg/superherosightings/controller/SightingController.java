@@ -55,8 +55,6 @@ public class SightingController {
     
     @GetMapping("/sightings/addSighting")
     public String displayAddSightings(Model model) {
-        //violations.clear();
-        
         List<Hero> heros = heroService.getAllHeros();
         model.addAttribute("heros", heros);
         
@@ -72,6 +70,9 @@ public class SightingController {
     
     @PostMapping("/sightings/addSighting")
     public String addSighting(HttpServletRequest request, Model model){
+        violations.clear();
+        dateError = null;
+        
         int heroId = Integer.parseInt(request.getParameter("heroId"));
         int locationId = Integer.parseInt(request.getParameter("locationId"));
         String dateString = request.getParameter("sightingDate");
@@ -110,7 +111,6 @@ public class SightingController {
     
     @GetMapping("/sightings/editSighting")
     public String displayEditSighting(HttpServletRequest request, Model model) {
-        //violations.clear();
         int id = Integer.parseInt(request.getParameter("id"));
         
         Sighting sighting = sightingService.getSightingById(id);
@@ -131,6 +131,9 @@ public class SightingController {
     
     @PostMapping("/sightings/editSighting")
     public String editSighting(HttpServletRequest request, Model model){
+        violations.clear();
+        dateError = null;
+        
         int id = Integer.parseInt(request.getParameter("sightingId"));
         int heroId = Integer.parseInt(request.getParameter("heroId"));
         int locationId = Integer.parseInt(request.getParameter("locationId"));

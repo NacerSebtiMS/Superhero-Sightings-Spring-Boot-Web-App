@@ -47,9 +47,7 @@ public class OrganizationController {
     }
     
     @GetMapping("/organizations/addOrganization")
-    public String displayAddOrganizations(Model model) {
-        //violations.clear();
-        
+    public String displayAddOrganizations(Model model) {       
         List<Hero> heros = heroService.getAllHeros();
         model.addAttribute("heros", heros);
         
@@ -60,6 +58,8 @@ public class OrganizationController {
     
     @PostMapping("/organizations/addOrganization")
     public String addOrganization(HttpServletRequest request, Model model){
+        violations.clear();
+        
         String name = request.getParameter("organizationName");
         boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));
         String description = request.getParameter("organizationDescription");
@@ -96,7 +96,6 @@ public class OrganizationController {
     
     @GetMapping("/organizations/editOrganization")
     public String displayEditOrganization(HttpServletRequest request, Model model) {
-        //violations.clear();
         int id = Integer.parseInt(request.getParameter("id"));
         
         Organization organization = organizationService.getOrganizationById(id);
@@ -112,6 +111,8 @@ public class OrganizationController {
     
     @PostMapping("/organizations/editOrganization")
     public String editOrganization(HttpServletRequest request, Model model){
+        violations.clear();
+        
         int id = Integer.parseInt(request.getParameter("organizationId"));
         String name = request.getParameter("organizationName");
         boolean isHero = Boolean.parseBoolean(request.getParameter("isHero"));
