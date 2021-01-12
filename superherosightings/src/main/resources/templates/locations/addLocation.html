@@ -77,6 +77,9 @@
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
                                     th:if="${error.getPropertyPath().toString().equals('latitude')}">Error message</p>
+                            <p class="alert alert-danger"
+                               th:if="${latitudeError!=null}"
+                               th:text="${latitudeError}">Error message</p>
                         </div>
                     </div>
                     
@@ -89,6 +92,9 @@
                             <p class="alert alert-danger" th:each="error : ${errors}" 
                                     th:text="${error.message}"
                                     th:if="${error.getPropertyPath().toString().equals('longitude')}">Error message</p>
+                            <p class="alert alert-danger"
+                               th:if="${longitudeError!=null}"
+                               th:text="${longitudeError}">Error message</p>
                         </div>
                     </div>
                     

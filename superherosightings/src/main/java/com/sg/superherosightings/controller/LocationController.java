@@ -33,6 +33,8 @@ public class LocationController {
     }
     
     Set<ConstraintViolation<Location>> violations = new HashSet<>();
+    String latitudeError = null;
+    String longitudeError = null;
     
     @GetMapping("locations")
     public String displayLocations(Model model) {
@@ -43,29 +45,50 @@ public class LocationController {
     
     @GetMapping("/locations/addLocation")
     public String displayAddLocations(Model model) {
-        //violations.clear();
         model.addAttribute("errors", violations);
+        model.addAttribute("latitudeError", latitudeError);
+        model.addAttribute("longitudeError", longitudeError);
         
         return "/locations/addLocation";
     }
     
     @PostMapping("/locations/addLocation")
     public String addLocation(HttpServletRequest request, Model model){
+        violations.clear();
+        latitudeError = null;
+        longitudeError = null;
+        
         String name = request.getParameter("locationName");
-        double latitude = Double.parseDouble(request.getParameter("latitude"));
-        double longitude = Double.parseDouble(request.getParameter("longitude"));
+        String stringLatitude = request.getParameter("latitude");
+        String stringLongitude = request.getParameter("longitude");
         String description = request.getParameter("description");
         String address = request.getParameter("addressInformation");
+        
+        double latitude = 0;
+        if(locationService.isValidLatLong(stringLatitude)){
+            latitude = Double.parseDouble(stringLatitude);
+        } else {
+            latitudeError = "Invalid or Empty Latitude";
+        }
+        
+        double longitude = 0;
+        if(locationService.isValidLatLong(stringLongitude)){
+            longitude = Double.parseDouble(stringLongitude);
+        } else {
+            longitudeError = "Invalid or Empty Longitude";
+        }
         
         Location location = locationService.createLocation(name, latitude, longitude, description, address);
         
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(location);
-        if(violations.isEmpty()){
+        if(violations.isEmpty() && locationService.isValidLatLong(stringLatitude) && locationService.isValidLatLong(stringLongitude)){
             locationService.addLocation(location);
         }
         
         model.addAttribute("errors", violations);
+        model.addAttribute("latitudeError", latitudeError);
+        model.addAttribute("longitudeError", longitudeError);
         
         return "redirect:/locations/addLocation";
     }
@@ -78,37 +101,58 @@ public class LocationController {
     
     @GetMapping("/locations/editLocation")
     public String displayEditLocation(HttpServletRequest request, Model model) {
-        //violations.clear();
         int id = Integer.parseInt(request.getParameter("id"));
         Location location = locationService.getLocationById(id);
         
         model.addAttribute("location", location);
         
         model.addAttribute("errors", violations);
+        model.addAttribute("latitudeError", latitudeError);
+        model.addAttribute("longitudeError", longitudeError);
         
         return "locations/editLocation";
     }
     
     @PostMapping("/locations/editLocation")
     public String editLocation(HttpServletRequest request, Model model){
+        violations.clear();
+        latitudeError = null;
+        longitudeError = null;
+        
         int id = Integer.parseInt(request.getParameter("locationId"));
         String name = request.getParameter("locationName");
-        double latitude = Double.parseDouble(request.getParameter("latitude"));
-        double longitude = Double.parseDouble(request.getParameter("longitude"));
+        String stringLatitude = request.getParameter("latitude");
+        String stringLongitude = request.getParameter("longitude");
         String description = request.getParameter("description");
         String address = request.getParameter("addressInformation");
+        
+        double latitude = 0;
+        if(locationService.isValidLatLong(stringLatitude)){
+            latitude = Double.parseDouble(stringLatitude);
+        } else {
+            latitudeError = "Invalid or Empty Latitude";
+        }
+        
+        double longitude = 0;
+        if(locationService.isValidLatLong(stringLongitude)){
+            longitude = Double.parseDouble(stringLongitude);
+        } else {
+            longitudeError = "Invalid or Empty Longitude";
+        }
         
         Location location = locationService.createLocation(name, latitude, longitude, description, address);
         location.setId(id);
         
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(location);
-        if(violations.isEmpty()){
+        if(violations.isEmpty() && locationService.isValidLatLong(stringLatitude) && locationService.isValidLatLong(stringLongitude)){
             locationService.updateLocation(location);
             return "redirect:/locations";
         } else {
             model.addAttribute("location", locationService.getLocationById(location.getId()));
             model.addAttribute("errors", violations);
+            model.addAttribute("latitudeError", latitudeError);
+            model.addAttribute("longitudeError", longitudeError);
             return "locations/editLocation";
         }    
     }

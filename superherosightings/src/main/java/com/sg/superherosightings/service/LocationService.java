@@ -51,6 +51,15 @@ public class LocationService {
         return location;
     }
     
+    public boolean isValidLatLong(String latLong){
+        try{
+            Double.parseDouble(latLong);
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+    
     
     // EXTERNAL DAO FUNCTIONS  
     public List<Sighting> getSightingsForLocation(Location location){
