@@ -88,7 +88,13 @@
                             Hero Description</label>
                         <div class="col-9">
                             <textarea type="textarea" name="heroDescription" 
-                                      id="heroDescription" class="form-control"></textarea>
+                                id="heroDescription" class="form-control"></textarea>
+                            <div class="text-center" 
+                                th:if="${!errors.isEmpty()}">
+                                <p class="alert alert-danger" th:each="error : ${errors}" 
+                                    th:text="${error.message}"
+                                    th:if="${error.getPropertyPath().toString().equals('description')}">Error message</p>
+                            </div>
                         </div>
                     </div>
                     
