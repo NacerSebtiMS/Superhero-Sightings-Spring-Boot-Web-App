@@ -6,6 +6,7 @@
 package com.sg.superherosightings.controller;
 import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Organization;
+import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.models.Superpower;
 import com.sg.superherosightings.service.HeroService;
 import com.sg.superherosightings.service.SuperpowerService;
@@ -136,7 +137,9 @@ public class HeroController {
             }
         }
         
+        List<Sighting> sightingTemp = heroService.getHeroById(id).getSightings();
         Hero hero = heroService.createHero(name,isHero,description,superpowers);
+        hero.setSightings(sightingTemp);
         hero.setId(id);
         
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
