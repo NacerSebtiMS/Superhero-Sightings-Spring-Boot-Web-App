@@ -60,44 +60,49 @@
         </div>
         <!-- END Insights -->
         <!-- Hero sightings table -->
-        <div class="row m-4 border border-dark">
-            <div class="col text-center m-3">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Hero</th>
-                            <th>Alignment</th>
-                            <th>Location</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="sighting : ${sightings}">
-                            <td>
-                                <a href="#"
-                                   th:href="@{/heroes/detailsHero(id=${heroSightings.get(sighting).id})}"
-                                   th:text="${heroSightings.get(sighting).name}"></a>
-                            </td>
-                            
-                            <td th:if='${heroSightings.get(sighting).isHero}'>Superhero</td>
-                            <td th:unless='${heroSightings.get(sighting).isHero}'>Supervillain</td>
-                            
-                            <td>
-                                <a href="#"
-                                    th:href="@{/locations/detailsLocation(id=${sighting.location.id})}"
-                                    th:text="${
-                                    sighting.location.name 
-                                    + ' (' 
-                                    + sighting.location.latitude 
-                                    +' , '
-                                    + sighting.location.longitude 
-                                    + ')'}"></a>
-                            </td>
-                            
-                            <td th:text="${sighting.date}">Date</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div class="m-4 border border-dark">
+            <div class="row">
+                <h3 class="col text-center my-3">Last 10 sightings</h3>
+            </div>
+            <div class="row">
+                <div class="col text-center m-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Hero</th>
+                                <th>Alignment</th>
+                                <th>Location</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="sighting : ${sightings}">
+                                <td>
+                                    <a href="#"
+                                       th:href="@{/heroes/detailsHero(id=${heroSightings.get(sighting).id})}"
+                                       th:text="${heroSightings.get(sighting).name}"></a>
+                                </td>
+
+                                <td th:if='${heroSightings.get(sighting).isHero}'>Superhero</td>
+                                <td th:unless='${heroSightings.get(sighting).isHero}'>Supervillain</td>
+
+                                <td>
+                                    <a href="#"
+                                        th:href="@{/locations/detailsLocation(id=${sighting.location.id})}"
+                                        th:text="${
+                                        sighting.location.name 
+                                        + ' (' 
+                                        + sighting.location.latitude 
+                                        +' , '
+                                        + sighting.location.longitude 
+                                        + ')'}"></a>
+                                </td>
+
+                                <td th:text="${sighting.date}">Date</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <!-- END Hero sightings table -->
