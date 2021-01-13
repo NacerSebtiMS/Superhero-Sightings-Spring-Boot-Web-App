@@ -5,10 +5,12 @@
  */
 package com.sg.superherosightings.service;
 
+import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Sighting;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class HomeService {
     
-    public String buildUrl(List<Sighting> sightings){
+    public String buildUrl(HashMap<Sighting,Hero> heroSightins){
         final String BASE_URL = "https://maps.googleapis.com/maps/api/staticmap?";
         // center=Brooklyn+Bridge,New+York,NY
         // &zoom=13
@@ -37,9 +39,15 @@ public class HomeService {
         // &markers=color:green%7Clabel:G%7C40.711614,-74.012318
         // &markers=color:red%7Clabel:C%7C40.718217,-73.998284
         String markers = "";
-        if(sightings != null){
-            for(Sighting sighting : sightings){
-                markers += "&markers=" 
+        if(heroSightins != null){
+            for(Sighting sighting : heroSightins.keySet()){
+                markers += "&markers="
+                        
+                        + "label:"
+                        + heroSightins.get(sighting).getName().charAt(0)
+                        
+                        + "%7C"
+                        
                         + sighting.getLocation().getLatitude()
                         + ","
                         + sighting.getLocation().getLongitude();

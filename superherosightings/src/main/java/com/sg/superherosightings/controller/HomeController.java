@@ -39,7 +39,7 @@ public class HomeController {
         model.addAttribute("sightings", sightings);
         model.addAttribute("heroSightings", heroSightings);
         
-        googleMapUrl = homeService.buildUrl(sightings);
+        googleMapUrl = homeService.buildUrl(heroSightings);
         
         model.addAttribute("googleMapUrl", googleMapUrl);
         
