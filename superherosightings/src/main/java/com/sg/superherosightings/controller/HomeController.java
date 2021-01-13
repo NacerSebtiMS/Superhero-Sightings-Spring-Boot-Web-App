@@ -7,6 +7,7 @@ package com.sg.superherosightings.controller;
 
 import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Sighting;
+import com.sg.superherosightings.service.HomeService;
 import com.sg.superherosightings.service.SightingService;
 import java.util.HashMap;
 import java.util.List;
@@ -22,9 +23,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
     
     private final SightingService sightingService;
-    public HomeController(SightingService sightingService){
+    private final HomeService homeService;
+    public HomeController(SightingService sightingService, HomeService homeService){
         this.sightingService = sightingService;
+        this.homeService = homeService;
     }
+    
+    private String googleMapUrl; 
     
     @GetMapping("/")
     public String displayIndex(Model model) {
@@ -33,6 +38,11 @@ public class HomeController {
         HashMap<Sighting,Hero> heroSightings = sightingService.mapHeroSightings(sightings);
         model.addAttribute("sightings", sightings);
         model.addAttribute("heroSightings", heroSightings);
+        
+        googleMapUrl = homeService.buildUrl(sightings);
+        
+        model.addAttribute("googleMapUrl", googleMapUrl);
+        
         return "index";
     }
     
