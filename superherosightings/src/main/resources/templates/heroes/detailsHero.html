@@ -112,7 +112,8 @@
         </div>
         <!-- END details hero -->
         <div class="text-center">
-            <img 
+            <img
+                th:if="${displayImg}"
                 th:src="@{${'/images/' + hero.id +'.jpg'}}"
                 class="rounded" style="width:auto;height:600px;"/>
         </div>

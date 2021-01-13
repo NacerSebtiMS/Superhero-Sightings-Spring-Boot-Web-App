@@ -43,6 +43,7 @@ public class HeroController {
     }
     
     Set<ConstraintViolation<Hero>> violations = new HashSet<>();
+    private boolean displayImg = false;
     
     @GetMapping("heroes")
     public String displayHeroes(Model model) {
@@ -83,11 +84,10 @@ public class HeroController {
             heroService.addHero(hero);
         }
         
-        String uploadDir = "src/main/resources/static/images";
-        String fileName = hero.getId()+".jpg";
+        String fileName = hero.getId()+"";
         
         try {
-            heroService.uploadFile(uploadDir, fileName, multipartFile);
+            heroService.uploadFile(fileName, multipartFile);
         } catch (IOException ex) {
             System.out.println("File could not be saved");
         }
@@ -141,11 +141,10 @@ public class HeroController {
         violations = validate.validate(hero);
         if(violations.isEmpty()) {
             heroService.updateHero(hero);
-            String uploadDir = "src/main/resources/static/images";
-            String fileName = hero.getId()+".jpg";
+            String fileName = hero.getId()+"";
 
             try {
-                heroService.uploadFile(uploadDir, fileName, multipartFile);
+                heroService.uploadFile(fileName, multipartFile);
             } catch (IOException ex) {
                 System.out.println("File could not be saved");
             }
@@ -169,7 +168,10 @@ public class HeroController {
         model.addAttribute("hero", hero);
         
         List<Organization> organizations = heroService.getOrganizationsForHero(hero);
-        model.addAttribute("organizations", organizations);   
+        model.addAttribute("organizations", organizations);  
+        
+        displayImg = heroService.isImageSet(hero.getId()+"");
+        model.addAttribute("displayImg",displayImg);
         
         return "heroes/detailsHero";
     }

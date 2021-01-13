@@ -15,6 +15,7 @@ import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.models.Superpower;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.*;
@@ -46,6 +47,9 @@ public class HeroService {
     @Autowired
     SuperpowerDao superpowerDao;
     
+    private final String IMAGE_DIRECTORY = "src/main/resources/static/images";
+    private final String IMAGE_EXTENSION = ".jpg";
+    
     // SERVICE FUNCTION
     public Hero createHero(String name, boolean isHero, String descritpion, List<Superpower> superpowers){
         Hero hero = new Hero();
@@ -58,19 +62,33 @@ public class HeroService {
         return hero;
     }
     
-    public void uploadFile(String uploadDir, String fileName, MultipartFile multipartFile) throws IOException{
-        Path uploadPath = Paths.get(uploadDir);
+    public void uploadFile(String fileName, MultipartFile multipartFile) throws IOException{
+        Path uploadPath = Paths.get(IMAGE_DIRECTORY);
          
         if (!Files.exists(uploadPath)) {
             Files.createDirectories(uploadPath);
         }
          
         try (InputStream inputStream = multipartFile.getInputStream()) {
-            Path filePath = uploadPath.resolve(fileName);
+            Path filePath = uploadPath.resolve(fileName+IMAGE_EXTENSION);
             Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ioe) {        
             throw new IOException("Could not save image file: " + fileName, ioe);
         } 
+    }
+    
+    public boolean isImageSet(String fileName){
+        try{
+            File f = new File(IMAGE_DIRECTORY+"/"+fileName+IMAGE_EXTENSION);
+            if(f.exists() && !f.isDirectory()) { 
+                return true;
+            } else {
+                return false;
+            }
+        } catch(Exception e){
+            return false;
+        }
+        
     }
     
     
