@@ -54,7 +54,7 @@
                 <span class="h3">Edit Hero</span>
             </div>
             <div class="col-7 text-center m-3">
-                <form action="/heroes/editHero" method="POST">
+                <form action="/heroes/editHero" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="heroId" th:value="${hero.id}" id="heroId"/>
                     
                     <div class="form-group row">
@@ -103,6 +103,14 @@
                                         th:selected="${hero.superpowers.contains(superpower)}">
                                     Superpower Name</option>
                             </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="image" class="col-3 col-form-label">
+                            Image</label>
+                        <div class="col-9">
+                            <input type="file" id="image" name="image" accept="image/png, image/jpeg" />
                         </div>
                     </div>
                     

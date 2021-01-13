@@ -9,10 +9,14 @@ import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.models.Superpower;
 import com.sg.superherosightings.service.HeroService;
 import com.sg.superherosightings.service.SuperpowerService;
+import java.beans.Transient;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -21,6 +25,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -54,7 +60,7 @@ public class HeroController {
     }
     
     @PostMapping("/heroes/addHero")
-    public String addHero(HttpServletRequest request, Model model){
+    public String addHero(HttpServletRequest request, Model model, @RequestParam("image") MultipartFile multipartFile){
         violations.clear();
         
         String name = request.getParameter("heroName");
@@ -75,6 +81,15 @@ public class HeroController {
         violations = validate.validate(hero);
         if(violations.isEmpty()) {
             heroService.addHero(hero);
+        }
+        
+        String uploadDir = "src/main/resources/static/images";
+        String fileName = hero.getId()+".jpg";
+        
+        try {
+            heroService.uploadFile(uploadDir, fileName, multipartFile);
+        } catch (IOException ex) {
+            System.out.println("File could not be saved");
         }
         
         model.addAttribute("errors", violations);
@@ -104,7 +119,7 @@ public class HeroController {
     }
     
     @PostMapping("/heroes/editHero")
-    public String editHero(HttpServletRequest request, Model model){
+    public String editHero(HttpServletRequest request, Model model, @RequestParam("image") MultipartFile multipartFile){
         violations.clear();
         int id = Integer.parseInt(request.getParameter("heroId"));
         String name = request.getParameter("heroName");
@@ -126,6 +141,14 @@ public class HeroController {
         violations = validate.validate(hero);
         if(violations.isEmpty()) {
             heroService.updateHero(hero);
+            String uploadDir = "src/main/resources/static/images";
+            String fileName = hero.getId()+".jpg";
+
+            try {
+                heroService.uploadFile(uploadDir, fileName, multipartFile);
+            } catch (IOException ex) {
+                System.out.println("File could not be saved");
+            }
             return "redirect:/heroes";
         } else {
             hero = heroService.getHeroById(hero.getId());

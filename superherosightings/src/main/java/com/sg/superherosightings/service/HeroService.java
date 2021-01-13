@@ -15,10 +15,14 @@ import com.sg.superherosightings.models.Location;
 import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.models.Superpower;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -52,6 +56,21 @@ public class HeroService {
         hero.setSightings(new ArrayList<Sighting>());
 
         return hero;
+    }
+    
+    public void uploadFile(String uploadDir, String fileName, MultipartFile multipartFile) throws IOException{
+        Path uploadPath = Paths.get(uploadDir);
+         
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+         
+        try (InputStream inputStream = multipartFile.getInputStream()) {
+            Path filePath = uploadPath.resolve(fileName);
+            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ioe) {        
+            throw new IOException("Could not save image file: " + fileName, ioe);
+        } 
     }
     
     
