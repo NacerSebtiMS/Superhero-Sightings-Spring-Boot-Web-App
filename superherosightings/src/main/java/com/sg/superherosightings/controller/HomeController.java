@@ -9,6 +9,7 @@ import com.sg.superherosightings.models.Hero;
 import com.sg.superherosightings.models.Sighting;
 import com.sg.superherosightings.service.HomeService;
 import com.sg.superherosightings.service.SightingService;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,8 @@ public class HomeController {
         this.homeService = homeService;
     }
     
-    private String googleMapUrl; 
+    private String googleMapUrl;
+    private ArrayList<HashMap<String,Integer>> insightsList;
     
     @GetMapping("/")
     public String displayIndex(Model model) {
@@ -42,6 +44,21 @@ public class HomeController {
         googleMapUrl = homeService.buildUrl(heroSightings);
         
         model.addAttribute("googleMapUrl", googleMapUrl);
+        
+        HashMap<String,Integer> insights = new HashMap<>();
+        
+        insights.put("Number of Superheroes",homeService.getNumberOfSuperheros());
+        insights.put("Number of Supervillain",homeService.getNumberOfSupervillains());
+        insights.put("Number of Hero Organizations",homeService.getNumberOfHeroOrganization());
+        insights.put("Number of Villain Organizations",homeService.getNumberOfVillainOrganization());
+        insights.put("Number of Locations",homeService.getNumberOfLocations());
+        insights.put("Number of Sightings",homeService.getNumberOfSightings());
+        insights.put("Number of Superpower",homeService.getNumberOfSuperpowers());
+        
+        insightsList = new ArrayList<>();
+        insightsList.add(insights);
+        
+        model.addAttribute("insightsList",insightsList);
         
         return "index";
     }
