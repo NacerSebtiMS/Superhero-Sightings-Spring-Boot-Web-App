@@ -5,7 +5,13 @@
  */
 package com.sg.superherosightings.service;
 
+import com.sg.superherosightings.dao.HeroDao;
+import com.sg.superherosightings.dao.LocationDao;
+import com.sg.superherosightings.dao.OrganizationDao;
+import com.sg.superherosightings.dao.SightingDao;
+import com.sg.superherosightings.dao.SuperpowerDao;
 import com.sg.superherosightings.models.Hero;
+import com.sg.superherosightings.models.Organization;
 import com.sg.superherosightings.models.Sighting;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -13,6 +19,7 @@ import java.io.FileReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -21,6 +28,21 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class HomeService {
+    
+    @Autowired
+    HeroDao heroDao;
+    
+    @Autowired
+    LocationDao locationDao;
+    
+    @Autowired
+    OrganizationDao organizationDao;
+    
+    @Autowired
+    SightingDao sightingDao;
+    
+    @Autowired
+    SuperpowerDao superpowerDao;
     
     public String buildUrl(HashMap<Sighting,Hero> heroSightins){
         final String BASE_URL = "https://maps.googleapis.com/maps/api/staticmap?";
@@ -75,5 +97,61 @@ public class HomeService {
             return "";
         }
         
+    }
+    
+    public int getNumberOfSuperheros(){
+        int numberOfSuperheros = 0;
+        List<Hero> heros = heroDao.getAllHeros();
+        for(Hero hero : heros){
+            if(hero.isIsHero()){
+                numberOfSuperheros++;
+            }
+        }
+        return numberOfSuperheros;
+    }
+    
+    public int getNumberOfSupervillains(){
+        int numberOfSupervillains = 0;
+        List<Hero> heros = heroDao.getAllHeros();
+        for(Hero hero : heros){
+            if(!hero.isIsHero()){
+                numberOfSupervillains++;
+            }
+        }
+        return numberOfSupervillains;
+    }
+    
+    public int getNumberOfHeroOrganization(){
+        int numberOfHeroOrganization = 0;
+        List<Organization> organizations = organizationDao.getAllOrganizations();
+        for(Organization organization : organizations){
+            if(organization.isIsHero()){
+                numberOfHeroOrganization++;
+            }
+        }
+        return numberOfHeroOrganization;
+    }
+    
+    public int getNumberOfVillainOrganization(){
+        int numberOfVillainOrganization = 0;
+        List<Organization> organizations = organizationDao.getAllOrganizations();
+        for(Organization organization : organizations){
+            if(!organization.isIsHero()){
+                numberOfVillainOrganization++;
+            }
+        }
+        return numberOfVillainOrganization;
+    }
+    
+    public int getNumberOfLocations(){
+        return locationDao.getAllLocations().size();
+    }
+    
+    public int getNumberOfSightings(){
+        return sightingDao.getAllSightings().size();
+    }
+    
+    public int getNumberOfSuperpowers(){
+        return superpowerDao.getAllSuperpowers().size();
     }
 }
