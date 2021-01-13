@@ -84,12 +84,14 @@ public class HeroController {
             heroService.addHero(hero);
         }
         
-        String fileName = hero.getId()+"";
-        
-        try {
-            heroService.uploadFile(fileName, multipartFile);
-        } catch (IOException ex) {
-            System.out.println("File could not be saved");
+        if(!multipartFile.isEmpty()){
+            String fileName = hero.getId()+"";
+
+            try {
+                heroService.uploadFile(fileName, multipartFile);
+            } catch (IOException ex) {
+                System.out.println("File could not be saved");
+            }
         }
         
         model.addAttribute("errors", violations);
@@ -141,12 +143,14 @@ public class HeroController {
         violations = validate.validate(hero);
         if(violations.isEmpty()) {
             heroService.updateHero(hero);
-            String fileName = hero.getId()+"";
+            if(!multipartFile.isEmpty()){
+                String fileName = hero.getId()+"";
 
-            try {
-                heroService.uploadFile(fileName, multipartFile);
-            } catch (IOException ex) {
-                System.out.println("File could not be saved");
+                try {
+                    heroService.uploadFile(fileName, multipartFile);
+                } catch (IOException ex) {
+                    System.out.println("File could not be saved");
+                }
             }
             return "redirect:/heroes";
         } else {
