@@ -31,7 +31,8 @@ public class HomeController {
     }
     
     private String googleMapUrl;
-    private ArrayList<HashMap<String,Integer>> insightsList;
+    private ArrayList<String> insightsList;
+    private HashMap<String,Integer> insights;
     
     @GetMapping("/")
     public String displayIndex(Model model) {
@@ -45,20 +46,41 @@ public class HomeController {
         
         model.addAttribute("googleMapUrl", googleMapUrl);
         
-        HashMap<String,Integer> insights = new HashMap<>();
-        
-        insights.put("Number of Superheroes",homeService.getNumberOfSuperheros());
-        insights.put("Number of Supervillain",homeService.getNumberOfSupervillains());
-        insights.put("Number of Hero Organizations",homeService.getNumberOfHeroOrganization());
-        insights.put("Number of Villain Organizations",homeService.getNumberOfVillainOrganization());
-        insights.put("Number of Locations",homeService.getNumberOfLocations());
-        insights.put("Number of Sightings",homeService.getNumberOfSightings());
-        insights.put("Number of Superpower",homeService.getNumberOfSuperpowers());
-        
+        insights = new HashMap<>();
         insightsList = new ArrayList<>();
-        insightsList.add(insights);
+        
+        final String NUMBER_SUPERHEROS = "Number of Superheroes";
+        final String NUMBER_SUPERVILLAIN = "Number of Supervillains";
+        final String NUMBER_HERO_ORGANIZATION = "Number of Hero Organizations";
+        final String NUMBER_VILLAIN_ORGANIZATION = "Number of Villain Organizations";
+        final String NUMBER_LOCATIONS = "Number of Locations";
+        final String NUMBER_SIGHTINGS = "Number of Sightings";
+        final String NUMBER_SUPERPOWER = "Number of Superpowers";
+        
+        insights.put(NUMBER_SUPERHEROS,homeService.getNumberOfSuperheros());
+        insightsList.add(NUMBER_SUPERHEROS);
+        
+        insights.put(NUMBER_SUPERVILLAIN,homeService.getNumberOfSupervillains());
+        insightsList.add(NUMBER_SUPERVILLAIN);
+        
+        insights.put(NUMBER_HERO_ORGANIZATION,homeService.getNumberOfHeroOrganization());
+        insightsList.add(NUMBER_HERO_ORGANIZATION);
+        
+        insights.put(NUMBER_VILLAIN_ORGANIZATION,homeService.getNumberOfVillainOrganization());
+        insightsList.add(NUMBER_VILLAIN_ORGANIZATION);
+        
+        insights.put(NUMBER_LOCATIONS,homeService.getNumberOfLocations());
+        insightsList.add(NUMBER_LOCATIONS);
+        
+        insights.put(NUMBER_SIGHTINGS,homeService.getNumberOfSightings());
+        insightsList.add(NUMBER_SIGHTINGS);
+        
+        insights.put(NUMBER_SUPERPOWER,homeService.getNumberOfSuperpowers());
+        insightsList.add(NUMBER_SUPERPOWER);    
         
         model.addAttribute("insightsList",insightsList);
+        model.addAttribute("insights",insights);
+        
         
         return "index";
     }

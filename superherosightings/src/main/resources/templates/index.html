@@ -49,14 +49,14 @@
         </div>
         <!-- END Navbar -->
         <!-- Insights -->
-        <div class="m-4 border border-dark" th:each="insights : ${insightsList}">
+        <div class="m-4 border border-dark">
             <h3 class="col text-center my-3">Insights</h3>
-                <div th:each="insight : ${insights}" class="row my-1">
-                    <div class="col text-right font-weight-bold" th:text="${insight.key}">insight title</div>
-                    <div class="col text-left">
-                        <span th:text="${insight.value}">display insight</span>
-                    </div>
+            <div th:each="title : ${insightsList}" class="row my-1">
+                <div class="col text-right font-weight-bold" th:text="${title}">insight title</div>
+                <div class="col text-left">
+                    <span th:text="${insights.get(title)}">display insight</span>
                 </div>
+            </div>
         </div>
         <!-- END Insights -->
         <!-- Hero sightings table -->
