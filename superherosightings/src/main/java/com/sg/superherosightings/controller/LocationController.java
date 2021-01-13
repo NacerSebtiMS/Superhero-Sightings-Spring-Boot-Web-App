@@ -65,14 +65,14 @@ public class LocationController {
         String address = request.getParameter("addressInformation");
         
         double latitude = 0;
-        if(locationService.isValidLatLong(stringLatitude)){
+        if(locationService.isValidLatitude(stringLatitude)){
             latitude = Double.parseDouble(stringLatitude);
         } else {
             latitudeError = "Invalid or Empty Latitude";
         }
         
         double longitude = 0;
-        if(locationService.isValidLatLong(stringLongitude)){
+        if(locationService.isValidLongitude(stringLongitude)){
             longitude = Double.parseDouble(stringLongitude);
         } else {
             longitudeError = "Invalid or Empty Longitude";
@@ -82,7 +82,7 @@ public class LocationController {
         
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(location);
-        if(violations.isEmpty() && locationService.isValidLatLong(stringLatitude) && locationService.isValidLatLong(stringLongitude)){
+        if(violations.isEmpty() && locationService.isValidLatitude(stringLatitude) && locationService.isValidLongitude(stringLongitude)){
             locationService.addLocation(location);
         }
         
@@ -127,14 +127,14 @@ public class LocationController {
         String address = request.getParameter("addressInformation");
         
         double latitude = 0;
-        if(locationService.isValidLatLong(stringLatitude)){
+        if(locationService.isValidLatitude(stringLatitude)){
             latitude = Double.parseDouble(stringLatitude);
         } else {
             latitudeError = "Invalid or Empty Latitude";
         }
         
         double longitude = 0;
-        if(locationService.isValidLatLong(stringLongitude)){
+        if(locationService.isValidLongitude(stringLongitude)){
             longitude = Double.parseDouble(stringLongitude);
         } else {
             longitudeError = "Invalid or Empty Longitude";
@@ -145,7 +145,7 @@ public class LocationController {
         
         Validator validate = Validation.buildDefaultValidatorFactory().getValidator();
         violations = validate.validate(location);
-        if(violations.isEmpty() && locationService.isValidLatLong(stringLatitude) && locationService.isValidLatLong(stringLongitude)){
+        if(violations.isEmpty() && locationService.isValidLatitude(stringLatitude) && locationService.isValidLongitude(stringLongitude)){
             locationService.updateLocation(location);
             return "redirect:/locations";
         } else {

@@ -51,9 +51,24 @@ public class LocationService {
         return location;
     }
     
-    public boolean isValidLatLong(String latLong){
+    public boolean isValidLatitude(String latitude){
         try{
-            Double.parseDouble(latLong);
+            double value = Double.parseDouble(latitude);
+            if(value<-90 || value>90){
+                return false;
+            }
+            return true;
+        } catch (Exception e){
+            return false;
+        }
+    }
+    
+    public boolean isValidLongitude(String longitude){
+        try{
+            double value = Double.parseDouble(longitude);
+            if(value<-180 || value>180){
+                return false;
+            }
             return true;
         } catch (Exception e){
             return false;
