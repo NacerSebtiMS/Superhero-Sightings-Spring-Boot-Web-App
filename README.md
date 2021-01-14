@@ -23,6 +23,6 @@ The project will still run without it but will not show the map.
 
 + The models are available [here](https://github.com/NacerSebtiMS/Superhero-Sightings-Spring-Boot-Web-App/tree/main/superherosightings/src/main/java/com/sg/superherosightings/models)
 
-+ The DAO files are avaiable [here](https://github.com/NacerSebtiMS/Superhero-Sightings-Spring-Boot-Web-App/tree/main/superherosightings/src/main/java/com/sg/superherosightings/dao)
++ The DAO files are available [here](https://github.com/NacerSebtiMS/Superhero-Sightings-Spring-Boot-Web-App/tree/main/superherosightings/src/main/java/com/sg/superherosightings/dao)
 
-+ The DAO test files are avaiable [here](https://github.com/NacerSebtiMS/Superhero-Sightings-Spring-Boot-Web-App/tree/main/superherosightings/src/test/java/com/sg/superherosightings/dao)
++ The DAO test files are available [here](https://github.com/NacerSebtiMS/Superhero-Sightings-Spring-Boot-Web-App/tree/main/superherosightings/src/test/java/com/sg/superherosightings/dao)
