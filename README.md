@@ -1,6 +1,6 @@
 # Superhero-Sightings-Spring-Boot-Web-App
 
-The superhero sightings is a web application that manages sightings of superheroes. The project includes a Data Layer and a web application that uses this Data Layer.
+Superhero sightings is a web application that manages sightings of superheroes. The project includes a Data Layer and a web application that uses that Data Layer.
 
 The system is capable of :
 + Display a home page with general insights about the application and a newsfeed of the latest 10 sightings in the database and a Google map view on those sightings ;
